@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>UC8 - Delete Taxpayer</title>
+</head>
+<body>
+    <div class="container">
+        <div class="name">UC8 - Delete Taxpayer</div>
+
+        <div class="data">
+            <i>Data:</i>
+            <ul>
+                <li>&lt;Taxpayer AFM&gt;</li>
+            </ul>
+        </div>
+
+        <div class="primary-course">
+            <i>Main Flow:</i>
+            <ol>
+                <li>User issues `Delete Taxpayer` command.</li>
+                <li>System deletes taxpayer with corresponding AFM from memory.</li>
+            </ol>
+        </div>
+
+        <div class="exception-course">
+            <i>No Taxpayer is Loaded (1)</i>
+            <ol>
+                <li>User is notified with: `There isnt't any taxpayer loaded. Please load one first.`.</li>
+                <li>Use case ends.</li>
+            </ol>
+        </div>
+
+        <div class="exception-course">
+            <i>Invalid Taxpayer AFM (2)</i>
+            <ol>
+                <li>Use case ends.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

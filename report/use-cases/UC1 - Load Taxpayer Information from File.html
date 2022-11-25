@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>UC1 - Load Taxpayer Information from File</title>
+</head>
+<body>
+    <div class="container">
+        <div class="name">UC1 - Load Taxpayer Information from File</div>
+
+        <div class="data">
+            <i>Data:</i>
+            <ul>
+                <li>&lt;Taxpayer AFM&gt;</li>
+            </ul>
+        </div>
+
+        <div class="primary-course">
+            <i>Main Flow:</i>
+            <ol>
+                <li>User issues `Load Taxpayer` command.</li>
+                <li>System uses the AFM provided to find the corresponding file.</li>
+                <li>System parses data and stores it in memory.</li>
+            </ol>
+        </div>
+        
+        <div class="exception-course">
+            <i>Non Existent AFM (2)</i>
+            <ol>
+                <li>User is notified with: `The file doesn't exist.`.</li>
+                <li>UC1 is executed again.</li>
+            </ol>
+
+            <i>Invalid AFM (2)</i>
+            <ol>
+                <li>User is notified with: `The tax registration number must have 9 digits. Try again.`.</li>
+                <li>UC1 is executed again.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

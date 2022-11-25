@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>UC3 - Submit new Receipt</title>
+</head>
+<body>
+    <div class="container">
+        <div class="name">UC3 - Submit new Receipt</div>
+
+        <div class="data">
+            <i>Data:</i>
+            <ul>
+                <li>&lt;ReceiptID&gt;</li>
+                <li>&lt;Date&gt;</li>
+                <li>&lt;Kind&gt;</li>
+                <li>&lt;Amount&gt;</li>
+                <li>&lt;Company&gt;</li>
+                <li>&lt;Country&gt;</li>
+                <li>&lt;City&gt;</li>
+                <li>&lt;Street&gt;</li>
+                <li>&lt;Number&gt;</li>
+            </ul>
+        </div>
+
+        <div class="primary-course">
+            <i>Main Flow:</i>
+            <ol>
+                <li>User issues `Add Receipt` command.</li>
+                <li>System uses information provided to issue a new receipt.</li>
+                <li>System saves receipt in memory.</li>
+                <li>System executes UC5.</li>
+            </ol>
+        </div>
+        
+        <div class="exception-course">
+            <i>Existing ReceiptID (2)</i>
+            <ol>
+                <li>User is notified with: `Receipt ID already exists.`.</li>
+                <li>Use case ends.</li>
+            </ol>
+
+            <i>Invalid Date (2)</i>
+            <ol>
+                <li>User is notified with: `Please make sure your date is DD/MM/YYYY and try again.`.</li>
+                <li>Use case ends.</li>
+            </ol>
+
+            <i>Invalid Kind (2)</i>
+            <ol>
+                <li>User is notified with: `Please check receipt kinds and try again.`.</li>
+                <li>Use case ends.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
