@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>UC5 Acceptance Test Description</title>
+</head>
+<body>
+    <div class="container">
+        <div class="name">UC5 - Update Taxpayer Information in Files</div>
+
+        <div class="data">
+            <i>Data:</i>
+            <ul>
+                <li>&lt;Taxpayer AFM&gt;</li>
+                <li>&lt;ReceiptID&gt;</li>
+            </ul>
+        </div>
+
+        <div class="primary-course">
+            <i>Primary Course:</i>
+            <ol>
+                <li>User issues `Delete Receipt` command.</li>
+                <li>User picks a ReceiptID.</li>
+                <li>User confirms and provides data.</li>
+                <li>System updates log files according to the deletion.</li>
+            </ol>
+        </div>
+
+        <div class="result">
+            <i>Expected Result:</i>
+            <ol>
+                <li>User is asked a receipt id.</li>
+                <li>-</li>
+                <li>System deletes the receipt in memory.</li>
+                <li>System deletes the receipt from the log file.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+(Taxpayer) -> (Single), (MarriedFillingJointly), (MarriedFillingSeparately), (HeadOfHousehold)
+tax calculation differs for each category
+tax increases or decreases according % or receipts submitted
+
+-- Data Requirements --
+    (Taxpayer) -> name, AFM, financials, earnings, (Receipts)
+    (Receipt) -> id, date, (ReceiptCategoryEnum), totalearnings, (Company)
+    (ReceiptCategoryEnum) -> (EntertainmentReceipt), (BasicReceipt), (TravelReceipt), (HealthReceipt), (OtherReceipt)
+    (Company) -> name, address
+
+-- Functional Requirements --
+    1. Load taxpayer information from TXT or XML
+    2. Select and Display taxpayer information
+    3. Submit new receipt [and update AFM info]
+    4. Delete existing receipt [and update AFM info]
+    5. Update AFM info in files
+    6. Aggregate data and produce a report
+        { barchart and piechart }
+    7. Export data to TXT or XML
+    8. Delete taxpayer from list
+
+-- Non-Functional Requirements --
+    1. Useability
+    2. Extendibility

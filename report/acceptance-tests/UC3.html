@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>UC3 Acceptance Test Description</title>
+</head>
+<body>
+    <div class="container">
+        <div class="name">UC3 - Submit new Receipt</div>
+
+        <div class="data">
+            <i>Data:</i>
+            <ul>
+                <li>&lt;ReceiptID&gt;</li>
+                <li>&lt;Date&gt;</li>
+                <li>&lt;Kind&gt;</li>
+                <li>&lt;Amount&gt;</li>
+                <li>&lt;Company&gt;</li>
+                <li>&lt;Country&gt;</li>
+                <li>&lt;City&gt;</li>
+                <li>&lt;Street&gt;</li>
+                <li>&lt;Number&gt;</li>
+            </ul>
+        </div>
+
+        <div class="primary-course">
+            <i>Primary Course:</i>
+            <ol>
+                <li>User issues `Add Receipt` command.</li>
+                <li>User picks all data for the creation of a new receipt.</li>
+                <li>User confirms and provides data.</li>
+            </ol>
+        </div>
+
+        <div class="result">
+            <i>Expected Result:</i>
+            <ol>
+                <li>User is asked a receipt id, a date kind and amount of receipt as well as a company name, country, city, street, and number for creating a receipt.</li>
+                <li>-</li>
+                <li>System adds the receipt in memory and updates the log files accordingly.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
