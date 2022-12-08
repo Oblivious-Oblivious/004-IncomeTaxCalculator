@@ -29,3 +29,6 @@ Resources/Outputs
 *.gif
 *.ucls
 .idea
+
+.vscode
+.metals
