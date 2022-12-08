@@ -1,5 +1,5 @@
 package incometaxcalculator.boundaries;
 
-public interface AggregateProduceReportBoundary {
+public interface ViewReportBoundary {
     public void produce_report();
 }

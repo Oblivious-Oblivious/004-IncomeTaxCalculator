@@ -1,5 +1,5 @@
 package incometaxcalculator.boundaries;
 
-public interface SubmitReceiptBoundary {
+public interface AddReceiptBoundary {
     public void submit(int taxRegistrationNumber);
 }

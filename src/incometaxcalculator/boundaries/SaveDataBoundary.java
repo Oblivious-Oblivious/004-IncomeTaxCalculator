@@ -1,5 +1,5 @@
 package incometaxcalculator.boundaries;
 
-public interface ExportToFormatBoundary {
+public interface SaveDataBoundary {
     public void export();
 }
