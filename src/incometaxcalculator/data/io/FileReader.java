@@ -3,11 +3,11 @@ package incometaxcalculator.data.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import incometaxcalculator.app.exceptions.WrongFileFormatException;
+import incometaxcalculator.app.exceptions.WrongReceiptDateException;
+import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.exceptions.WrongReceiptDateException;
-import incometaxcalculator.exceptions.WrongFileFormatException;
-import incometaxcalculator.exceptions.WrongReceiptKindException;
-import incometaxcalculator.exceptions.WrongTaxpayerStatusException;
 
 public abstract class FileReader {
 

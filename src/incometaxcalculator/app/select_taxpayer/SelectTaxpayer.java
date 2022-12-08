@@ -3,8 +3,8 @@ package incometaxcalculator.app.select_taxpayer;
 import javax.swing.JOptionPane;
 
 import incometaxcalculator.boundaries.SelectTaxpayerBoundary;
+import incometaxcalculator.client.gui.TaxpayerData;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.gui.TaxpayerData;
 
 public class SelectTaxpayer implements SelectTaxpayerBoundary {
     TaxpayerManager taxpayerManager;

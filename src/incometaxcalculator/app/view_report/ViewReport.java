@@ -1,8 +1,8 @@
 package incometaxcalculator.app.view_report;
 
 import incometaxcalculator.boundaries.ViewReportBoundary;
+import incometaxcalculator.client.gui.ChartDisplay;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.gui.ChartDisplay;
 
 public class ViewReport implements ViewReportBoundary {
     static final short ENTERTAINMENT = 0;

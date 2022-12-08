@@ -8,13 +8,13 @@ import javax.swing.JTextField;
 
 import java.io.IOException;
 
+import incometaxcalculator.app.exceptions.WrongFileEndingException;
+import incometaxcalculator.app.exceptions.WrongFileFormatException;
+import incometaxcalculator.app.exceptions.WrongReceiptDateException;
+import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.boundaries.LoadTaxpayerBoundary;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.exceptions.WrongFileEndingException;
-import incometaxcalculator.exceptions.WrongFileFormatException;
-import incometaxcalculator.exceptions.WrongReceiptDateException;
-import incometaxcalculator.exceptions.WrongReceiptKindException;
-import incometaxcalculator.exceptions.WrongTaxpayerStatusException;
 
 public class LoadTaxpayer implements LoadTaxpayerBoundary {
     TaxpayerManager taxpayerManager;

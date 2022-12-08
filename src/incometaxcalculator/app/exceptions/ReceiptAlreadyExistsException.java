@@ -1,4 +1,4 @@
-package incometaxcalculator.exceptions;
+package incometaxcalculator.app.exceptions;
 
 public class ReceiptAlreadyExistsException extends Exception {
 

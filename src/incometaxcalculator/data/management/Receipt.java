@@ -1,6 +1,6 @@
 package incometaxcalculator.data.management;
 
-import incometaxcalculator.exceptions.WrongReceiptDateException;
+import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 
 public class Receipt {
 

@@ -3,7 +3,7 @@ package incometaxcalculator.data.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import incometaxcalculator.exceptions.WrongFileFormatException;
+import incometaxcalculator.app.exceptions.WrongFileFormatException;
 
 public class XMLFileReader extends FileReader {
 

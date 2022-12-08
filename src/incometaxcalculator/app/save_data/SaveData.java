@@ -14,9 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import incometaxcalculator.app.exceptions.WrongFileFormatException;
 import incometaxcalculator.boundaries.SaveDataBoundary;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.exceptions.WrongFileFormatException;
 
 public class SaveData implements SaveDataBoundary {
     TaxpayerManager taxpayerManager;

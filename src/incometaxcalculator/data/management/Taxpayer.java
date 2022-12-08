@@ -2,7 +2,7 @@ package incometaxcalculator.data.management;
 
 import java.util.HashMap;
 
-import incometaxcalculator.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 
 public abstract class Taxpayer {
 

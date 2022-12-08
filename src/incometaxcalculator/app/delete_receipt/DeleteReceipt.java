@@ -10,9 +10,9 @@ import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
+import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.boundaries.DeleteReceiptBoundary;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.exceptions.WrongReceiptKindException;
 
 public class DeleteReceipt implements DeleteReceiptBoundary {
     TaxpayerManager taxpayerManager;

@@ -5,6 +5,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import incometaxcalculator.app.exceptions.ReceiptAlreadyExistsException;
+import incometaxcalculator.app.exceptions.WrongFileEndingException;
+import incometaxcalculator.app.exceptions.WrongFileFormatException;
+import incometaxcalculator.app.exceptions.WrongReceiptDateException;
+import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.data.io.FileReader;
 import incometaxcalculator.data.io.TXTFileReader;
 import incometaxcalculator.data.io.TXTInfoWriter;
@@ -12,12 +18,6 @@ import incometaxcalculator.data.io.TXTLogWriter;
 import incometaxcalculator.data.io.XMLFileReader;
 import incometaxcalculator.data.io.XMLInfoWriter;
 import incometaxcalculator.data.io.XMLLogWriter;
-import incometaxcalculator.exceptions.ReceiptAlreadyExistsException;
-import incometaxcalculator.exceptions.WrongFileEndingException;
-import incometaxcalculator.exceptions.WrongFileFormatException;
-import incometaxcalculator.exceptions.WrongReceiptDateException;
-import incometaxcalculator.exceptions.WrongReceiptKindException;
-import incometaxcalculator.exceptions.WrongTaxpayerStatusException;
 
 public class TaxpayerManager {
 

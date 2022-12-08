@@ -1,4 +1,4 @@
-package incometaxcalculator.gui;
+package incometaxcalculator.client.gui;
 
 import java.awt.Color;
 import java.awt.Font;

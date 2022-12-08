@@ -10,11 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import incometaxcalculator.app.exceptions.ReceiptAlreadyExistsException;
+import incometaxcalculator.app.exceptions.WrongReceiptDateException;
+import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.boundaries.AddReceiptBoundary;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.exceptions.ReceiptAlreadyExistsException;
-import incometaxcalculator.exceptions.WrongReceiptDateException;
-import incometaxcalculator.exceptions.WrongReceiptKindException;
 
 public class AddReceipt implements AddReceiptBoundary {
     TaxpayerManager taxpayerManager;
