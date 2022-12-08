@@ -1,4 +1,4 @@
-package incometaxcalculator.delete_taxpayer;
+package incometaxcalculator.app.delete_taxpayer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;

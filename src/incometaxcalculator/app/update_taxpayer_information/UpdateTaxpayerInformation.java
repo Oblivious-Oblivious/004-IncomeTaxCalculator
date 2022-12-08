@@ -1,4 +1,4 @@
-package incometaxcalculator.update_taxpayer_information;
+package incometaxcalculator.app.update_taxpayer_information;
 
 import incometaxcalculator.boundaries.UpdateTaxpayerInformationBoundary;
 

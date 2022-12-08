@@ -1,4 +1,4 @@
-package incometaxcalculator.view_report;
+package incometaxcalculator.app.view_report;
 
 import incometaxcalculator.boundaries.ViewReportBoundary;
 import incometaxcalculator.data.management.TaxpayerManager;

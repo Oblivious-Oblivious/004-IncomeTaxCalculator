@@ -1,4 +1,4 @@
-package incometaxcalculator.add_receipt;
+package incometaxcalculator.app.add_receipt;
 
 import java.io.IOException;
 

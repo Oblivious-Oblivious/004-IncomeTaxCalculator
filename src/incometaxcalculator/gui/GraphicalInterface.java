@@ -24,10 +24,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import incometaxcalculator.app.delete_taxpayer.DeleteTaxpayer;
+import incometaxcalculator.app.load_taxpayer.LoadTaxpayer;
+import incometaxcalculator.app.select_taxpayer.SelectTaxpayer;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.delete_taxpayer.DeleteTaxpayer;
-import incometaxcalculator.load_taxpayer.LoadTaxpayer;
-import incometaxcalculator.select_taxpayer.SelectTaxpayer;
 
 public class GraphicalInterface extends JFrame {
 

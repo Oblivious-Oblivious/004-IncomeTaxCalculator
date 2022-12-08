@@ -1,4 +1,4 @@
-package incometaxcalculator.select_taxpayer;
+package incometaxcalculator.app.select_taxpayer;
 
 import javax.swing.JOptionPane;
 

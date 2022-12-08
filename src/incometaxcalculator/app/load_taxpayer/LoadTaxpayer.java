@@ -1,4 +1,4 @@
-package incometaxcalculator.load_taxpayer;
+package incometaxcalculator.app.load_taxpayer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;

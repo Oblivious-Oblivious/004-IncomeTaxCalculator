@@ -1,4 +1,4 @@
-package incometaxcalculator.delete_receipt;
+package incometaxcalculator.app.delete_receipt;
 
 import java.io.IOException;
 
