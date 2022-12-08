@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -16,7 +15,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -27,17 +25,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.exceptions.WrongFileEndingException;
-import incometaxcalculator.exceptions.WrongFileFormatException;
-import incometaxcalculator.exceptions.WrongReceiptDateException;
-import incometaxcalculator.exceptions.WrongReceiptKindException;
-import incometaxcalculator.exceptions.WrongTaxpayerStatusException;
+import incometaxcalculator.delete_taxpayer.DeleteTaxpayer;
+import incometaxcalculator.load_taxpayer.LoadTaxpayer;
+import incometaxcalculator.select_taxpayer.SelectTaxpayer;
 
 public class GraphicalInterface extends JFrame {
 
   private JPanel contentPane;
   private TaxpayerManager taxpayerManager = new TaxpayerManager();
-  private String taxpayersTRN = new String();
   private JTextField txtTaxRegistrationNumber;
 
   public static void main(String[] args) {
@@ -119,54 +114,7 @@ public class GraphicalInterface extends JFrame {
     JButton btnLoadTaxpayer = new JButton("Load Taxpayer");
     btnLoadTaxpayer.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        int answer = JOptionPane.showConfirmDialog(null, fileLoaderPanel, "",
-            JOptionPane.OK_CANCEL_OPTION);
-        if (answer == 0) {
-          String taxRegistrationNumber = taxRegistrationNumberField.getText();
-          while (taxRegistrationNumber.length() != 9 && answer == 0) {
-            JOptionPane.showMessageDialog(null,
-                "The tax  registration number must have 9 digit.\n" + " Try again.");
-            answer = JOptionPane.showConfirmDialog(null, fileLoaderPanel, "",
-                JOptionPane.OK_CANCEL_OPTION);
-            taxRegistrationNumber = taxRegistrationNumberField.getText();
-          }
-          if (answer == 0) {
-            int trn = 0;
-            String taxRegistrationNumberFile;
-            try {
-              trn = Integer.parseInt(taxRegistrationNumber);
-              if (txtBox.isSelected()) {
-                taxRegistrationNumberFile = taxRegistrationNumber + "_INFO.txt";
-              } else {
-                taxRegistrationNumberFile = taxRegistrationNumber + "_INFO.xml";
-              }
-              if (taxpayerManager.containsTaxpayer(trn)) {
-                JOptionPane.showMessageDialog(null, "This taxpayer is already loaded.");
-              } else {
-                taxpayerManager.loadTaxpayer(taxRegistrationNumberFile);
-                taxRegisterNumberModel.addElement(taxRegistrationNumber);
-              }
-              // textPane.setText(taxpayersTRN);
-            } catch (NumberFormatException e1) {
-              JOptionPane.showMessageDialog(null,
-                  "The tax registration number must have only digits.");
-            } catch (IOException e1) {
-              JOptionPane.showMessageDialog(null, "The file doesn't exists.");
-            } catch (WrongFileFormatException e1) {
-              JOptionPane.showMessageDialog(null, "Please check your file format and try again.");
-            } catch (WrongFileEndingException e1) {
-              JOptionPane.showMessageDialog(null, "Please check your file ending and try again.");
-            } catch (WrongTaxpayerStatusException e1) {
-              JOptionPane.showMessageDialog(null, "Please check taxpayer's status and try again.");
-            } catch (WrongReceiptKindException e1) {
-              JOptionPane.showMessageDialog(null, "Please check receipts kind and try again.");
-            } catch (WrongReceiptDateException e1) {
-              JOptionPane.showMessageDialog(null,
-                  "Please make sure your date is " + "DD/MM/YYYY and try again.");
-            }
-          }
-
-        }
+        new LoadTaxpayer(taxpayerManager, taxRegisterNumberModel, fileLoaderPanel, taxRegistrationNumberField, txtBox).load();
       }
     });
     btnLoadTaxpayer.setBounds(0, 0, 146, 23);
@@ -175,30 +123,7 @@ public class GraphicalInterface extends JFrame {
     JButton btnSelectTaxpayer = new JButton("Select Taxpayer");
     btnSelectTaxpayer.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        if (taxpayerManager.containsTaxpayer()) {
-          String trn = JOptionPane.showInputDialog(null,
-              "Give the tax registration number " + "that you want to be displayed : ");
-          if (trn != null) {
-            int taxRegistrationNumber;
-            try {
-              taxRegistrationNumber = Integer.parseInt(trn);
-              if (taxpayerManager.containsTaxpayer(taxRegistrationNumber)) {
-                TaxpayerData taxpayerData = new TaxpayerData(taxRegistrationNumber,
-                    taxpayerManager);
-                taxpayerData.setVisible(true);
-              } else {
-                JOptionPane.showMessageDialog(null, "This tax registration number isn't loaded.");
-              }
-            } catch (NumberFormatException e1) {
-              JOptionPane.showMessageDialog(null, "You must give a tax registation number.");
-            } catch (Exception e1) {
-              e1.printStackTrace();
-            }
-          }
-        } else {
-          JOptionPane.showMessageDialog(null,
-              "There isn't any taxpayer loaded. Please load one first.");
-        }
+        new SelectTaxpayer(taxpayerManager).select();
       }
     });
     btnSelectTaxpayer.setBounds(147, 0, 139, 23);
@@ -207,23 +132,7 @@ public class GraphicalInterface extends JFrame {
     JButton btnDeleteTaxpayer = new JButton("Delete Taxpayer");
     btnDeleteTaxpayer.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
-        if (taxpayerManager.containsTaxpayer()) {
-          String trn = JOptionPane.showInputDialog(null,
-              "Give the tax registration number that you want to delete: ");
-          int taxRegistrationNumber;
-          try {
-            taxRegistrationNumber = Integer.parseInt(trn);
-            if (taxpayerManager.containsTaxpayer(taxRegistrationNumber)) {
-              taxpayerManager.removeTaxpayer(taxRegistrationNumber);
-              taxRegisterNumberModel.removeElement(trn);
-            }
-          } catch (NumberFormatException e) {
-
-          }
-        } else {
-          JOptionPane.showMessageDialog(null,
-              "There isn't any taxpayer loaded. Please load one first.");
-        }
+        new DeleteTaxpayer(taxpayerManager, taxRegisterNumberModel).delete();
       }
     });
     btnDeleteTaxpayer.setBounds(287, 0, 146, 23);

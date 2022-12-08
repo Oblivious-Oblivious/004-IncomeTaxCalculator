@@ -1,45 +1,31 @@
 package incometaxcalculator.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
+import incometaxcalculator.add_receipt.AddReceipt;
 import incometaxcalculator.data.management.Receipt;
 import incometaxcalculator.data.management.TaxpayerManager;
-import incometaxcalculator.exceptions.ReceiptAlreadyExistsException;
-import incometaxcalculator.exceptions.WrongFileFormatException;
-import incometaxcalculator.exceptions.WrongReceiptDateException;
-import incometaxcalculator.exceptions.WrongReceiptKindException;
+import incometaxcalculator.delete_receipt.DeleteReceipt;
+import incometaxcalculator.save_data.SaveData;
+import incometaxcalculator.view_report.ViewReport;
 
 public class TaxpayerData extends JFrame {
-
-  private static final short ENTERTAINMENT = 0;
-  private static final short BASIC = 1;
-  private static final short TRAVEL = 2;
-  private static final short HEALTH = 3;
-  private static final short OTHER = 4;
   private JPanel contentPane;
 
   public TaxpayerData(int taxRegistrationNumber, TaxpayerManager taxpayerManager) {
@@ -75,67 +61,7 @@ public class TaxpayerData extends JFrame {
     JButton btnAddReceipt = new JButton("Add Receipt");
     btnAddReceipt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        JPanel receiptImporterPanel = new JPanel(new GridLayout(9, 2));
-        JTextField receiptID = new JTextField(16);
-        JTextField date = new JTextField(16);
-        JTextField kind = new JTextField(16);
-        JTextField amount = new JTextField(16);
-        JTextField company = new JTextField(16);
-        JTextField country = new JTextField(16);
-        JTextField city = new JTextField(16);
-        JTextField street = new JTextField(16);
-        JTextField number = new JTextField(16);
-        int receiptIDValue, numberValue;
-        float amountValue;
-        String dateValue, kindValue, companyValue, countryValue;
-        String cityValue, streetValue;
-        receiptImporterPanel.add(new JLabel("Receipt ID:"));
-        receiptImporterPanel.add(receiptID);
-        receiptImporterPanel.add(new JLabel("Date:"));
-        receiptImporterPanel.add(date);
-        receiptImporterPanel.add(new JLabel("Kind:"));
-        receiptImporterPanel.add(kind);
-        receiptImporterPanel.add(new JLabel("Amount:"));
-        receiptImporterPanel.add(amount);
-        receiptImporterPanel.add(new JLabel("Company:"));
-        receiptImporterPanel.add(company);
-        receiptImporterPanel.add(new JLabel("Country:"));
-        receiptImporterPanel.add(country);
-        receiptImporterPanel.add(new JLabel("City:"));
-        receiptImporterPanel.add(city);
-        receiptImporterPanel.add(new JLabel("Street:"));
-        receiptImporterPanel.add(street);
-        receiptImporterPanel.add(new JLabel("Number:"));
-        receiptImporterPanel.add(number);
-        int op = JOptionPane.showConfirmDialog(null, receiptImporterPanel, "",
-            JOptionPane.OK_CANCEL_OPTION);
-        if (op == 0) {
-          receiptIDValue = Integer.parseInt(receiptID.getText());
-          dateValue = date.getText();
-          kindValue = kind.getText();
-          amountValue = Float.parseFloat(amount.getText());
-          companyValue = company.getText();
-          countryValue = country.getText();
-          cityValue = city.getText();
-          streetValue = street.getText();
-          numberValue = Integer.parseInt(number.getText());
-          try {
-            taxpayerManager.addReceipt(receiptIDValue, dateValue, amountValue, kindValue,
-                companyValue, countryValue, cityValue, streetValue, numberValue,
-                taxRegistrationNumber);
-            receiptsModel.addElement(receiptIDValue);
-          } catch (IOException e1) {
-            JOptionPane.showMessageDialog(null,
-                "Problem with opening file ." + receiptIDValue + "_INFO.txt");
-          } catch (WrongReceiptKindException e1) {
-            JOptionPane.showMessageDialog(null, "Please check receipts kind and try again.");
-          } catch (WrongReceiptDateException e1) {
-            JOptionPane.showMessageDialog(null,
-                "Please make sure your date " + "is DD/MM/YYYY and try again.");
-          } catch (ReceiptAlreadyExistsException e1) {
-            JOptionPane.showMessageDialog(null, "Receipt ID already exists.");
-          }
-        }
+        new AddReceipt(taxpayerManager, receiptsModel).submit(taxRegistrationNumber);
       }
     });
     btnAddReceipt.setBounds(0, 0, 102, 23);
@@ -144,24 +70,7 @@ public class TaxpayerData extends JFrame {
     JButton btnDeleteReceipt = new JButton("Delete Receipt");
     btnDeleteReceipt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        JPanel receiptRemoverPanel = new JPanel(new GridLayout(2, 2));
-        JTextField receiptID = new JTextField(16);
-        receiptRemoverPanel.add(new JLabel("Receipt ID:"));
-        receiptRemoverPanel.add(receiptID);
-        int op = JOptionPane.showConfirmDialog(null, receiptRemoverPanel, "",
-            JOptionPane.OK_CANCEL_OPTION);
-        if (op == 0) {
-          int receiptIDValue = Integer.parseInt(receiptID.getText());
-          try {
-            taxpayerManager.removeReceipt(receiptIDValue);
-            receiptsModel.removeElement(receiptIDValue);
-          } catch (IOException e1) {
-            JOptionPane.showMessageDialog(null,
-                "Problem with opening file ." + receiptIDValue + "_INFO.txt");
-          } catch (WrongReceiptKindException e1) {
-            JOptionPane.showMessageDialog(null, "Please check receipt's kind and try again.");
-          }
-        }
+        new DeleteReceipt(taxpayerManager, receiptsModel).delete();
       }
     });
     btnDeleteReceipt.setBounds(100, 0, 120, 23);
@@ -170,15 +79,7 @@ public class TaxpayerData extends JFrame {
     JButton btnViewReport = new JButton("View Report");
     btnViewReport.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        ChartDisplay.createBarChart(taxpayerManager.getTaxpayerBasicTax(taxRegistrationNumber),
-            taxpayerManager.getTaxpayerVariationTaxOnReceipts(taxRegistrationNumber),
-            taxpayerManager.getTaxpayerTotalTax(taxRegistrationNumber));
-        ChartDisplay.createPieChart(
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, ENTERTAINMENT),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, BASIC),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, TRAVEL),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, HEALTH),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, OTHER));
+        new ViewReport(taxpayerManager, taxRegistrationNumber).produce_report();
       }
     });
     btnViewReport.setBounds(214, 0, 109, 23);
@@ -187,66 +88,7 @@ public class TaxpayerData extends JFrame {
     JButton btnSaveData = new JButton("Save Data");
     btnSaveData.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        JPanel fileLoaderPanel = new JPanel(new BorderLayout());
-        JPanel boxPanel = new JPanel(new BorderLayout());
-        JPanel taxRegistrationNumberPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        JLabel TRN = new JLabel("Choose file format.");
-        // JTextField taxRegistrationNumberField = new JTextField(20);
-        taxRegistrationNumberPanel.add(TRN);
-        // taxRegistrationNumberPanel.add(taxRegistrationNumberField);
-        JPanel loadPanel = new JPanel(new GridLayout(1, 2));
-        loadPanel.add(taxRegistrationNumberPanel);
-        fileLoaderPanel.add(boxPanel, BorderLayout.NORTH);
-        fileLoaderPanel.add(loadPanel, BorderLayout.CENTER);
-        JCheckBox txtBox = new JCheckBox("Txt file");
-        JCheckBox xmlBox = new JCheckBox("Xml file");
-
-        txtBox.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            xmlBox.setSelected(false);
-          }
-        });
-
-        xmlBox.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            txtBox.setSelected(false);
-          }
-        });
-        txtBox.doClick();
-        boxPanel.add(txtBox, BorderLayout.WEST);
-        boxPanel.add(xmlBox, BorderLayout.EAST);
-
-        int answer = JOptionPane.showConfirmDialog(null, fileLoaderPanel, "",
-            JOptionPane.OK_CANCEL_OPTION);
-        if (answer == 0) {
-          int trn = 0;
-          String taxRegistrationNumberFile;
-          try {
-            if (txtBox.isSelected()) {
-              try {
-                taxpayerManager.saveLogFile(taxRegistrationNumber, "txt");
-              } catch (IOException e1) {
-                JOptionPane.showMessageDialog(null,
-                    "Problem with opening file ." + taxRegistrationNumber + "_LOG.txt");
-              } catch (WrongFileFormatException e1) {
-                JOptionPane.showMessageDialog(null, "Wrong file format");
-              }
-            } else {
-              try {
-                taxpayerManager.saveLogFile(taxRegistrationNumber, "xml");
-              } catch (IOException e1) {
-                JOptionPane.showMessageDialog(null,
-                    "Problem with opening file ." + taxRegistrationNumber + "_LOG.xml");
-              } catch (WrongFileFormatException e1) {
-                JOptionPane.showMessageDialog(null, "Wrong file format");
-              }
-            }
-          } catch (NumberFormatException e1) {
-            JOptionPane.showMessageDialog(null,
-                "The tax registration number must have only digits.");
-          }
-        }
-
+        new SaveData(taxpayerManager, taxRegistrationNumber).export();
       }
     });
     btnSaveData.setBounds(322, 0, 102, 23);
