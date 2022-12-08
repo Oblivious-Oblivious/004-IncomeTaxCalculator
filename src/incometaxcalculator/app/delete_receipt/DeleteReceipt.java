@@ -1,48 +1,40 @@
 package incometaxcalculator.app.delete_receipt;
 
+import java.io.File;
 import java.io.IOException;
-
-import java.awt.GridLayout;
-
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.boundaries.DeleteReceiptBoundary;
+import incometaxcalculator.data.io.TXTInfoWriter;
+import incometaxcalculator.data.io.XMLInfoWriter;
 import incometaxcalculator.data.management.TaxpayerManager;
 
 public class DeleteReceipt implements DeleteReceiptBoundary {
-    TaxpayerManager taxpayerManager;
-    DefaultListModel<Integer> receiptsModel;
+    TaxpayerManager manager;
 
-    public DeleteReceipt(TaxpayerManager taxpayerManager, DefaultListModel<Integer> receiptsModel) {
-        this.taxpayerManager = taxpayerManager;
-        this.receiptsModel = receiptsModel;
+    public DeleteReceipt(TaxpayerManager manager) {
+        this.manager = manager;
+    }
+
+    // TODO Insert into file manager package
+    private void updateFiles(int taxRegistrationNumber) throws IOException {
+        if(new File(taxRegistrationNumber + "_INFO.xml").exists()) {
+            new XMLInfoWriter().generateFile(taxRegistrationNumber);
+        }
+        else {
+            new TXTInfoWriter().generateFile(taxRegistrationNumber);
+            return;
+        }
+        
+        if(new File(taxRegistrationNumber + "_INFO.txt").exists()) {
+            new TXTInfoWriter().generateFile(taxRegistrationNumber);
+        }
     }
 
     @Override
-    public void delete() {
-        JPanel receiptRemoverPanel = new JPanel(new GridLayout(2, 2));
-        JTextField receiptID = new JTextField(16);
-        receiptRemoverPanel.add(new JLabel("Receipt ID:"));
-        receiptRemoverPanel.add(receiptID);
-        int op = JOptionPane.showConfirmDialog(null, receiptRemoverPanel, "", JOptionPane.OK_CANCEL_OPTION);
-        
-        if(op == 0) {
-            int receiptIDValue = Integer.parseInt(receiptID.getText());
-            try {
-                this.taxpayerManager.removeReceipt(receiptIDValue);
-                this.receiptsModel.removeElement(receiptIDValue);
-            }
-            catch(IOException e1) {
-                JOptionPane.showMessageDialog(null, "Problem with opening file ." + receiptIDValue + "_INFO.txt");
-            }
-            catch(WrongReceiptKindException e1) {
-                JOptionPane.showMessageDialog(null, "Please check receipt's kind and try again.");
-            }
-        }
+    public void delete(int receipt_id) throws IOException, WrongReceiptKindException {
+        this.manager.get_from_taxpayers(this.manager.get_from_receipts(receipt_id)).removeReceipt(receipt_id);
+        updateFiles(this.manager.get_from_receipts(receipt_id));
+        this.manager.remove_from_receipts(receipt_id);
     }
 }

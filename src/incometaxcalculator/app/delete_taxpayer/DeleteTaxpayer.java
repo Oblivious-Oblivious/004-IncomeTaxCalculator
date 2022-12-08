@@ -1,36 +1,31 @@
 package incometaxcalculator.app.delete_taxpayer;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import incometaxcalculator.boundaries.DeleteTaxpayerBoundary;
+import incometaxcalculator.data.management.Receipt;
+import incometaxcalculator.data.management.Taxpayer;
 import incometaxcalculator.data.management.TaxpayerManager;
 
 public class DeleteTaxpayer implements DeleteTaxpayerBoundary {
-    TaxpayerManager taxpayerManager;
-    DefaultListModel<String> taxRegisterNumberModel;
+    TaxpayerManager manager;
 
-    public DeleteTaxpayer(TaxpayerManager taxpayerManager, DefaultListModel<String> taxRegisterNumberModel) {
-        this.taxpayerManager = taxpayerManager;
-        this.taxRegisterNumberModel = taxRegisterNumberModel;
+    public DeleteTaxpayer(TaxpayerManager manager) {
+        this.manager = manager;
     }
 
     @Override
-    public void delete() {
-        if(taxpayerManager.containsTaxpayer()) {
-            String trn = JOptionPane.showInputDialog(null, "Give the tax registration number that you want to delete: ");
-            try {
-                int taxRegistrationNumber = Integer.parseInt(trn);
-                if(taxpayerManager.containsTaxpayer(taxRegistrationNumber)) {
-                    taxpayerManager.removeTaxpayer(taxRegistrationNumber);
-                    taxRegisterNumberModel.removeElement(trn);
-                }
-            }
-            catch (NumberFormatException e) {
-            }
+    public void delete(int tax_registration_number) {
+        Taxpayer taxpayer = this.manager.get_from_taxpayers(tax_registration_number);
+        this.manager.remove_from_taxpayers(tax_registration_number);
+        HashMap<Integer, Receipt> receiptsHashMap = taxpayer.getReceiptHashMap();
+        Iterator<HashMap.Entry<Integer, Receipt>> iterator = receiptsHashMap.entrySet().iterator();
+
+        while(iterator.hasNext()) {
+            HashMap.Entry<Integer, Receipt> entry = iterator.next();
+            Receipt receipt = entry.getValue();
+            this.manager.remove_from_receipts(receipt.getId());
         }
-        else {
-            JOptionPane.showMessageDialog(null, "There isn't any taxpayer loaded. Please load one first.");
-        }
-    }
+    }    
 }
