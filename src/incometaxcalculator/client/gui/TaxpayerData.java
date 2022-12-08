@@ -18,10 +18,6 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-import incometaxcalculator.app.add_receipt.AddReceipt;
-import incometaxcalculator.app.delete_receipt.DeleteReceipt;
-import incometaxcalculator.app.save_data.SaveData;
-import incometaxcalculator.app.view_report.ViewReport;
 import incometaxcalculator.data.management.Receipt;
 import incometaxcalculator.data.management.TaxpayerManager;
 
@@ -61,7 +57,7 @@ public class TaxpayerData extends JFrame {
     JButton btnAddReceipt = new JButton("Add Receipt");
     btnAddReceipt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new AddReceipt(taxpayerManager, receiptsModel).submit(taxRegistrationNumber);
+        new AddReceiptView(taxpayerManager, receiptsModel, taxRegistrationNumber).submit();
       }
     });
     btnAddReceipt.setBounds(0, 0, 102, 23);
@@ -70,7 +66,7 @@ public class TaxpayerData extends JFrame {
     JButton btnDeleteReceipt = new JButton("Delete Receipt");
     btnDeleteReceipt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new DeleteReceipt(taxpayerManager, receiptsModel).delete();
+        new DeleteReceiptView(taxpayerManager, receiptsModel).delete();
       }
     });
     btnDeleteReceipt.setBounds(100, 0, 120, 23);
@@ -79,7 +75,7 @@ public class TaxpayerData extends JFrame {
     JButton btnViewReport = new JButton("View Report");
     btnViewReport.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new ViewReport(taxpayerManager, taxRegistrationNumber).produce_report();
+        new ViewReportView(taxpayerManager, taxRegistrationNumber).produce_report();
       }
     });
     btnViewReport.setBounds(214, 0, 109, 23);
@@ -88,7 +84,7 @@ public class TaxpayerData extends JFrame {
     JButton btnSaveData = new JButton("Save Data");
     btnSaveData.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new SaveData(taxpayerManager, taxRegistrationNumber).export();
+        new SaveDataView(taxpayerManager, taxRegistrationNumber).export();
       }
     });
     btnSaveData.setBounds(322, 0, 102, 23);
