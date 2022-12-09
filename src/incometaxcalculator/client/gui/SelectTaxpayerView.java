@@ -14,7 +14,7 @@ public class SelectTaxpayerView implements SelectTaxpayerBoundary {
 
     @Override
     public void select() {
-        if(taxpayerManager.containsTaxpayer()) {
+        if(taxpayerManager.is_not_empty()) {
             String trn = JOptionPane.showInputDialog(null, "Give the tax registration number " + "that you want to be displayed : ");
             if(trn != null) {
                 try {
