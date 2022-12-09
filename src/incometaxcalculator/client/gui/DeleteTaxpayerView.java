@@ -16,7 +16,7 @@ public class DeleteTaxpayerView {
     }
 
     public void delete() {
-        if(taxpayerManager.is_not_empty()) {
+        if(taxpayerManager.taxpayer_hashmap_is_not_empty()) {
             String trn = JOptionPane.showInputDialog(null, "Give the tax registration number that you want to delete: ");
             try {
                 int taxRegistrationNumber = Integer.parseInt(trn);

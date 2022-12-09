@@ -38,7 +38,7 @@ public class TaxpayerManager {
         return taxpayerHashMap.containsKey(taxRegistrationNumber);
     }
     
-    public boolean is_not_empty() {
+    public boolean taxpayer_hashmap_is_not_empty() {
         return !taxpayerHashMap.isEmpty();
     }
     
