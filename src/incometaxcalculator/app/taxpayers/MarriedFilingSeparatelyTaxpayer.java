@@ -5,6 +5,7 @@ public class MarriedFilingSeparatelyTaxpayer extends Taxpayer {
         super(fullname, taxRegistrationNumber, income);
     }
 
+    @Override
     public double calculateBasicTax() {
         if(income < 18040)
             return 0.0535 * income;

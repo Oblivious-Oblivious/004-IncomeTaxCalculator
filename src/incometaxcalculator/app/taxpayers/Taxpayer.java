@@ -28,6 +28,26 @@ public abstract class Taxpayer {
         this.income = income;
     }
 
+    private float getTotalAmountOfReceipts() {
+        int sum = 0;
+        for(int i = 0; i < 5; i++)
+            sum += amountPerReceiptsKind[i];
+        return sum;
+    }
+
+    public double getVariationTaxOnReceipts() {
+        float totalAmountOfReceipts = getTotalAmountOfReceipts();
+
+        if(totalAmountOfReceipts < 0.2 * income)
+            return calculateBasicTax() * 0.08;
+        else if(totalAmountOfReceipts < 0.4 * income)
+            return calculateBasicTax() * 0.04;
+        else if(totalAmountOfReceipts < 0.6 * income)
+            return -calculateBasicTax() * 0.15;
+        else
+            return -calculateBasicTax() * 0.3;
+    }
+
     public void addReceipt(Receipt receipt) throws WrongReceiptKindException {
         if(receipt.kind.equals("Entertainment"))
             amountPerReceiptsKind[ENTERTAINMENT] += receipt.amount;
@@ -63,26 +83,6 @@ public abstract class Taxpayer {
 
         totalReceiptsGathered--;
         receiptHashMap.remove(receiptId);
-    }
-
-    private float getTotalAmountOfReceipts() {
-        int sum = 0;
-        for(int i = 0; i < 5; i++)
-            sum += amountPerReceiptsKind[i];
-        return sum;
-    }
-
-    public double getVariationTaxOnReceipts() {
-        float totalAmountOfReceipts = getTotalAmountOfReceipts();
-
-        if(totalAmountOfReceipts < 0.2 * income)
-            return calculateBasicTax() * 0.08;
-        else if(totalAmountOfReceipts < 0.4 * income)
-            return calculateBasicTax() * 0.04;
-        else if(totalAmountOfReceipts < 0.6 * income)
-            return -calculateBasicTax() * 0.15;
-        else
-            return -calculateBasicTax() * 0.3;
     }
 
     public double getTotalTax() {
