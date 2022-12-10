@@ -1,8 +1,9 @@
-package incometaxcalculator.data.management;
+package incometaxcalculator.app.taxpayers;
 
 import java.util.HashMap;
 
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.receipts.Receipt;
 
 public abstract class Taxpayer {
     protected final String fullname;
@@ -26,35 +27,35 @@ public abstract class Taxpayer {
     }
 
     public void addReceipt(Receipt receipt) throws WrongReceiptKindException {
-        if(receipt.getKind().equals("Entertainment"))
-            amountPerReceiptsKind[ENTERTAINMENT] += receipt.getAmount();
-        else if(receipt.getKind().equals("Basic"))
-            amountPerReceiptsKind[BASIC] += receipt.getAmount();
-        else if(receipt.getKind().equals("Travel"))
-            amountPerReceiptsKind[TRAVEL] += receipt.getAmount();
-        else if(receipt.getKind().equals("Health"))
-            amountPerReceiptsKind[HEALTH] += receipt.getAmount();
-        else if(receipt.getKind().equals("Other"))
-            amountPerReceiptsKind[OTHER] += receipt.getAmount();
+        if(receipt.kind.equals("Entertainment"))
+            amountPerReceiptsKind[ENTERTAINMENT] += receipt.amount;
+        else if(receipt.kind.equals("Basic"))
+            amountPerReceiptsKind[BASIC] += receipt.amount;
+        else if(receipt.kind.equals("Travel"))
+            amountPerReceiptsKind[TRAVEL] += receipt.amount;
+        else if(receipt.kind.equals("Health"))
+            amountPerReceiptsKind[HEALTH] += receipt.amount;
+        else if(receipt.kind.equals("Other"))
+            amountPerReceiptsKind[OTHER] += receipt.amount;
         else
             throw new WrongReceiptKindException();
 
-        receiptHashMap.put(receipt.getId(), receipt);
+        receiptHashMap.put(receipt.id, receipt);
         totalReceiptsGathered++;
     }
 
     public void removeReceipt(int receiptId) throws WrongReceiptKindException {
         Receipt receipt = receiptHashMap.get(receiptId);
-        if(receipt.getKind().equals("Entertainment"))
-            amountPerReceiptsKind[ENTERTAINMENT] -= receipt.getAmount();
-        else if(receipt.getKind().equals("Basic"))
-            amountPerReceiptsKind[BASIC] -= receipt.getAmount();
-        else if(receipt.getKind().equals("Travel"))
-            amountPerReceiptsKind[TRAVEL] -= receipt.getAmount();
-        else if(receipt.getKind().equals("Health"))
-            amountPerReceiptsKind[HEALTH] -= receipt.getAmount();
-        else if(receipt.getKind().equals("Other"))
-            amountPerReceiptsKind[OTHER] -= receipt.getAmount();
+        if(receipt.kind.equals("Entertainment"))
+            amountPerReceiptsKind[ENTERTAINMENT] -= receipt.amount;
+        else if(receipt.kind.equals("Basic"))
+            amountPerReceiptsKind[BASIC] -= receipt.amount;
+        else if(receipt.kind.equals("Travel"))
+            amountPerReceiptsKind[TRAVEL] -= receipt.amount;
+        else if(receipt.kind.equals("Health"))
+            amountPerReceiptsKind[HEALTH] -= receipt.amount;
+        else if(receipt.kind.equals("Other"))
+            amountPerReceiptsKind[OTHER] -= receipt.amount;
         else
             throw new WrongReceiptKindException();
 
@@ -80,7 +81,7 @@ public abstract class Taxpayer {
 
     public double getVariationTaxOnReceipts() {
         float totalAmountOfReceipts = getTotalAmountOfReceipts();
-        
+
         if(totalAmountOfReceipts < 0.2 * income)
             return calculateBasicTax() * 0.08;
         else if(totalAmountOfReceipts < 0.4 * income)

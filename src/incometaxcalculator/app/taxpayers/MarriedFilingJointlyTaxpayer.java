@@ -1,4 +1,4 @@
-package incometaxcalculator.data.management;
+package incometaxcalculator.app.taxpayers;
 
 public class MarriedFilingJointlyTaxpayer extends Taxpayer {
     public MarriedFilingJointlyTaxpayer(String fullname, int taxRegistrationNumber, float income) {

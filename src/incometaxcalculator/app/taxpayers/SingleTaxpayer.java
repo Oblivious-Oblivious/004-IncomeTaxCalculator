@@ -1,4 +1,4 @@
-package incometaxcalculator.data.management;
+package incometaxcalculator.app.taxpayers;
 
 public class SingleTaxpayer extends Taxpayer {
     public SingleTaxpayer(String fullname, int taxRegistrationNumber, float income) {

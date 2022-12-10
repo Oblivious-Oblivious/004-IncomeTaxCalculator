@@ -1,13 +1,13 @@
-package incometaxcalculator.data.management;
+package incometaxcalculator.app.receipts;
 
 import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 
 public class Receipt {
-    private final int id;
-    private final Date issueDate;
-    private final float amount;
-    private final String kind;
-    private final Company company;
+    public final int id;
+    public final Date issueDate;
+    public final float amount;
+    public final String kind;
+    public final Company company;
 
     public Receipt(int id, String issueDate, float amount, String kind, Company company) throws WrongReceiptDateException {
         this.id = id;
@@ -27,25 +27,5 @@ public class Receipt {
         int year = Integer.parseInt(token[2]);
 
         return new Date(day, month, year);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getIssueDate() {
-        return issueDate.toString();
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public String getKind() {
-        return kind;
-    }
-
-    public Company getCompany() {
-        return company;
     }
 }
