@@ -35,4 +35,8 @@ public class LoadTaxpayer implements LoadTaxpayerBoundary {
             throw new WrongFileEndingException();
         }
     }
+
+    public boolean containsTaxpayer(int taxRegistrationNumber) {
+        return TaxpayerManager.taxpayerHashMap.containsKey(taxRegistrationNumber);
+    }
 }
