@@ -17,4 +17,8 @@ public class HeadOfHouseholdTaxpayer extends Taxpayer {
         else
             return 14472.61 + 0.0985 * (income - 203390);
     }
+
+    public String toString() {
+        return "Head of Household";
+    }
 }

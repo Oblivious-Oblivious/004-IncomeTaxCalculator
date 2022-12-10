@@ -17,4 +17,8 @@ public class MarriedFilingJointlyTaxpayer extends Taxpayer {
         else
             return 18197.69 + 0.0985 * (income - 254240);
     }
+
+    public String toString() {
+        return "Married Filing Jointly";
+    }
 }

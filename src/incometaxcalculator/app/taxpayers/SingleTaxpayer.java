@@ -17,4 +17,8 @@ public class SingleTaxpayer extends Taxpayer {
         else
             return 10906.19 + 0.0985 * (income - 152540);
     }
+
+    public String toString() {
+        return "Single";
+    }
 }

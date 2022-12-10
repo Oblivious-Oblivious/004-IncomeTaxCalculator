@@ -17,4 +17,8 @@ public class MarriedFilingSeparatelyTaxpayer extends Taxpayer {
         else
             return 9098.80 + 0.0985 * (income - 127120);
     }
+
+    public String toString() {
+        return "Married Filing Separately";
+    }
 }
