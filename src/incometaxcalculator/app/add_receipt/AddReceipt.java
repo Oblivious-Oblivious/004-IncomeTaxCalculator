@@ -25,7 +25,6 @@ public class AddReceipt implements AddReceiptBoundary {
             throw new ReceiptAlreadyExistsException();
 
         createReceipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number, taxRegistrationNumber);
-        // updateFiles(taxRegistrationNumber);
         new UpdateTaxpayerInformation().update(taxRegistrationNumber);
     }
 }
