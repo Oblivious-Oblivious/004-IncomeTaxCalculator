@@ -62,10 +62,10 @@ public class SaveDataView {
             try {
                 try {
                     if(txtBox.isSelected()) {
-                        new SaveData(taxpayerManager).export(taxRegistrationNumber, "txt");
+                        new SaveData().export(taxRegistrationNumber, "txt");
                     }
                     else {
-                        new SaveData(taxpayerManager).export(taxRegistrationNumber, "xml");
+                        new SaveData().export(taxRegistrationNumber, "xml");
                     }
                 }
                 catch(IOException e1) {
