@@ -8,18 +8,9 @@ import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.boundaries.LoadTaxpayerBoundary;
-import incometaxcalculator.data.io.FileReader;
-import incometaxcalculator.data.io.TXTFileReader;
-import incometaxcalculator.data.io.XMLFileReader;
-import incometaxcalculator.data.management.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerManager;
 
 public class LoadTaxpayer implements LoadTaxpayerBoundary {
-    TaxpayerManager manager;
-
-    public LoadTaxpayer(TaxpayerManager manager) {
-        this.manager = manager;
-    }
-
     @Override
     public void load(int tax_registration_number, String type) throws NumberFormatException, IOException, WrongFileFormatException, WrongFileEndingException, WrongTaxpayerStatusException, WrongReceiptKindException, WrongReceiptDateException {
         String filename = tax_registration_number + "_INFO." + type;
