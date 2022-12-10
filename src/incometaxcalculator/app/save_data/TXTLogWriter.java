@@ -1,9 +1,9 @@
-package incometaxcalculator.data.io;
+package incometaxcalculator.app.save_data;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class TXTLogWriter extends FileWriter {
+public class TXTLogWriter extends LogWriter {
     private static final short ENTERTAINMENT = 0;
     private static final short BASIC = 1;
     private static final short TRAVEL = 2;
