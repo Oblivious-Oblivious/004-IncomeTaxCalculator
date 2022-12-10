@@ -14,7 +14,7 @@ import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.app.load_taxpayer.LoadTaxpayer;
-import incometaxcalculator.data.management.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerManager;
 
 public class LoadTaxpayerView {
     TaxpayerManager taxpayerManager;

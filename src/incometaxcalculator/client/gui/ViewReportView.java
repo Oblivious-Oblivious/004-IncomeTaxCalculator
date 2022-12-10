@@ -1,6 +1,6 @@
 package incometaxcalculator.client.gui;
 
-import incometaxcalculator.data.management.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerManager;
 
 public class ViewReportView {
     static final short ENTERTAINMENT = 0;

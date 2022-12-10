@@ -4,7 +4,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import incometaxcalculator.app.delete_taxpayer.DeleteTaxpayer;
-import incometaxcalculator.data.management.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerManager;
 
 public class DeleteTaxpayerView {
     TaxpayerManager taxpayerManager;

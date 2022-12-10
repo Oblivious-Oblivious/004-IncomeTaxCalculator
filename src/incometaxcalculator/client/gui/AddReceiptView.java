@@ -14,7 +14,7 @@ import incometaxcalculator.app.add_receipt.AddReceipt;
 import incometaxcalculator.app.exceptions.ReceiptAlreadyExistsException;
 import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
-import incometaxcalculator.data.management.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerManager;
 
 public class AddReceiptView {
     TaxpayerManager taxpayerManager;

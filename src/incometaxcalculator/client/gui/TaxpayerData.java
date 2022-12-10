@@ -18,8 +18,8 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-import incometaxcalculator.data.management.Receipt;
-import incometaxcalculator.data.management.TaxpayerManager;
+import incometaxcalculator.app.receipts.Receipt;
+import incometaxcalculator.persistence.TaxpayerManager;
 
 public class TaxpayerData extends JFrame {
     private JPanel contentPane;
