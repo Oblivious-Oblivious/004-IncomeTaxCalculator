@@ -1,13 +1,13 @@
-package incometaxcalculator.data.io;
+package incometaxcalculator.app.update_taxpayer_information;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import incometaxcalculator.data.management.Receipt;
+import incometaxcalculator.app.receipts.Receipt;
 
-public class XMLInfoWriter extends FileWriter {
+public class XMLInfoWriter extends InfoWriter {
     public void generateFile(int taxRegistrationNumber) throws IOException {
         PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.xml"));
         outputStream.println("<Name> " + getTaxpayerName(taxRegistrationNumber) + " </Name>");
