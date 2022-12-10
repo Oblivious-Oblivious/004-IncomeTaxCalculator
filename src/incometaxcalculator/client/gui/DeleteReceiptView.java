@@ -33,7 +33,7 @@ public class DeleteReceiptView {
         if(op == 0) {
             int receiptIDValue = Integer.parseInt(receiptID.getText());
             try {
-                new DeleteReceipt(taxpayerManager).delete(receiptIDValue);
+                new DeleteReceipt().delete(receiptIDValue);
                 this.receiptsModel.removeElement(receiptIDValue);
             }
             catch(IOException e1) {
