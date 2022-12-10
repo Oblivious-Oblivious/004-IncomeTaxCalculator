@@ -51,7 +51,7 @@ public class TaxpayerData extends JFrame {
         while(iterator.hasNext()) {
             HashMap.Entry<Integer, Receipt> entry = iterator.next();
             Receipt receipt = entry.getValue();
-            receiptsModel.addElement(receipt.getId());
+            receiptsModel.addElement(receipt.id);
         }
 
         JButton btnAddReceipt = new JButton("Add Receipt");
