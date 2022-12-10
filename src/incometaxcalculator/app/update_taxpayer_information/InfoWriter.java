@@ -1,29 +1,12 @@
 package incometaxcalculator.app.update_taxpayer_information;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import incometaxcalculator.app.receipts.Receipt;
-import incometaxcalculator.persistence.TaxpayerManager;
 
+// TODO Implement into factory
 public abstract class InfoWriter {
     public abstract void generateFile(int taxRegistrationNumber) throws IOException;
-
-    public String getTaxpayerName(int taxRegistrationNumber) {
-        return TaxpayerManager.getTaxpayerName(taxRegistrationNumber);
-    }
-
-    public String getTaxpayerIncome(int taxRegistrationNumber) {
-        return TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber);
-    }
-
-    public String getTaxpayerStatus(int taxRegistrationNumber) {
-        return TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber);
-    }
-
-    public HashMap<Integer, Receipt> getReceiptHashMap(int taxRegistrationNumber) {
-        return TaxpayerManager.getReceiptHashMap(taxRegistrationNumber);
-    }
 
     public int getReceiptId(Receipt receipt) {
         return receipt.id;

@@ -6,24 +6,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import incometaxcalculator.app.receipts.Receipt;
+import incometaxcalculator.persistence.TaxpayerManager;
 
 public class TXTInfoWriter extends InfoWriter {
-    public void generateFile(int taxRegistrationNumber) throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.txt"));
-        outputStream.println("Name: " + getTaxpayerName(taxRegistrationNumber));
-        outputStream.println("AFM: " + taxRegistrationNumber);
-        outputStream.println("Status: " + getTaxpayerStatus(taxRegistrationNumber));
-        outputStream.println("Income: " + getTaxpayerIncome(taxRegistrationNumber));
-        outputStream.println();// den mas emfanize to \n se aplo notepad
-        outputStream.println("Receipts:");
-        outputStream.println();
-
-        generateTaxpayerReceipts(taxRegistrationNumber, outputStream);
-        outputStream.close();
-    }
-
     private void generateTaxpayerReceipts(int taxRegistrationNumber, PrintWriter outputStream) {
-        HashMap<Integer, Receipt> receiptsHashMap = getReceiptHashMap(taxRegistrationNumber);
+        HashMap<Integer, Receipt> receiptsHashMap = TaxpayerManager.getReceiptHashMap(taxRegistrationNumber);
         Iterator<HashMap.Entry<Integer, Receipt>> iterator = receiptsHashMap.entrySet().iterator();
         while(iterator.hasNext()) {
             HashMap.Entry<Integer, Receipt> entry = iterator.next();
@@ -39,5 +26,20 @@ public class TXTInfoWriter extends InfoWriter {
             outputStream.println("Number: " + getCompanyNumber(receipt));
             outputStream.println();
         }
+    }
+
+    @Override
+    public void generateFile(int taxRegistrationNumber) throws IOException {
+        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.txt"));
+        outputStream.println("Name: " + TaxpayerManager.getTaxpayerName(taxRegistrationNumber));
+        outputStream.println("AFM: " + taxRegistrationNumber);
+        outputStream.println("Status: " + TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber));
+        outputStream.println("Income: " + TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber));
+        outputStream.println();// den mas emfanize to \n se aplo notepad
+        outputStream.println("Receipts:");
+        outputStream.println();
+
+        generateTaxpayerReceipts(taxRegistrationNumber, outputStream);
+        outputStream.close();
     }
 }
