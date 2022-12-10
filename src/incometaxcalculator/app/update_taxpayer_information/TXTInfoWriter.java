@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import incometaxcalculator.app.receipts.Receipt;
+import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.persistence.TaxpayerManager;
 
+// TODO Abstract commonalities into factory
 public class TXTInfoWriter extends InfoWriter {
-    private void generateTaxpayerReceipts(int taxRegistrationNumber, PrintWriter outputStream) {
-        HashMap<Integer, Receipt> receiptsHashMap = TaxpayerManager.getReceiptHashMap(taxRegistrationNumber);
+    private void generateTaxpayerReceipts(Taxpayer taxpayer, PrintWriter outputStream) {
+        HashMap<Integer, Receipt> receiptsHashMap = taxpayer.receiptHashMap;
         Iterator<HashMap.Entry<Integer, Receipt>> iterator = receiptsHashMap.entrySet().iterator();
         while(iterator.hasNext()) {
             HashMap.Entry<Integer, Receipt> entry = iterator.next();
@@ -31,15 +33,17 @@ public class TXTInfoWriter extends InfoWriter {
     @Override
     public void generateFile(int taxRegistrationNumber) throws IOException {
         PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.txt"));
-        outputStream.println("Name: " + TaxpayerManager.getTaxpayerName(taxRegistrationNumber));
+        Taxpayer taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
+
+        outputStream.println("Name: " + taxpayer.fullname);
         outputStream.println("AFM: " + taxRegistrationNumber);
-        outputStream.println("Status: " + TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber));
-        outputStream.println("Income: " + TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber));
-        outputStream.println();// den mas emfanize to \n se aplo notepad
+        outputStream.println("Status: " + taxpayer);
+        outputStream.println("Income: " + taxpayer.income);
+        outputStream.println();
         outputStream.println("Receipts:");
         outputStream.println();
 
-        generateTaxpayerReceipts(taxRegistrationNumber, outputStream);
+        generateTaxpayerReceipts(taxpayer, outputStream);
         outputStream.close();
     }
 }

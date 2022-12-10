@@ -1,5 +1,8 @@
 package incometaxcalculator.client.gui;
 
+import incometaxcalculator.app.taxpayers.Taxpayer;
+
+// TODO Try to refactor out
 import incometaxcalculator.persistence.TaxpayerManager;
 
 public class ViewReportView {
@@ -10,23 +13,26 @@ public class ViewReportView {
     static final short OTHER = 4;
 
     int taxRegistrationNumber;
+    Taxpayer current_taxpayer;
 
     public ViewReportView(int taxRegistrationNumber) {
         this.taxRegistrationNumber = taxRegistrationNumber;
+        this.current_taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
     }
 
+    // TODO Get data from boundary
     public void produce_report() {
         ChartDisplay.createBarChart(
-            TaxpayerManager.getTaxpayerBasicTax(taxRegistrationNumber),
-            TaxpayerManager.getTaxpayerVariationTaxOnReceipts(taxRegistrationNumber),
-            TaxpayerManager.getTaxpayerTotalTax(taxRegistrationNumber)
+            current_taxpayer.getBasicTax(),
+            current_taxpayer.getVariationTaxOnReceipts(),
+            current_taxpayer.getTotalTax()
         );
         ChartDisplay.createPieChart(
-            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, ENTERTAINMENT),
-            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, BASIC),
-            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, TRAVEL),
-            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, HEALTH),
-            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, OTHER)
+            current_taxpayer.getAmountOfReceiptKind(ENTERTAINMENT),
+            current_taxpayer.getAmountOfReceiptKind(BASIC),
+            current_taxpayer.getAmountOfReceiptKind(TRAVEL),
+            current_taxpayer.getAmountOfReceiptKind(HEALTH),
+            current_taxpayer.getAmountOfReceiptKind(OTHER)
         );
     }
 }

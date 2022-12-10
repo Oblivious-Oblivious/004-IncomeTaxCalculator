@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import incometaxcalculator.app.receipts.Receipt;
+import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.persistence.TaxpayerManager;
 
+// TODO Abstract commonalities into factory
 public class XMLInfoWriter extends InfoWriter {
-    private void generateTaxpayerReceipts(int taxRegistrationNumber, PrintWriter outputStream) {
-        HashMap<Integer, Receipt> receiptsHashMap = TaxpayerManager.getReceiptHashMap(taxRegistrationNumber);
+    private void generateTaxpayerReceipts(Taxpayer taxpayer, PrintWriter outputStream) {
+        HashMap<Integer, Receipt> receiptsHashMap = taxpayer.receiptHashMap;
         Iterator<HashMap.Entry<Integer, Receipt>> iterator = receiptsHashMap.entrySet().iterator();
         while(iterator.hasNext()) {
             HashMap.Entry<Integer, Receipt> entry = iterator.next();
@@ -31,15 +33,17 @@ public class XMLInfoWriter extends InfoWriter {
     @Override
     public void generateFile(int taxRegistrationNumber) throws IOException {
         PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.xml"));
-        outputStream.println("<Name> " + TaxpayerManager.getTaxpayerName(taxRegistrationNumber) + " </Name>");
+        Taxpayer taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
+
+        outputStream.println("<Name> " + taxpayer.fullname + " </Name>");
         outputStream.println("<AFM> " + taxRegistrationNumber + " </AFM>");
-        outputStream.println("<Status> " + TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber) + " </Status>");
-        outputStream.println("<Income> " + TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber) + " </Income>");
-        outputStream.println();// den mas emfanize to \n se aplo notepad
+        outputStream.println("<Status> " + taxpayer + " </Status>");
+        outputStream.println("<Income> " + taxpayer.income + " </Income>");
+        outputStream.println();
         outputStream.println("<Receipts>");
         outputStream.println();
 
-        generateTaxpayerReceipts(taxRegistrationNumber, outputStream);
+        generateTaxpayerReceipts(taxpayer, outputStream);
         outputStream.close();
     }
 }

@@ -5,9 +5,6 @@ import javax.swing.JOptionPane;
 
 import incometaxcalculator.app.delete_taxpayer.DeleteTaxpayer;
 
-// TODO Try refactor out
-import incometaxcalculator.persistence.TaxpayerManager;
-
 public class DeleteTaxpayerView {
     DefaultListModel<String> taxRegisterNumberModel;
 
@@ -16,11 +13,13 @@ public class DeleteTaxpayerView {
     }
 
     public void delete() {
-        if(TaxpayerManager.taxpayer_hashmap_is_not_empty()) {
+        DeleteTaxpayer deleter = new DeleteTaxpayer();
+
+        if(deleter.taxpayer_hashmap_is_not_empty()) {
             String trn = JOptionPane.showInputDialog(null, "Give the tax registration number that you want to delete: ");
             try {
                 int taxRegistrationNumber = Integer.parseInt(trn);
-                if(TaxpayerManager.containsTaxpayer(taxRegistrationNumber)) {
+                if(deleter.containsTaxpayer(taxRegistrationNumber)) {
                     new DeleteTaxpayer().delete(taxRegistrationNumber);
                     taxRegisterNumberModel.removeElement(trn);
                 }

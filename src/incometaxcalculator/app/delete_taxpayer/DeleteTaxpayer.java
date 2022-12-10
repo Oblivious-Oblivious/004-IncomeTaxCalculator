@@ -13,13 +13,22 @@ public class DeleteTaxpayer implements DeleteTaxpayerBoundary {
     public void delete(int tax_registration_number) {
         Taxpayer taxpayer = TaxpayerManager.taxpayerHashMap.get(tax_registration_number);
         TaxpayerManager.taxpayerHashMap.remove(tax_registration_number);
-        HashMap<Integer, Receipt> receiptsHashMap = taxpayer.getReceiptHashMap();
+        HashMap<Integer, Receipt> receiptsHashMap = taxpayer.receiptHashMap;
         Iterator<HashMap.Entry<Integer, Receipt>> iterator = receiptsHashMap.entrySet().iterator();
 
+        // TODO Eventually remove this since we would be deleting Taxpayer as an object
         while(iterator.hasNext()) {
             HashMap.Entry<Integer, Receipt> entry = iterator.next();
             Receipt receipt = entry.getValue();
             TaxpayerManager.receiptOwnerTRN.remove(receipt.id);
         }
-    }    
+    }
+
+    public boolean taxpayer_hashmap_is_not_empty() {
+        return !TaxpayerManager.taxpayerHashMap.isEmpty();
+    }
+
+    public boolean containsTaxpayer(int taxRegistrationNumber) {
+        return TaxpayerManager.taxpayerHashMap.containsKey(taxRegistrationNumber);
+    }
 }

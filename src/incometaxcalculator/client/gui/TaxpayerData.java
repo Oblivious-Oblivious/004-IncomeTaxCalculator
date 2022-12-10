@@ -19,6 +19,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import incometaxcalculator.app.receipts.Receipt;
+import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.persistence.TaxpayerManager;
 
 public class TaxpayerData extends JFrame {
@@ -31,6 +32,8 @@ public class TaxpayerData extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        Taxpayer current_taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
 
         DefaultListModel<Integer> receiptsModel = new DefaultListModel<Integer>();
 
@@ -45,7 +48,7 @@ public class TaxpayerData extends JFrame {
         receiptsListScrollPane.setLocation(100, 170);
         contentPane.add(receiptsListScrollPane);
 
-        HashMap<Integer, Receipt> receipts = TaxpayerManager.getReceiptHashMap(taxRegistrationNumber);
+        HashMap<Integer, Receipt> receipts = current_taxpayer.receiptHashMap;
         Iterator<HashMap.Entry<Integer, Receipt>> iterator = receipts.entrySet().iterator();
 
         while(iterator.hasNext()) {
@@ -118,7 +121,7 @@ public class TaxpayerData extends JFrame {
         taxpayerName.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerName.setEditable(false);
         taxpayerName.setBounds(110, 34, 213, 20);
-        taxpayerName.setText(TaxpayerManager.getTaxpayerName(taxRegistrationNumber));
+        taxpayerName.setText(current_taxpayer.fullname);
         contentPane.add(taxpayerName);
 
         JTextArea taxpayerTRN = new JTextArea();
@@ -132,14 +135,14 @@ public class TaxpayerData extends JFrame {
         taxpayerStatus.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerStatus.setEditable(false);
         taxpayerStatus.setBounds(110, 96, 213, 20);
-        taxpayerStatus.setText(TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber));
+        taxpayerStatus.setText(current_taxpayer.toString());
         contentPane.add(taxpayerStatus);
 
         JTextArea taxpayerIncome = new JTextArea();
         taxpayerIncome.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerIncome.setEditable(false);
         taxpayerIncome.setBounds(112, 127, 213, 20);
-        taxpayerIncome.setText(TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber));
+        taxpayerIncome.setText("" + current_taxpayer.income);
         contentPane.add(taxpayerIncome);
 
         JTextPane txtpnReceipts = new JTextPane();
