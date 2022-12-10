@@ -9,26 +9,24 @@ public class ViewReportView {
     static final short HEALTH = 3;
     static final short OTHER = 4;
 
-    TaxpayerManager taxpayerManager;
     int taxRegistrationNumber;
 
-    public ViewReportView(TaxpayerManager taxpayerManager, int taxRegistrationNumber) {
-        this.taxpayerManager = taxpayerManager;
+    public ViewReportView(int taxRegistrationNumber) {
         this.taxRegistrationNumber = taxRegistrationNumber;
     }
 
     public void produce_report() {
         ChartDisplay.createBarChart(
-            taxpayerManager.getTaxpayerBasicTax(taxRegistrationNumber),
-            taxpayerManager.getTaxpayerVariationTaxOnReceipts(taxRegistrationNumber),
-            taxpayerManager.getTaxpayerTotalTax(taxRegistrationNumber)
+            TaxpayerManager.getTaxpayerBasicTax(taxRegistrationNumber),
+            TaxpayerManager.getTaxpayerVariationTaxOnReceipts(taxRegistrationNumber),
+            TaxpayerManager.getTaxpayerTotalTax(taxRegistrationNumber)
         );
         ChartDisplay.createPieChart(
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, ENTERTAINMENT),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, BASIC),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, TRAVEL),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, HEALTH),
-            taxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, OTHER)
+            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, ENTERTAINMENT),
+            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, BASIC),
+            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, TRAVEL),
+            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, HEALTH),
+            TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, OTHER)
         );
     }
 }

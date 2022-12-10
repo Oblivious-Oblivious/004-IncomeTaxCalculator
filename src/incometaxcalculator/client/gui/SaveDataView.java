@@ -16,14 +16,11 @@ import javax.swing.JPanel;
 
 import incometaxcalculator.app.exceptions.WrongFileFormatException;
 import incometaxcalculator.app.save_data.SaveData;
-import incometaxcalculator.persistence.TaxpayerManager;
 
 public class SaveDataView {
-    TaxpayerManager taxpayerManager;
     int taxRegistrationNumber;
 
-    public SaveDataView(TaxpayerManager taxpayerManager, int taxRegistrationNumber) {
-        this.taxpayerManager = taxpayerManager;
+    public SaveDataView(int taxRegistrationNumber) {
         this.taxRegistrationNumber = taxRegistrationNumber;
     }
 

@@ -10,19 +10,19 @@ public abstract class InfoWriter {
     public abstract void generateFile(int taxRegistrationNumber) throws IOException;
 
     public String getTaxpayerName(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerName(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerName(taxRegistrationNumber);
     }
 
     public String getTaxpayerIncome(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerIncome(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber);
     }
 
     public String getTaxpayerStatus(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerStatus(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber);
     }
 
     public HashMap<Integer, Receipt> getReceiptHashMap(int taxRegistrationNumber) {
-        return new TaxpayerManager().getReceiptHashMap(taxRegistrationNumber);
+        return TaxpayerManager.getReceiptHashMap(taxRegistrationNumber);
     }
 
     public int getReceiptId(Receipt receipt) {

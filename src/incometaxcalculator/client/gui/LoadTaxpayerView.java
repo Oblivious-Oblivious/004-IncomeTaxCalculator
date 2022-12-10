@@ -14,23 +14,22 @@ import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.app.load_taxpayer.LoadTaxpayer;
+
+// TODO Try refactor out
 import incometaxcalculator.persistence.TaxpayerManager;
 
 public class LoadTaxpayerView {
-    TaxpayerManager taxpayerManager;
     DefaultListModel<String> taxRegisterNumberModel;
     JPanel fileLoaderPanel;
     JTextField taxRegistrationNumberField;
     JCheckBox txtBox;
 
     public LoadTaxpayerView(
-        TaxpayerManager taxpayerManager,
         DefaultListModel<String> taxRegisterNumberModel,
         JPanel fileLoaderPanel,
         JTextField taxRegistrationNumberField,
         JCheckBox txtBox
     ) {
-        this.taxpayerManager = taxpayerManager;
         this.taxRegisterNumberModel = taxRegisterNumberModel;
         this.fileLoaderPanel = fileLoaderPanel;
         this.taxRegistrationNumberField = taxRegistrationNumberField;
@@ -58,11 +57,11 @@ public class LoadTaxpayerView {
 
                 try {
                     int trn = Integer.parseInt(taxRegistrationNumber);
-                    if(this.taxpayerManager.containsTaxpayer(trn)) {
+                    if(TaxpayerManager.containsTaxpayer(trn)) {
                         JOptionPane.showMessageDialog(null, "This taxpayer is already loaded.");
                     }
                     else {
-                        new LoadTaxpayer(taxpayerManager).load(trn, type);
+                        new LoadTaxpayer().load(trn, type);
                         this.taxRegisterNumberModel.addElement(taxRegistrationNumber);
                     }
                 }

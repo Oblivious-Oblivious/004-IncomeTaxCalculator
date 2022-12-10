@@ -3,24 +3,20 @@ package incometaxcalculator.client.gui;
 import javax.swing.JOptionPane;
 
 import incometaxcalculator.boundaries.SelectTaxpayerBoundary;
+
+// TODO Try refactor out
 import incometaxcalculator.persistence.TaxpayerManager;
 
 public class SelectTaxpayerView implements SelectTaxpayerBoundary {
-    TaxpayerManager taxpayerManager;
-
-    public SelectTaxpayerView(TaxpayerManager taxpayerManager) {
-        this.taxpayerManager = taxpayerManager;
-    }
-
     @Override
     public void select() {
-        if(taxpayerManager.taxpayer_hashmap_is_not_empty()) {
+        if(TaxpayerManager.taxpayer_hashmap_is_not_empty()) {
             String trn = JOptionPane.showInputDialog(null, "Give the tax registration number " + "that you want to be displayed : ");
             if(trn != null) {
                 try {
                     int taxRegistrationNumber = Integer.parseInt(trn);
-                    if(taxpayerManager.containsTaxpayer(taxRegistrationNumber)) {
-                        TaxpayerData taxpayerData = new TaxpayerData(taxRegistrationNumber, taxpayerManager);
+                    if(TaxpayerManager.containsTaxpayer(taxRegistrationNumber)) {
+                        TaxpayerData taxpayerData = new TaxpayerData(taxRegistrationNumber);
                         taxpayerData.setVisible(true);
                     }
                     else {

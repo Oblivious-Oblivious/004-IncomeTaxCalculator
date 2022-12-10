@@ -12,14 +12,11 @@ import javax.swing.JLabel;
 
 import incometaxcalculator.app.delete_receipt.DeleteReceipt;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
-import incometaxcalculator.persistence.TaxpayerManager;
 
 public class DeleteReceiptView {
-    TaxpayerManager taxpayerManager;
     DefaultListModel<Integer> receiptsModel;
 
-    public DeleteReceiptView(TaxpayerManager taxpayerManager, DefaultListModel<Integer> receiptsModel) {
-        this.taxpayerManager = taxpayerManager;
+    public DeleteReceiptView(DefaultListModel<Integer> receiptsModel) {
         this.receiptsModel = receiptsModel;
     }
 

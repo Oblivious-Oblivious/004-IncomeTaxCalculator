@@ -24,11 +24,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
-import incometaxcalculator.persistence.TaxpayerManager;
-
 public class GraphicalInterface extends JFrame {
     private JPanel contentPane;
-    private TaxpayerManager taxpayerManager = new TaxpayerManager();
     private JTextField txtTaxRegistrationNumber;
 
     public static void main(String[] args) {
@@ -111,7 +108,7 @@ public class GraphicalInterface extends JFrame {
         JButton btnLoadTaxpayer = new JButton("Load Taxpayer");
         btnLoadTaxpayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new LoadTaxpayerView(taxpayerManager, taxRegisterNumberModel, fileLoaderPanel, taxRegistrationNumberField, txtBox).load();
+                new LoadTaxpayerView(taxRegisterNumberModel, fileLoaderPanel, taxRegistrationNumberField, txtBox).load();
             }
         });
         btnLoadTaxpayer.setBounds(0, 0, 146, 23);
@@ -120,7 +117,7 @@ public class GraphicalInterface extends JFrame {
         JButton btnSelectTaxpayer = new JButton("Select Taxpayer");
         btnSelectTaxpayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new SelectTaxpayerView(taxpayerManager).select();
+                new SelectTaxpayerView().select();
             }
         });
         btnSelectTaxpayer.setBounds(147, 0, 139, 23);
@@ -129,7 +126,7 @@ public class GraphicalInterface extends JFrame {
         JButton btnDeleteTaxpayer = new JButton("Delete Taxpayer");
         btnDeleteTaxpayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                new DeleteTaxpayerView(taxpayerManager, taxRegisterNumberModel).delete();
+                new DeleteTaxpayerView(taxRegisterNumberModel).delete();
             }
         });
         btnDeleteTaxpayer.setBounds(287, 0, 146, 23);

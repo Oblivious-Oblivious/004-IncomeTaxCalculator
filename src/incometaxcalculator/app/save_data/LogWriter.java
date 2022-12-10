@@ -9,38 +9,38 @@ public abstract class LogWriter {
     public abstract void generateFile(int taxRegistrationNumber) throws IOException;
 
     public Taxpayer getTaxpayer(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayer(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayer(taxRegistrationNumber);
     }
 
     public String getTaxpayerName(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerName(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerName(taxRegistrationNumber);
     }
 
     public String getTaxpayerIncome(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerIncome(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber);
     }
 
     public String getTaxpayerStatus(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerStatus(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber);
     }
 
     public double getTaxpayerVariationTaxOnReceipts(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerVariationTaxOnReceipts(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerVariationTaxOnReceipts(taxRegistrationNumber);
     }
 
     public int getTaxpayerTotalReceiptsGathered(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerTotalReceiptsGathered(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerTotalReceiptsGathered(taxRegistrationNumber);
     }
 
     public float getTaxpayerAmountOfReceiptKind(int taxRegistrationNumber, short kind) {
-        return new TaxpayerManager().getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, kind);
+        return TaxpayerManager.getTaxpayerAmountOfReceiptKind(taxRegistrationNumber, kind);
     }
 
     public double getTaxpayerTotalTax(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerTotalTax(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerTotalTax(taxRegistrationNumber);
     }
 
     public double getTaxpayerBasicTax(int taxRegistrationNumber) {
-        return new TaxpayerManager().getTaxpayerBasicTax(taxRegistrationNumber);
+        return TaxpayerManager.getTaxpayerBasicTax(taxRegistrationNumber);
     }
 }

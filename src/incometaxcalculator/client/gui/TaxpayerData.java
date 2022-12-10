@@ -24,7 +24,7 @@ import incometaxcalculator.persistence.TaxpayerManager;
 public class TaxpayerData extends JFrame {
     private JPanel contentPane;
 
-    public TaxpayerData(int taxRegistrationNumber, TaxpayerManager taxpayerManager) {
+    public TaxpayerData(int taxRegistrationNumber) {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(200, 100, 450, 420);
         contentPane = new JPanel();
@@ -45,7 +45,7 @@ public class TaxpayerData extends JFrame {
         receiptsListScrollPane.setLocation(100, 170);
         contentPane.add(receiptsListScrollPane);
 
-        HashMap<Integer, Receipt> receipts = taxpayerManager.getReceiptHashMap(taxRegistrationNumber);
+        HashMap<Integer, Receipt> receipts = TaxpayerManager.getReceiptHashMap(taxRegistrationNumber);
         Iterator<HashMap.Entry<Integer, Receipt>> iterator = receipts.entrySet().iterator();
 
         while(iterator.hasNext()) {
@@ -57,7 +57,7 @@ public class TaxpayerData extends JFrame {
         JButton btnAddReceipt = new JButton("Add Receipt");
         btnAddReceipt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new AddReceiptView(taxpayerManager, receiptsModel, taxRegistrationNumber).submit();
+                new AddReceiptView(receiptsModel, taxRegistrationNumber).submit();
             }
         });
         btnAddReceipt.setBounds(0, 0, 102, 23);
@@ -66,7 +66,7 @@ public class TaxpayerData extends JFrame {
         JButton btnDeleteReceipt = new JButton("Delete Receipt");
         btnDeleteReceipt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new DeleteReceiptView(taxpayerManager, receiptsModel).delete();
+                new DeleteReceiptView(receiptsModel).delete();
             }
         });
         btnDeleteReceipt.setBounds(100, 0, 120, 23);
@@ -75,7 +75,7 @@ public class TaxpayerData extends JFrame {
         JButton btnViewReport = new JButton("View Report");
         btnViewReport.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new ViewReportView(taxpayerManager, taxRegistrationNumber).produce_report();
+                new ViewReportView(taxRegistrationNumber).produce_report();
             }
         });
         btnViewReport.setBounds(214, 0, 109, 23);
@@ -84,7 +84,7 @@ public class TaxpayerData extends JFrame {
         JButton btnSaveData = new JButton("Save Data");
         btnSaveData.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new SaveDataView(taxpayerManager, taxRegistrationNumber).export();
+                new SaveDataView(taxRegistrationNumber).export();
             }
         });
         btnSaveData.setBounds(322, 0, 102, 23);
@@ -118,7 +118,7 @@ public class TaxpayerData extends JFrame {
         taxpayerName.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerName.setEditable(false);
         taxpayerName.setBounds(110, 34, 213, 20);
-        taxpayerName.setText(taxpayerManager.getTaxpayerName(taxRegistrationNumber));
+        taxpayerName.setText(TaxpayerManager.getTaxpayerName(taxRegistrationNumber));
         contentPane.add(taxpayerName);
 
         JTextArea taxpayerTRN = new JTextArea();
@@ -132,14 +132,14 @@ public class TaxpayerData extends JFrame {
         taxpayerStatus.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerStatus.setEditable(false);
         taxpayerStatus.setBounds(110, 96, 213, 20);
-        taxpayerStatus.setText(taxpayerManager.getTaxpayerStatus(taxRegistrationNumber));
+        taxpayerStatus.setText(TaxpayerManager.getTaxpayerStatus(taxRegistrationNumber));
         contentPane.add(taxpayerStatus);
 
         JTextArea taxpayerIncome = new JTextArea();
         taxpayerIncome.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerIncome.setEditable(false);
         taxpayerIncome.setBounds(112, 127, 213, 20);
-        taxpayerIncome.setText(taxpayerManager.getTaxpayerIncome(taxRegistrationNumber));
+        taxpayerIncome.setText(TaxpayerManager.getTaxpayerIncome(taxRegistrationNumber));
         contentPane.add(taxpayerIncome);
 
         JTextPane txtpnReceipts = new JTextPane();

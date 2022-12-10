@@ -14,15 +14,12 @@ import incometaxcalculator.app.add_receipt.AddReceipt;
 import incometaxcalculator.app.exceptions.ReceiptAlreadyExistsException;
 import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
-import incometaxcalculator.persistence.TaxpayerManager;
 
 public class AddReceiptView {
-    TaxpayerManager taxpayerManager;
     DefaultListModel<Integer> receiptsModel;
     int taxRegistrationNumber;
 
-    public AddReceiptView(TaxpayerManager taxpayerManager, DefaultListModel<Integer> receiptsModel, int taxRegistrationNumber) {
-        this.taxpayerManager = taxpayerManager;
+    public AddReceiptView(DefaultListModel<Integer> receiptsModel, int taxRegistrationNumber) {
         this.receiptsModel = receiptsModel;
         this.taxRegistrationNumber = taxRegistrationNumber;
     }
@@ -73,7 +70,7 @@ public class AddReceiptView {
             numberValue = Integer.parseInt(number.getText());
             
             try {
-                new AddReceipt(taxpayerManager).add(receiptIDValue, dateValue, amountValue, kindValue, companyValue, countryValue, cityValue, streetValue, numberValue, this.taxRegistrationNumber);
+                new AddReceipt().add(receiptIDValue, dateValue, amountValue, kindValue, companyValue, countryValue, cityValue, streetValue, numberValue, this.taxRegistrationNumber);
                 receiptsModel.addElement(receiptIDValue);
             }
             catch (IOException e1) {
