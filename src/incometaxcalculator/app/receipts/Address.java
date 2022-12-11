@@ -12,9 +12,4 @@ public class Address {
         this.street = street;
         this.number = number;
     }
-
-    // TODO Eventually just use this
-    public String toString() {
-        return city + ", " + country + ", " + street + " " + number;
-    }
 }
