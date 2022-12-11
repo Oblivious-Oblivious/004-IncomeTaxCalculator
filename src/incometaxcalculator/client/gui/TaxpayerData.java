@@ -69,7 +69,7 @@ public class TaxpayerData extends JFrame {
         JButton btnDeleteReceipt = new JButton("Delete Receipt");
         btnDeleteReceipt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new DeleteReceiptView(receiptsModel).delete();
+                new DeleteReceiptView(taxRegistrationNumber, receiptsModel).delete();
             }
         });
         btnDeleteReceipt.setBounds(100, 0, 120, 23);

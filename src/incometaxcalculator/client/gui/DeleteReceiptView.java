@@ -14,9 +14,11 @@ import incometaxcalculator.app.delete_receipt.DeleteReceipt;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 
 public class DeleteReceiptView {
+    int taxRegistrationNumber;
     DefaultListModel<Integer> receiptsModel;
 
-    public DeleteReceiptView(DefaultListModel<Integer> receiptsModel) {
+    public DeleteReceiptView(int taxRegistrationNumber, DefaultListModel<Integer> receiptsModel) {
+        this.taxRegistrationNumber = taxRegistrationNumber;
         this.receiptsModel = receiptsModel;
     }
 
@@ -30,7 +32,7 @@ public class DeleteReceiptView {
         if(op == 0) {
             int receiptIDValue = Integer.parseInt(receiptID.getText());
             try {
-                new DeleteReceipt().delete(receiptIDValue);
+                new DeleteReceipt().delete(this.taxRegistrationNumber, receiptIDValue);
                 this.receiptsModel.removeElement(receiptIDValue);
             }
             catch(IOException e1) {
