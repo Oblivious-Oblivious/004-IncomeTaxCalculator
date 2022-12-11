@@ -1,15 +1,10 @@
 package incometaxcalculator.client.gui.presenters;
 
+import incometaxcalculator.app.receipts.ReceiptKind;
 import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.client.gui.views.ChartDisplayView;
 
 public class ViewReportPresenter {
-    static final short ENTERTAINMENT = 0;
-    static final short BASIC = 1;
-    static final short TRAVEL = 2;
-    static final short HEALTH = 3;
-    static final short OTHER = 4;
-
     Taxpayer current_taxpayer;
 
     public ViewReportPresenter(Taxpayer current_taxpayer) {
@@ -24,11 +19,11 @@ public class ViewReportPresenter {
             current_taxpayer.getTotalTax()
         );
         ChartDisplayView.createPieChart(
-            current_taxpayer.getAmountOfReceiptKind(ENTERTAINMENT),
-            current_taxpayer.getAmountOfReceiptKind(BASIC),
-            current_taxpayer.getAmountOfReceiptKind(TRAVEL),
-            current_taxpayer.getAmountOfReceiptKind(HEALTH),
-            current_taxpayer.getAmountOfReceiptKind(OTHER)
+            current_taxpayer.getAmountOfReceiptKind(ReceiptKind.ENTERTAINMENT),
+            current_taxpayer.getAmountOfReceiptKind(ReceiptKind.BASIC),
+            current_taxpayer.getAmountOfReceiptKind(ReceiptKind.TRAVEL),
+            current_taxpayer.getAmountOfReceiptKind(ReceiptKind.HEALTH),
+            current_taxpayer.getAmountOfReceiptKind(ReceiptKind.OTHER)
         );
     }
 }

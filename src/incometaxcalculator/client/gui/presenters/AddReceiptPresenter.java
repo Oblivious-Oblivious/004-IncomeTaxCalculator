@@ -14,6 +14,7 @@ import incometaxcalculator.app.add_receipt.AddReceipt;
 import incometaxcalculator.app.exceptions.ReceiptAlreadyExistsException;
 import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.receipts.ReceiptKind;
 import incometaxcalculator.app.taxpayers.Taxpayer;
 
 public class AddReceiptPresenter {
@@ -38,7 +39,8 @@ public class AddReceiptPresenter {
         JTextField number = new JTextField(16);
         int receiptIDValue, numberValue;
         float amountValue;
-        String dateValue, kindValue, companyValue, countryValue;
+        String dateValue, companyValue, countryValue;
+        ReceiptKind kindValue;
         String cityValue, streetValue;
         receiptImporterPanel.add(new JLabel("Receipt ID:"));
         receiptImporterPanel.add(receiptID);
@@ -62,7 +64,7 @@ public class AddReceiptPresenter {
         if(op == 0) {
             receiptIDValue = Integer.parseInt(receiptID.getText());
             dateValue = date.getText();
-            kindValue = kind.getText();
+            kindValue = ReceiptKind.from_string(kind.getText());
             amountValue = Float.parseFloat(amount.getText());
             companyValue = company.getText();
             countryValue = country.getText();

@@ -3,6 +3,7 @@ package incometaxcalculator.app.save_data;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import incometaxcalculator.app.receipts.ReceiptKind;
 import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
@@ -24,11 +25,11 @@ public class TXTLogWriter extends LogWriter {
 
         outputStream.println("Total Tax: " + taxpayer.getTotalTax());
         outputStream.println("TotalReceiptsGathered: " + taxpayer.totalReceiptsGathered);
-        outputStream.println("Entertainment: " + taxpayer.getAmountOfReceiptKind(ENTERTAINMENT));
-        outputStream.println("Basic: " + taxpayer.getAmountOfReceiptKind(BASIC));
-        outputStream.println("Travel: " + taxpayer.getAmountOfReceiptKind(TRAVEL));
-        outputStream.println("Health: " + taxpayer.getAmountOfReceiptKind(HEALTH));
-        outputStream.println("Other: " + taxpayer.getAmountOfReceiptKind(OTHER));
+        outputStream.println("Entertainment: " + taxpayer.getAmountOfReceiptKind(ReceiptKind.ENTERTAINMENT));
+        outputStream.println("Basic: " + taxpayer.getAmountOfReceiptKind(ReceiptKind.BASIC));
+        outputStream.println("Travel: " + taxpayer.getAmountOfReceiptKind(ReceiptKind.TRAVEL));
+        outputStream.println("Health: " + taxpayer.getAmountOfReceiptKind(ReceiptKind.HEALTH));
+        outputStream.println("Other: " + taxpayer.getAmountOfReceiptKind(ReceiptKind.OTHER));
         outputStream.close();
     }
 }

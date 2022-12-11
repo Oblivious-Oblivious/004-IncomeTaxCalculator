@@ -2,21 +2,15 @@ package incometaxcalculator.app.taxpayers;
 
 import java.util.HashMap;
 
-import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.receipts.Receipt;
+import incometaxcalculator.app.receipts.ReceiptKind;
 
 public abstract class Taxpayer {
-    private static final short ENTERTAINMENT = 0;
-    private static final short BASIC = 1;
-    private static final short TRAVEL = 2;
-    private static final short HEALTH = 3;
-    private static final short OTHER = 4;
-
     public final String fullname;
     public final int taxRegistrationNumber;
     public final float income;
     public int totalReceiptsGathered = 0;
-    private float amountPerReceiptsKind[] = new float[5];
+    private HashMap<ReceiptKind, Double> amountPerReceiptsKind = new HashMap<ReceiptKind, Double>();
 
     public HashMap<Integer, Receipt> receiptHashMap = new HashMap<Integer, Receipt>(0);
 
@@ -26,17 +20,20 @@ public abstract class Taxpayer {
         this.fullname = fullname;
         this.taxRegistrationNumber = taxRegistrationNumber;
         this.income = income;
+
+        this.amountPerReceiptsKind.put(ReceiptKind.BASIC, 0d);
+        this.amountPerReceiptsKind.put(ReceiptKind.ENTERTAINMENT, 0d);
+        this.amountPerReceiptsKind.put(ReceiptKind.HEALTH, 0d);
+        this.amountPerReceiptsKind.put(ReceiptKind.TRAVEL, 0d);
+        this.amountPerReceiptsKind.put(ReceiptKind.OTHER, 0d);
     }
 
-    private float getTotalAmountOfReceipts() {
-        int sum = 0;
-        for(int i = 0; i < 5; i++)
-            sum += amountPerReceiptsKind[i];
-        return sum;
+    private double getTotalAmountOfReceipts() {
+        return this.amountPerReceiptsKind.values().stream().mapToDouble(f -> f).sum();
     }
 
     public double getVariationTaxOnReceipts() {
-        float totalAmountOfReceipts = getTotalAmountOfReceipts();
+        double totalAmountOfReceipts = getTotalAmountOfReceipts();
 
         if(totalAmountOfReceipts < 0.2 * income)
             return calculateBasicTax() * 0.08;
@@ -48,39 +45,15 @@ public abstract class Taxpayer {
             return -calculateBasicTax() * 0.3;
     }
 
-    public void addReceipt(Receipt receipt) throws WrongReceiptKindException {
-        if(receipt.kind.equals("Entertainment"))
-            amountPerReceiptsKind[ENTERTAINMENT] += receipt.amount;
-        else if(receipt.kind.equals("Basic"))
-            amountPerReceiptsKind[BASIC] += receipt.amount;
-        else if(receipt.kind.equals("Travel"))
-            amountPerReceiptsKind[TRAVEL] += receipt.amount;
-        else if(receipt.kind.equals("Health"))
-            amountPerReceiptsKind[HEALTH] += receipt.amount;
-        else if(receipt.kind.equals("Other"))
-            amountPerReceiptsKind[OTHER] += receipt.amount;
-        else
-            throw new WrongReceiptKindException();
-
+    public void addReceipt(Receipt receipt) {
+        this.amountPerReceiptsKind.put(receipt.kind, this.amountPerReceiptsKind.get(receipt.kind) + receipt.amount);
         receiptHashMap.put(receipt.id, receipt);
         totalReceiptsGathered++;
     }
 
-    public void removeReceipt(int receiptId) throws WrongReceiptKindException {
+    public void removeReceipt(int receiptId) {
         Receipt receipt = receiptHashMap.get(receiptId);
-        if(receipt.kind.equals("Entertainment"))
-            amountPerReceiptsKind[ENTERTAINMENT] -= receipt.amount;
-        else if(receipt.kind.equals("Basic"))
-            amountPerReceiptsKind[BASIC] -= receipt.amount;
-        else if(receipt.kind.equals("Travel"))
-            amountPerReceiptsKind[TRAVEL] -= receipt.amount;
-        else if(receipt.kind.equals("Health"))
-            amountPerReceiptsKind[HEALTH] -= receipt.amount;
-        else if(receipt.kind.equals("Other"))
-            amountPerReceiptsKind[OTHER] -= receipt.amount;
-        else
-            throw new WrongReceiptKindException();
-
+        this.amountPerReceiptsKind.put(receipt.kind, this.amountPerReceiptsKind.get(receipt.kind) - receipt.amount);
         totalReceiptsGathered--;
         receiptHashMap.remove(receiptId);
     }
@@ -93,7 +66,7 @@ public abstract class Taxpayer {
         return calculateBasicTax();
     }
 
-    public float getAmountOfReceiptKind(short kind) {
-        return amountPerReceiptsKind[kind];
+    public double getAmountOfReceiptKind(ReceiptKind kind) {
+        return this.amountPerReceiptsKind.get(kind);
     }
 }

@@ -3,16 +3,15 @@ package incometaxcalculator.app.taxpayers;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 
 public class TaxpayerFactory {
-    // TODO Maybe implement this with type enum
-    public static Taxpayer create(String status, String fullname, int taxRegistrationNumber, float income) throws WrongTaxpayerStatusException {
+    public static Taxpayer create(TaxpayerType status, String fullname, int taxRegistrationNumber, float income) throws WrongTaxpayerStatusException {
         switch(status) {
-            case "Married Filing Jointly":
+            case MARRIED_FILING_JOINTLY:
                 return new MarriedFilingJointlyTaxpayer(fullname, taxRegistrationNumber, income);
-            case "Married Filing Separately":
+            case MARRIED_FILING_SEPARATELY:
                 return new MarriedFilingSeparatelyTaxpayer(fullname, taxRegistrationNumber, income);
-            case "Single":
+            case SINGLE:
                 return new SingleTaxpayer(fullname, taxRegistrationNumber, income);
-            case "Head of Household":
+            case HEAD_OF_HOUSEHOLD:
                 return new HeadOfHouseholdTaxpayer(fullname, taxRegistrationNumber, income);
             default:
                 throw new WrongTaxpayerStatusException();

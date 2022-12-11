@@ -7,7 +7,7 @@ public class Receipt {
     public final int id;
     public final Date issueDate;
     public final float amount;
-    public final String kind;
+    public final ReceiptKind kind;
     public final Company company;
 
     Date createDate(String issueDate) throws WrongReceiptDateException {
@@ -22,7 +22,7 @@ public class Receipt {
         return new Date(day, month, year);
     }
 
-    public Receipt(int id, String issueDate, float amount, String kind, String companyName, String country, String city, String street, int number) throws WrongReceiptKindException, WrongReceiptDateException {
+    public Receipt(int id, String issueDate, float amount, ReceiptKind kind, String companyName, String country, String city, String street, int number) throws WrongReceiptKindException, WrongReceiptDateException {
         this.id = id;
         this.issueDate = createDate(issueDate);
         this.amount = amount;

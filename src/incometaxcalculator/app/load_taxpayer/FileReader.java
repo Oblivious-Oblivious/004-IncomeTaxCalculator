@@ -8,8 +8,10 @@ import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.app.receipts.Receipt;
+import incometaxcalculator.app.receipts.ReceiptKind;
 import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.app.taxpayers.TaxpayerFactory;
+import incometaxcalculator.app.taxpayers.TaxpayerType;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public abstract class FileReader {
@@ -20,6 +22,7 @@ public abstract class FileReader {
         return line == null;
     }
 
+    // TODO Move to Receipt object
     boolean readReceipt(BufferedReader inputStream, int taxRegistrationNumber) throws WrongFileFormatException, IOException, WrongReceiptKindException, WrongReceiptDateException {
         int receiptId;
 
@@ -27,7 +30,7 @@ public abstract class FileReader {
             return false;
 
         String issueDate = getValueOfField(inputStream.readLine());
-        String kind = getValueOfField(inputStream.readLine());
+        ReceiptKind kind = ReceiptKind.from_string(getValueOfField(inputStream.readLine()));
         float amount = Float.parseFloat(getValueOfField(inputStream.readLine()));
         String companyName = getValueOfField(inputStream.readLine());
         String country = getValueOfField(inputStream.readLine());
@@ -44,7 +47,7 @@ public abstract class FileReader {
         BufferedReader inputStream = new BufferedReader(new java.io.FileReader(fileName));
         String fullname = getValueOfField(inputStream.readLine());
         int taxRegistrationNumber = Integer.parseInt(getValueOfField(inputStream.readLine()));
-        String status = getValueOfField(inputStream.readLine());
+        TaxpayerType status = TaxpayerType.from_string(getValueOfField(inputStream.readLine()));
         float income = Float.parseFloat(getValueOfField(inputStream.readLine()));
 
         Taxpayer new_taxpayer = TaxpayerFactory.create(status, fullname, taxRegistrationNumber, income);
