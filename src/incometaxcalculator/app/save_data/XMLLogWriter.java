@@ -7,6 +7,7 @@ import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class XMLLogWriter extends LogWriter {
+    @Override
     public void generateFile(int taxRegistrationNumber) throws IOException {
         PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_LOG.xml"));
         Taxpayer taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
