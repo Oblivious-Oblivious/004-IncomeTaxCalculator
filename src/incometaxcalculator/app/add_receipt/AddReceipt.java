@@ -14,20 +14,18 @@ import incometaxcalculator.app.taxpayers.Taxpayer;
 
 public class AddReceipt implements AddReceiptBoundary {
     // TODO Insert into file manager package
-    private void createReceipt(int receiptId, String issueDate, float amount, String kind, String companyName, String country, String city, String street, int number, Taxpayer current_taxpayer) throws WrongReceiptKindException, WrongReceiptDateException {
-        current_taxpayer.addReceipt(
-            new Receipt(
-                receiptId,
-                issueDate,
-                amount,
-                kind,
-                new Company(
-                    companyName,
-                    country,
-                    city,
-                    street,
-                    number
-                )
+    private Receipt createReceipt(int receiptId, String issueDate, float amount, String kind, String companyName, String country, String city, String street, int number) throws WrongReceiptKindException, WrongReceiptDateException {
+        return new Receipt(
+            receiptId,
+            issueDate,
+            amount,
+            kind,
+            new Company(
+                companyName,
+                country,
+                city,
+                street,
+                number
             )
         );
     }
@@ -39,7 +37,7 @@ public class AddReceipt implements AddReceiptBoundary {
         if(current_taxpayer.receiptHashMap.containsKey(receiptId))
             throw new ReceiptAlreadyExistsException();
 
-        createReceipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number, current_taxpayer);
+        current_taxpayer.addReceipt(createReceipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number));
         new UpdateTaxpayerInformation().update(taxRegistrationNumber);
     }
 }
