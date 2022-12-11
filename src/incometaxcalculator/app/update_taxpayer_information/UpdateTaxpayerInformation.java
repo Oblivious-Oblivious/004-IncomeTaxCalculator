@@ -15,7 +15,7 @@ public class UpdateTaxpayerInformation implements UpdateTaxpayerInformationBound
             new TXTInfoWriter().generateFile(tax_registration_number);
             return;
         }
-        
+
         if(new File(tax_registration_number + "_INFO.txt").exists()) {
             new TXTInfoWriter().generateFile(tax_registration_number);
         }

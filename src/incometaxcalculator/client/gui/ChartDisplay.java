@@ -40,12 +40,12 @@ public class ChartDisplay {
     private static DefaultCategoryDataset createDefaultCategoryDataset(double basicTax, double taxVariation, double totalTax) {
         DefaultCategoryDataset barChartDataset = new DefaultCategoryDataset();
         barChartDataset.addValue(basicTax, "Tax", "Basic");
-        
+
         if (taxVariation > 0)
             barChartDataset.addValue(taxVariation, "Tax", "Increase");
         else
             barChartDataset.addValue(-taxVariation, "Tax", "Decrease");
-        
+
         barChartDataset.addValue(totalTax, "Tax", "Total");
         return barChartDataset;
     }

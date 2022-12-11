@@ -16,7 +16,7 @@ public class XMLLogWriter extends LogWriter {
         outputStream.println("<Income> " + taxpayer.income + " </Income>");
         outputStream.println("<BasicTax> " + taxpayer.getBasicTax() + " </BasicTax>");
 
-        if (taxpayer.getVariationTaxOnReceipts() > 0)
+        if(taxpayer.getVariationTaxOnReceipts() > 0)
             outputStream.println("<TaxIncrease> " + taxpayer.getVariationTaxOnReceipts() + " </TaxIncrease>");
         else
             outputStream.println("<TaxDecrease> " + taxpayer.getVariationTaxOnReceipts() + " </TaxDecrease>");

@@ -24,7 +24,7 @@ public class DeleteTaxpayerView {
                     taxRegisterNumberModel.removeElement(trn);
                 }
             }
-            catch (NumberFormatException e) {
+            catch(NumberFormatException e) {
             }
         }
         else {

@@ -28,7 +28,7 @@ public class DeleteReceiptView {
         receiptRemoverPanel.add(new JLabel("Receipt ID:"));
         receiptRemoverPanel.add(receiptID);
         int op = JOptionPane.showConfirmDialog(null, receiptRemoverPanel, "", JOptionPane.OK_CANCEL_OPTION);
-        
+
         if(op == 0) {
             int receiptIDValue = Integer.parseInt(receiptID.getText());
             try {

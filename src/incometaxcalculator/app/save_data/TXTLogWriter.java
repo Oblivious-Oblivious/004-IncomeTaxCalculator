@@ -10,7 +10,7 @@ public class TXTLogWriter extends LogWriter {
     public void generateFile(int taxRegistrationNumber) throws IOException {
         PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_LOG.txt"));
         Taxpayer taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
-        
+
         outputStream.println("Name: " + taxpayer.fullname);
         outputStream.println("AFM: " + taxRegistrationNumber);
         outputStream.println("Income: " + taxpayer.income);

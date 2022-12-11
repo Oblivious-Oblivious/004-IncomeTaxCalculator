@@ -68,21 +68,21 @@ public class AddReceiptView {
             cityValue = city.getText();
             streetValue = street.getText();
             numberValue = Integer.parseInt(number.getText());
-            
+
             try {
                 new AddReceipt().add(receiptIDValue, dateValue, amountValue, kindValue, companyValue, countryValue, cityValue, streetValue, numberValue, this.taxRegistrationNumber);
                 receiptsModel.addElement(receiptIDValue);
             }
-            catch (IOException e1) {
+            catch(IOException e1) {
                 JOptionPane.showMessageDialog(null, "Problem with opening file ." + receiptIDValue + "_INFO.txt");
             }
-            catch (WrongReceiptKindException e1) {
+            catch(WrongReceiptKindException e1) {
                 JOptionPane.showMessageDialog(null, "Please check receipts kind and try again.");
             }
-            catch (WrongReceiptDateException e1) {
+            catch(WrongReceiptDateException e1) {
                 JOptionPane.showMessageDialog(null, "Please make sure your date " + "is DD/MM/YYYY and try again.");
             }
-            catch (ReceiptAlreadyExistsException e1) {
+            catch(ReceiptAlreadyExistsException e1) {
                 JOptionPane.showMessageDialog(null, "Receipt ID already exists.");
             }
         }
