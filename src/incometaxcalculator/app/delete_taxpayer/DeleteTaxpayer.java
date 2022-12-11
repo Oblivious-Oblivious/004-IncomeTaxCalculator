@@ -9,7 +9,6 @@ public class DeleteTaxpayer implements DeleteTaxpayerBoundary {
         TaxpayerHashmap.remove(tax_registration_number);
     }
 
-    // TODO Eventually try removing
     public boolean taxpayer_hashmap_is_not_empty() {
         return !TaxpayerHashmap.is_empty();
     }

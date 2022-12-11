@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.presenters;
 
 import java.io.IOException;
 
@@ -16,12 +16,13 @@ import javax.swing.JPanel;
 
 import incometaxcalculator.app.exceptions.WrongFileFormatException;
 import incometaxcalculator.app.save_data.SaveData;
+import incometaxcalculator.app.taxpayers.Taxpayer;
 
-public class SaveDataView {
-    int taxRegistrationNumber;
+public class SaveDataPresenter {
+    Taxpayer current_taxpayer;
 
-    public SaveDataView(int taxRegistrationNumber) {
-        this.taxRegistrationNumber = taxRegistrationNumber;
+    public SaveDataPresenter(Taxpayer current_taxpayer) {
+        this.current_taxpayer = current_taxpayer;
     }
 
     public void export() {
@@ -59,14 +60,14 @@ public class SaveDataView {
             try {
                 try {
                     if(txtBox.isSelected()) {
-                        new SaveData().export(taxRegistrationNumber, "txt");
+                        new SaveData().export(this.current_taxpayer.taxRegistrationNumber, "txt");
                     }
                     else {
-                        new SaveData().export(taxRegistrationNumber, "xml");
+                        new SaveData().export(this.current_taxpayer.taxRegistrationNumber, "xml");
                     }
                 }
                 catch(IOException e1) {
-                    JOptionPane.showMessageDialog(null, "Problem with opening file ." + taxRegistrationNumber + "_LOG.xml");
+                    JOptionPane.showMessageDialog(null, "Problem with opening file ." + this.current_taxpayer.taxRegistrationNumber + "_LOG.xml");
                 }
                 catch(WrongFileFormatException e1) {
                     JOptionPane.showMessageDialog(null, "Wrong file format");

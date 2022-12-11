@@ -1,10 +1,11 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.presenters;
 
 import javax.swing.JOptionPane;
 
 import incometaxcalculator.app.select_taxpayer.SelectTaxpayer;
+import incometaxcalculator.client.gui.views.TaxpayerDataView;
 
-public class SelectTaxpayerView {
+public class SelectTaxpayerPresenter {
     public void select() {
         SelectTaxpayer selector = new SelectTaxpayer();
 
@@ -14,7 +15,7 @@ public class SelectTaxpayerView {
                 try {
                     int taxRegistrationNumber = Integer.parseInt(trn);
                     if(selector.containsTaxpayer(taxRegistrationNumber)) {
-                        TaxpayerData taxpayerData = new TaxpayerData(taxRegistrationNumber);
+                        TaxpayerDataView taxpayerData = new TaxpayerDataView(selector.select(taxRegistrationNumber));
                         taxpayerData.setVisible(true);
                     }
                     else {

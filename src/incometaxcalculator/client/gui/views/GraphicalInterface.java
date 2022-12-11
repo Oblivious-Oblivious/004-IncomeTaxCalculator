@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,6 +23,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import incometaxcalculator.client.gui.presenters.DeleteTaxpayerPresenter;
+import incometaxcalculator.client.gui.presenters.LoadTaxpayerPresenter;
+import incometaxcalculator.client.gui.presenters.SelectTaxpayerPresenter;
 
 public class GraphicalInterface extends JFrame {
     private JPanel contentPane;
@@ -108,7 +112,7 @@ public class GraphicalInterface extends JFrame {
         JButton btnLoadTaxpayer = new JButton("Load Taxpayer");
         btnLoadTaxpayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new LoadTaxpayerView(taxRegisterNumberModel, fileLoaderPanel, taxRegistrationNumberField, txtBox).load();
+                new LoadTaxpayerPresenter(taxRegisterNumberModel, fileLoaderPanel, taxRegistrationNumberField, txtBox).load();
             }
         });
         btnLoadTaxpayer.setBounds(0, 0, 146, 23);
@@ -117,7 +121,7 @@ public class GraphicalInterface extends JFrame {
         JButton btnSelectTaxpayer = new JButton("Select Taxpayer");
         btnSelectTaxpayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new SelectTaxpayerView().select();
+                new SelectTaxpayerPresenter().select();
             }
         });
         btnSelectTaxpayer.setBounds(147, 0, 139, 23);
@@ -126,7 +130,7 @@ public class GraphicalInterface extends JFrame {
         JButton btnDeleteTaxpayer = new JButton("Delete Taxpayer");
         btnDeleteTaxpayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                new DeleteTaxpayerView(taxRegisterNumberModel).delete();
+                new DeleteTaxpayerPresenter(taxRegisterNumberModel).delete();
             }
         });
         btnDeleteTaxpayer.setBounds(287, 0, 146, 23);

@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.presenters;
 
 import java.io.IOException;
 
@@ -12,13 +12,14 @@ import javax.swing.JLabel;
 
 import incometaxcalculator.app.delete_receipt.DeleteReceipt;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.taxpayers.Taxpayer;
 
-public class DeleteReceiptView {
-    int taxRegistrationNumber;
+public class DeleteReceiptPresenter {
+    Taxpayer current_taxpayer;
     DefaultListModel<Integer> receiptsModel;
 
-    public DeleteReceiptView(int taxRegistrationNumber, DefaultListModel<Integer> receiptsModel) {
-        this.taxRegistrationNumber = taxRegistrationNumber;
+    public DeleteReceiptPresenter(Taxpayer current_taxpayer, DefaultListModel<Integer> receiptsModel) {
+        this.current_taxpayer = current_taxpayer;
         this.receiptsModel = receiptsModel;
     }
 
@@ -32,7 +33,7 @@ public class DeleteReceiptView {
         if(op == 0) {
             int receiptIDValue = Integer.parseInt(receiptID.getText());
             try {
-                new DeleteReceipt().delete(this.taxRegistrationNumber, receiptIDValue);
+                new DeleteReceipt().delete(this.current_taxpayer.taxRegistrationNumber, receiptIDValue);
                 this.receiptsModel.removeElement(receiptIDValue);
             }
             catch(IOException e1) {

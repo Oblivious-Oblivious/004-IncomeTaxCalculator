@@ -1,14 +1,14 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.presenters;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import incometaxcalculator.app.delete_taxpayer.DeleteTaxpayer;
 
-public class DeleteTaxpayerView {
+public class DeleteTaxpayerPresenter {
     DefaultListModel<String> taxRegisterNumberModel;
 
-    public DeleteTaxpayerView(DefaultListModel<String> taxRegisterNumberModel) {
+    public DeleteTaxpayerPresenter(DefaultListModel<String> taxRegisterNumberModel) {
         this.taxRegisterNumberModel = taxRegisterNumberModel;
     }
 
@@ -20,7 +20,7 @@ public class DeleteTaxpayerView {
             try {
                 int taxRegistrationNumber = Integer.parseInt(trn);
                 if(deleter.containsTaxpayer(taxRegistrationNumber)) {
-                    new DeleteTaxpayer().delete(taxRegistrationNumber);
+                    deleter.delete(taxRegistrationNumber);
                     taxRegisterNumberModel.removeElement(trn);
                 }
             }

@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.presenters;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
@@ -15,13 +15,13 @@ import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.app.load_taxpayer.LoadTaxpayer;
 
-public class LoadTaxpayerView {
+public class LoadTaxpayerPresenter {
     DefaultListModel<String> taxRegisterNumberModel;
     JPanel fileLoaderPanel;
     JTextField taxRegistrationNumberField;
     JCheckBox txtBox;
 
-    public LoadTaxpayerView(
+    public LoadTaxpayerPresenter(
         DefaultListModel<String> taxRegisterNumberModel,
         JPanel fileLoaderPanel,
         JTextField taxRegistrationNumberField,

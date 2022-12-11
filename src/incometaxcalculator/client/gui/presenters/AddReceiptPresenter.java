@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.presenters;
 
 import java.io.IOException;
 
@@ -14,14 +14,15 @@ import incometaxcalculator.app.add_receipt.AddReceipt;
 import incometaxcalculator.app.exceptions.ReceiptAlreadyExistsException;
 import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.app.taxpayers.Taxpayer;
 
-public class AddReceiptView {
+public class AddReceiptPresenter {
+    Taxpayer current_taxpayer;
     DefaultListModel<Integer> receiptsModel;
-    int taxRegistrationNumber;
 
-    public AddReceiptView(DefaultListModel<Integer> receiptsModel, int taxRegistrationNumber) {
+    public AddReceiptPresenter(Taxpayer current_taxpayer, DefaultListModel<Integer> receiptsModel) {
+        this.current_taxpayer = current_taxpayer;
         this.receiptsModel = receiptsModel;
-        this.taxRegistrationNumber = taxRegistrationNumber;
     }
 
     public void submit() {
@@ -70,7 +71,7 @@ public class AddReceiptView {
             numberValue = Integer.parseInt(number.getText());
 
             try {
-                new AddReceipt().add(receiptIDValue, dateValue, amountValue, kindValue, companyValue, countryValue, cityValue, streetValue, numberValue, this.taxRegistrationNumber);
+                new AddReceipt().add(receiptIDValue, dateValue, amountValue, kindValue, companyValue, countryValue, cityValue, streetValue, numberValue, this.current_taxpayer.taxRegistrationNumber);
                 receiptsModel.addElement(receiptIDValue);
             }
             catch(IOException e1) {

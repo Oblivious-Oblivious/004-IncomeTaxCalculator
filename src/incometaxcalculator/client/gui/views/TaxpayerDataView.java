@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.views;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,20 +20,21 @@ import javax.swing.border.EmptyBorder;
 
 import incometaxcalculator.app.receipts.Receipt;
 import incometaxcalculator.app.taxpayers.Taxpayer;
-import incometaxcalculator.persistence.TaxpayerHashmap;
+import incometaxcalculator.client.gui.presenters.AddReceiptPresenter;
+import incometaxcalculator.client.gui.presenters.DeleteReceiptPresenter;
+import incometaxcalculator.client.gui.presenters.SaveDataPresenter;
+import incometaxcalculator.client.gui.presenters.ViewReportPresenter;
 
-public class TaxpayerData extends JFrame {
+public class TaxpayerDataView extends JFrame {
     private JPanel contentPane;
 
-    public TaxpayerData(int taxRegistrationNumber) {
+    public TaxpayerDataView(Taxpayer current_taxpayer) {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(200, 100, 450, 420);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        Taxpayer current_taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
 
         DefaultListModel<Integer> receiptsModel = new DefaultListModel<Integer>();
 
@@ -60,7 +61,7 @@ public class TaxpayerData extends JFrame {
         JButton btnAddReceipt = new JButton("Add Receipt");
         btnAddReceipt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new AddReceiptView(receiptsModel, taxRegistrationNumber).submit();
+                new AddReceiptPresenter(current_taxpayer, receiptsModel).submit();
             }
         });
         btnAddReceipt.setBounds(0, 0, 102, 23);
@@ -69,7 +70,7 @@ public class TaxpayerData extends JFrame {
         JButton btnDeleteReceipt = new JButton("Delete Receipt");
         btnDeleteReceipt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new DeleteReceiptView(taxRegistrationNumber, receiptsModel).delete();
+                new DeleteReceiptPresenter(current_taxpayer, receiptsModel).delete();
             }
         });
         btnDeleteReceipt.setBounds(100, 0, 120, 23);
@@ -78,7 +79,7 @@ public class TaxpayerData extends JFrame {
         JButton btnViewReport = new JButton("View Report");
         btnViewReport.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new ViewReportView(taxRegistrationNumber).produce_report();
+                new ViewReportPresenter(current_taxpayer).produce_report();
             }
         });
         btnViewReport.setBounds(214, 0, 109, 23);
@@ -87,7 +88,7 @@ public class TaxpayerData extends JFrame {
         JButton btnSaveData = new JButton("Save Data");
         btnSaveData.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new SaveDataView(taxRegistrationNumber).export();
+                new SaveDataPresenter(current_taxpayer).export();
             }
         });
         btnSaveData.setBounds(322, 0, 102, 23);
@@ -128,7 +129,7 @@ public class TaxpayerData extends JFrame {
         taxpayerTRN.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerTRN.setEditable(false);
         taxpayerTRN.setBounds(110, 65, 213, 20);
-        taxpayerTRN.setText(taxRegistrationNumber + "");
+        taxpayerTRN.setText(current_taxpayer.taxRegistrationNumber + "");
         contentPane.add(taxpayerTRN);
 
         JTextArea taxpayerStatus = new JTextArea();

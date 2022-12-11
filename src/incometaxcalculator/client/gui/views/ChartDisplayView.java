@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui;
+package incometaxcalculator.client.gui.views;
 
 import java.awt.BorderLayout;
 
@@ -12,7 +12,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.ui.RefineryUtilities;
 
-public class ChartDisplay {
+public class ChartDisplayView {
     private static ChartPanel createPieChartPanel(double entertainment, double basic, double travel, double health, double other) {
         JFreeChart pieChart = ChartFactory.createPieChart("Percentage of the total amount of each kind of receipt.", createDefaultPieDataset(entertainment, basic, travel, health, other), true, true, false);
         ChartPanel barChartPanel = new ChartPanel(pieChart);
