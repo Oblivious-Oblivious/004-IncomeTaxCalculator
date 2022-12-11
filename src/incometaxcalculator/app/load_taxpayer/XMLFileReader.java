@@ -6,6 +6,7 @@ import java.io.IOException;
 import incometaxcalculator.app.exceptions.WrongFileFormatException;
 
 public class XMLFileReader extends FileReader {
+    @Override
     int checkForReceipt(BufferedReader inputStream) throws NumberFormatException, IOException {
         String line;
         while(!isEmpty(line = inputStream.readLine())) {
@@ -18,6 +19,7 @@ public class XMLFileReader extends FileReader {
         return -1;
     }
 
+    @Override
     String getValueOfField(String fieldsLine) throws WrongFileFormatException {
         if(isEmpty(fieldsLine))
             throw new WrongFileFormatException();
