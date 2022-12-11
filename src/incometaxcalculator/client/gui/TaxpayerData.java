@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import incometaxcalculator.app.receipts.Receipt;
 import incometaxcalculator.app.taxpayers.Taxpayer;
-import incometaxcalculator.persistence.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class TaxpayerData extends JFrame {
     private JPanel contentPane;
@@ -33,7 +33,7 @@ public class TaxpayerData extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        Taxpayer current_taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
+        Taxpayer current_taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
 
         DefaultListModel<Integer> receiptsModel = new DefaultListModel<Integer>();
 

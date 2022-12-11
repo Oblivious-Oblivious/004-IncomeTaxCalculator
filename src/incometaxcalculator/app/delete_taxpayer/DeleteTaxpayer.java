@@ -1,19 +1,19 @@
 package incometaxcalculator.app.delete_taxpayer;
 
 import incometaxcalculator.boundaries.DeleteTaxpayerBoundary;
-import incometaxcalculator.persistence.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class DeleteTaxpayer implements DeleteTaxpayerBoundary {
     @Override
     public void delete(int tax_registration_number) {
-        TaxpayerManager.taxpayerHashMap.remove(tax_registration_number);
+        TaxpayerHashmap.remove(tax_registration_number);
     }
 
     public boolean taxpayer_hashmap_is_not_empty() {
-        return !TaxpayerManager.taxpayerHashMap.isEmpty();
+        return !TaxpayerHashmap.is_empty();
     }
 
     public boolean containsTaxpayer(int taxRegistrationNumber) {
-        return TaxpayerManager.taxpayerHashMap.containsKey(taxRegistrationNumber);
+        return TaxpayerHashmap.contains(taxRegistrationNumber);
     }
 }

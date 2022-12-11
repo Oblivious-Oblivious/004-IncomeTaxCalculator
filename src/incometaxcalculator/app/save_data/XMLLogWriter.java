@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import incometaxcalculator.app.taxpayers.Taxpayer;
-import incometaxcalculator.persistence.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class XMLLogWriter extends LogWriter {
     public void generateFile(int taxRegistrationNumber) throws IOException {
         PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_LOG.xml"));
-        Taxpayer taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
+        Taxpayer taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
 
         outputStream.println("<Name> " + taxpayer.fullname + " </Name>");
         outputStream.println("<AFM> " + taxRegistrationNumber + " </AFM>");

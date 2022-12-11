@@ -3,7 +3,7 @@ package incometaxcalculator.client.gui;
 import incometaxcalculator.app.taxpayers.Taxpayer;
 
 // TODO Try to refactor out
-import incometaxcalculator.persistence.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class ViewReportView {
     static final short ENTERTAINMENT = 0;
@@ -17,7 +17,7 @@ public class ViewReportView {
 
     public ViewReportView(int taxRegistrationNumber) {
         this.taxRegistrationNumber = taxRegistrationNumber;
-        this.current_taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
+        this.current_taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
     }
 
     // TODO Get data from boundary
