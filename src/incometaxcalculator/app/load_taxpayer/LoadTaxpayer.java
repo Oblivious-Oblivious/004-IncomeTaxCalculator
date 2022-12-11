@@ -8,7 +8,7 @@ import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.boundaries.LoadTaxpayerBoundary;
-import incometaxcalculator.persistence.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class LoadTaxpayer implements LoadTaxpayerBoundary {
     @Override
@@ -28,6 +28,6 @@ public class LoadTaxpayer implements LoadTaxpayerBoundary {
     }
 
     public boolean containsTaxpayer(int taxRegistrationNumber) {
-        return TaxpayerManager.taxpayerHashMap.containsKey(taxRegistrationNumber);
+        return TaxpayerHashmap.contains(taxRegistrationNumber);
     }
 }
