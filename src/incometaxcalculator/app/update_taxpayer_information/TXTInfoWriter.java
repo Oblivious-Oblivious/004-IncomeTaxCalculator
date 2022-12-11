@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import incometaxcalculator.app.receipts.Receipt;
 import incometaxcalculator.app.taxpayers.Taxpayer;
-import incometaxcalculator.persistence.TaxpayerManager;
+import incometaxcalculator.persistence.TaxpayerHashmap;
 
 // TODO Abstract commonalities into factory
 public class TXTInfoWriter extends InfoWriter {
@@ -17,15 +17,15 @@ public class TXTInfoWriter extends InfoWriter {
         while(iterator.hasNext()) {
             HashMap.Entry<Integer, Receipt> entry = iterator.next();
             Receipt receipt = entry.getValue();
-            outputStream.println("Receipt ID: " + getReceiptId(receipt));
-            outputStream.println("Date: " + getReceiptIssueDate(receipt));
-            outputStream.println("Kind: " + getReceiptKind(receipt));
-            outputStream.println("Amount: " + getReceiptAmount(receipt));
-            outputStream.println("Company: " + getCompanyName(receipt));
-            outputStream.println("Country: " + getCompanyCountry(receipt));
-            outputStream.println("City: " + getCompanyCity(receipt));
-            outputStream.println("Street: " + getCompanyStreet(receipt));
-            outputStream.println("Number: " + getCompanyNumber(receipt));
+            outputStream.println("Receipt ID: " + receipt.id);
+            outputStream.println("Date: " + receipt.issueDate);
+            outputStream.println("Kind: " + receipt.kind);
+            outputStream.println("Amount: " + receipt.amount);
+            outputStream.println("Company: " + receipt.company.name);
+            outputStream.println("Country: " + receipt.company.address.country);
+            outputStream.println("City: " + receipt.company.address.city);
+            outputStream.println("Street: " + receipt.company.address.street);
+            outputStream.println("Number: " + receipt.company.address.number);
             outputStream.println();
         }
     }
@@ -33,7 +33,7 @@ public class TXTInfoWriter extends InfoWriter {
     @Override
     public void generateFile(int taxRegistrationNumber) throws IOException {
         PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.txt"));
-        Taxpayer taxpayer = TaxpayerManager.taxpayerHashMap.get(taxRegistrationNumber);
+        Taxpayer taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
 
         outputStream.println("Name: " + taxpayer.fullname);
         outputStream.println("AFM: " + taxRegistrationNumber);
