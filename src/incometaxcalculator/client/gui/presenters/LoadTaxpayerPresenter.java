@@ -13,6 +13,7 @@ import incometaxcalculator.app.exceptions.WrongFileFormatException;
 import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
+import incometaxcalculator.app.load_taxpayer.FileReaderType;
 import incometaxcalculator.app.load_taxpayer.LoadTaxpayer;
 
 public class LoadTaxpayerPresenter {
@@ -44,12 +45,12 @@ public class LoadTaxpayerPresenter {
             }
             
             if(answer == 0) {
-                String type;
+                FileReaderType type;
                 if(txtBox.isSelected()) {
-                    type = "txt";
+                    type = FileReaderType.TXT;
                 }
                 else {
-                    type = "xml";
+                    type = FileReaderType.XML;
                 }
 
                 try {

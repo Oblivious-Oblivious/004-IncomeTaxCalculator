@@ -12,20 +12,10 @@ import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class LoadTaxpayer implements LoadTaxpayerBoundary {
     @Override
-    public void load(int tax_registration_number, String type) throws NumberFormatException, IOException, WrongFileFormatException, WrongFileEndingException, WrongTaxpayerStatusException, WrongReceiptKindException, WrongReceiptDateException {
+    public void load(int tax_registration_number, FileReaderType type) throws NumberFormatException, IOException, WrongFileFormatException, WrongFileEndingException, WrongTaxpayerStatusException, WrongReceiptKindException, WrongReceiptDateException {
+        FileReader reader = FileReaderFactory.create(type);
         String filename = tax_registration_number + "_INFO." + type;
-        // TODO Factory of types
-        if(type.equals("txt")) {
-            FileReader reader = new TXTFileReader();
-            reader.readFile(filename);
-        }
-        else if(type.equals("xml")) {
-            FileReader reader = new XMLFileReader();
-            reader.readFile(filename);
-        }
-        else {
-            throw new WrongFileEndingException();
-        }
+        reader.readFile(filename);
     }
 
     // TODO Eventually try remove
