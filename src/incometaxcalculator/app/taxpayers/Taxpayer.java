@@ -11,10 +11,14 @@ public abstract class Taxpayer {
     public final float income;
     public int totalReceiptsGathered = 0;
     private HashMap<ReceiptKind, Double> amountPerReceiptsKind = new HashMap<ReceiptKind, Double>();
-
     public HashMap<Integer, Receipt> receiptHashMap = new HashMap<Integer, Receipt>(0);
 
-    public abstract double calculateBasicTax();
+    public abstract int[] get_income_bounds();
+    public abstract double[] get_tax_multipliers();
+
+    private double getTotalAmountOfReceipts() {
+        return this.amountPerReceiptsKind.values().stream().mapToDouble(f -> f).sum();
+    }
 
     protected Taxpayer(String fullname, int taxRegistrationNumber, float income) {
         this.fullname = fullname;
@@ -28,8 +32,20 @@ public abstract class Taxpayer {
         this.amountPerReceiptsKind.put(ReceiptKind.OTHER, 0d);
     }
 
-    private double getTotalAmountOfReceipts() {
-        return this.amountPerReceiptsKind.values().stream().mapToDouble(f -> f).sum();
+    public double calculateBasicTax() {
+        int income_bounds[] = get_income_bounds();
+        double tax_multipliers[] = get_tax_multipliers();
+
+        if(income < income_bounds[0])
+            return 0.0535 * income;
+        else if(income < income_bounds[1])
+            return tax_multipliers[0] + 0.0705 * (income - income_bounds[0]);
+        else if(income < income_bounds[2])
+            return tax_multipliers[1] + 0.0785 * (income - income_bounds[1]);
+        else if(income < income_bounds[3])
+            return tax_multipliers[2] + 0.0785 * (income - income_bounds[2]);
+        else
+            return tax_multipliers[3] + 0.0985 * (income - income_bounds[3]);
     }
 
     public double getVariationTaxOnReceipts() {
@@ -52,6 +68,7 @@ public abstract class Taxpayer {
     }
 
     public void removeReceipt(int receiptId) {
+        // TODO Fix that ?
         Receipt receipt = receiptHashMap.get(receiptId);
         this.amountPerReceiptsKind.put(receipt.kind, this.amountPerReceiptsKind.get(receipt.kind) - receipt.amount);
         totalReceiptsGathered--;

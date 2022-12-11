@@ -6,17 +6,13 @@ public class HeadOfHouseholdTaxpayer extends Taxpayer {
     }
 
     @Override
-    public double calculateBasicTax() {
-        if(income < 30390)
-            return 0.0535 * income;
-        else if(income < 90000)
-            return 1625.87 + 0.0705 * (income - 30390);
-        else if(income < 122110)
-            return 5828.38 + 0.0705 * (income - 90000);
-        else if(income < 203390)
-            return 8092.13 + 0.0785 * (income - 122110);
-        else
-            return 14472.61 + 0.0985 * (income - 203390);
+    public int[] get_income_bounds() {
+        return new int[] {30390, 90000, 122110, 203390};
+    }
+
+    @Override
+    public double[] get_tax_multipliers() {
+        return new double[] {1625.87, 5828.38, 8092.13, 14472.61};
     }
 
     public String toString() {

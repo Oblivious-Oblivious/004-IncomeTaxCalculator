@@ -6,17 +6,13 @@ public class MarriedFilingSeparatelyTaxpayer extends Taxpayer {
     }
 
     @Override
-    public double calculateBasicTax() {
-        if(income < 18040)
-            return 0.0535 * income;
-        else if(income < 71680)
-            return 965.14 + 0.0705 * (income - 18040);
-        else if(income < 90000)
-            return 4746.76 + 0.0785 * (income - 71680);
-        else if(income < 127120)
-            return 6184.88 + 0.0785 * (income - 90000);
-        else
-            return 9098.80 + 0.0985 * (income - 127120);
+    public int[] get_income_bounds() {
+        return new int[] {18040, 71680, 90000, 127120};
+    }
+
+    @Override
+    public double[] get_tax_multipliers() {
+        return new double[] {965.14, 4746.76, 6184.88, 9098.80};
     }
 
     public String toString() {
