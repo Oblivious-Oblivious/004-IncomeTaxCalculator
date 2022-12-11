@@ -14,6 +14,7 @@ public class LoadTaxpayer implements LoadTaxpayerBoundary {
     @Override
     public void load(int tax_registration_number, String type) throws NumberFormatException, IOException, WrongFileFormatException, WrongFileEndingException, WrongTaxpayerStatusException, WrongReceiptKindException, WrongReceiptDateException {
         String filename = tax_registration_number + "_INFO." + type;
+        // TODO Factory of types
         if(type.equals("txt")) {
             FileReader reader = new TXTFileReader();
             reader.readFile(filename);
@@ -27,6 +28,7 @@ public class LoadTaxpayer implements LoadTaxpayerBoundary {
         }
     }
 
+    // TODO Eventually try remove
     public boolean containsTaxpayer(int taxRegistrationNumber) {
         return TaxpayerHashmap.contains(taxRegistrationNumber);
     }

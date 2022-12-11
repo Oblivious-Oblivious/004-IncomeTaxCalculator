@@ -8,4 +8,9 @@ public class Company {
         this.name = name;
         this.address = new Address(country, city, street, number);
     }
+
+    // TODO Eventually just use this
+    public String toString() {
+        return name + ": " + address;
+    }
 }
