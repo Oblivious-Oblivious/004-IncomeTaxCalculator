@@ -7,18 +7,8 @@ import incometaxcalculator.boundaries.SaveDataBoundary;
 
 public class SaveData implements SaveDataBoundary {
     @Override
-    public void export(int tax_registration_number, String type) throws IOException, WrongFileFormatException {
-        // TODO Get from factory
-        if(type.equals("txt")) {
-            TXTLogWriter writer = new TXTLogWriter();
-            writer.generateFile(tax_registration_number);
-        }
-        else if(type.equals("xml")) {
-            XMLLogWriter writer = new XMLLogWriter();
-            writer.generateFile(tax_registration_number);
-        }
-        else {
-            throw new WrongFileFormatException();
-        }
+    public void export(int tax_registration_number, LogWriterType type) throws IOException, WrongFileFormatException {
+        LogWriter writer = LogWriterFactory.create(type);
+        writer.generateFile(tax_registration_number);
     }
 }

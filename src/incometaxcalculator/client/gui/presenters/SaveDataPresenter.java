@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import incometaxcalculator.app.exceptions.WrongFileFormatException;
+import incometaxcalculator.app.save_data.LogWriterType;
 import incometaxcalculator.app.save_data.SaveData;
 import incometaxcalculator.app.taxpayers.Taxpayer;
 
@@ -60,10 +61,10 @@ public class SaveDataPresenter {
             try {
                 try {
                     if(txtBox.isSelected()) {
-                        new SaveData().export(this.current_taxpayer.taxRegistrationNumber, "txt");
+                        new SaveData().export(this.current_taxpayer.taxRegistrationNumber, LogWriterType.TXT);
                     }
                     else {
-                        new SaveData().export(this.current_taxpayer.taxRegistrationNumber, "xml");
+                        new SaveData().export(this.current_taxpayer.taxRegistrationNumber, LogWriterType.XML);
                     }
                 }
                 catch(IOException e1) {
