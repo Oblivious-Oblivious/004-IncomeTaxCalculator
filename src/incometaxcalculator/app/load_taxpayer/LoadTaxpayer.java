@@ -18,7 +18,6 @@ public class LoadTaxpayer implements LoadTaxpayerBoundary {
         reader.readFile(filename);
     }
 
-    // TODO Eventually try remove
     public boolean containsTaxpayer(int taxRegistrationNumber) {
         return TaxpayerHashmap.contains(taxRegistrationNumber);
     }

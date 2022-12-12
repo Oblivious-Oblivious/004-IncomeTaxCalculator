@@ -14,6 +14,5 @@ public class DeleteReceipt implements DeleteReceiptBoundary {
         Taxpayer current_taxpayer = TaxpayerHashmap.get(tax_registration_number);
         current_taxpayer.removeReceipt(receipt_id);
         new UpdateTaxpayerInformation().update(tax_registration_number);
-        current_taxpayer.receiptHashMap.remove(receipt_id);
     }
 }
