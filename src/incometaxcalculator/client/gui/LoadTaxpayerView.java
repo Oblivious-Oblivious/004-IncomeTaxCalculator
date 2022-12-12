@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui.presenters;
+package incometaxcalculator.client.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,17 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import java.io.IOException;
+import incometaxcalculator.client.presenters.LoadTaxpayerPresenter;
 
-import incometaxcalculator.app.exceptions.WrongFileEndingException;
-import incometaxcalculator.app.exceptions.WrongFileFormatException;
-import incometaxcalculator.app.exceptions.WrongReceiptDateException;
-import incometaxcalculator.app.exceptions.WrongReceiptKindException;
-import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
-import incometaxcalculator.app.load_taxpayer.FileReaderType;
-import incometaxcalculator.app.load_taxpayer.LoadTaxpayer;
-
-public class LoadTaxpayerPresenter {
+public class LoadTaxpayerView {
     public static void load(JPanel contentPane, DefaultListModel<String> taxRegisterNumberModel) {
         JList<String> taxRegisterNumberList = new JList<String>(taxRegisterNumberModel);
         taxRegisterNumberList.setBackground(new Color(153, 204, 204));
@@ -81,49 +73,10 @@ public class LoadTaxpayerPresenter {
                         answer = JOptionPane.showConfirmDialog(null, fileLoaderPanel, "", JOptionPane.OK_CANCEL_OPTION);
                         taxRegistrationNumber = taxRegistrationNumberField.getText();
                     }
-                    
+
                     if(answer == 0) {
-                        FileReaderType type;
-                        if(txtBox.isSelected()) {
-                            type = FileReaderType.TXT;
-                        }
-                        else {
-                            type = FileReaderType.XML;
-                        }
-
-                        try {
-                            LoadTaxpayer loader = new LoadTaxpayer();
-
-                            int trn = Integer.parseInt(taxRegistrationNumber);
-                            if(loader.containsTaxpayer(trn)) {
-                                JOptionPane.showMessageDialog(null, "This taxpayer is already loaded.");
-                            }
-                            else {
-                                loader.load(trn, type);
-                                taxRegisterNumberModel.addElement(taxRegistrationNumber);
-                            }
-                        }
-                        catch (NumberFormatException e1) {
-                            JOptionPane.showMessageDialog(null, "The tax registration number must have only digits.");
-                        }
-                        catch(IOException e1) {
-                            JOptionPane.showMessageDialog(null, "The file doesn't exists.");
-                        }
-                        catch(WrongFileFormatException e1) {
-                            JOptionPane.showMessageDialog(null, "Please check your file format and try again.");
-                        }
-                        catch(WrongFileEndingException e1) {
-                            JOptionPane.showMessageDialog(null, "Please check your file ending and try again.");
-                        }
-                        catch(WrongTaxpayerStatusException e1) {
-                            JOptionPane.showMessageDialog(null, "Please check taxpayer's status and try again.");
-                        }
-                        catch(WrongReceiptKindException e1) {
-                            JOptionPane.showMessageDialog(null, "Please check receipts kind and try again.");
-                        }
-                        catch(WrongReceiptDateException e1) {
-                            JOptionPane.showMessageDialog(null, "Please make sure your date is " + "DD/MM/YYYY and try again.");
-                        }
+                        LoadTaxpayerPresenter.load(txtBox.isSelected(), taxRegistrationNumber);
+                        taxRegisterNumberModel.addElement(taxRegistrationNumber);
                     }
                 }
             }

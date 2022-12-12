@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui.views;
+package incometaxcalculator.client.gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -12,10 +12,6 @@ import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-
-import incometaxcalculator.client.gui.presenters.DeleteTaxpayerPresenter;
-import incometaxcalculator.client.gui.presenters.LoadTaxpayerPresenter;
-import incometaxcalculator.client.gui.presenters.SelectTaxpayerPresenter;
 
 public class GraphicalInterface extends JFrame {
     private JPanel contentPane;
@@ -57,9 +53,9 @@ public class GraphicalInterface extends JFrame {
 
         DefaultListModel<String> taxRegisterNumberModel = new DefaultListModel<String>();
 
-        LoadTaxpayerPresenter.load(contentPane, taxRegisterNumberModel);
-        SelectTaxpayerPresenter.select(contentPane);
-        DeleteTaxpayerPresenter.delete(contentPane, taxRegisterNumberModel);
+        LoadTaxpayerView.load(contentPane, taxRegisterNumberModel);
+        SelectTaxpayerView.select(contentPane);
+        DeleteTaxpayerView.delete(contentPane, taxRegisterNumberModel);
 
         txtTaxRegistrationNumber = new JTextField();
         txtTaxRegistrationNumber.setEditable(false);

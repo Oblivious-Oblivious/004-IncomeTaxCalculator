@@ -1,4 +1,4 @@
-package incometaxcalculator.client.gui.views;
+package incometaxcalculator.client.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,10 +17,6 @@ import javax.swing.border.EmptyBorder;
 
 import incometaxcalculator.app.receipts.Receipt;
 import incometaxcalculator.app.taxpayers.Taxpayer;
-import incometaxcalculator.client.gui.presenters.AddReceiptPresenter;
-import incometaxcalculator.client.gui.presenters.DeleteReceiptPresenter;
-import incometaxcalculator.client.gui.presenters.SaveDataPresenter;
-import incometaxcalculator.client.gui.presenters.ViewReportPresenter;
 
 public class TaxpayerDataView extends JFrame {
     private JPanel contentPane;
@@ -55,10 +51,10 @@ public class TaxpayerDataView extends JFrame {
             receiptsModel.addElement(receipt.id);
         }
 
-        AddReceiptPresenter.submit(contentPane, current_taxpayer, receiptsModel);
-        DeleteReceiptPresenter.delete(contentPane, current_taxpayer, receiptsModel);
-        ViewReportPresenter.produce_report(contentPane, current_taxpayer);
-        SaveDataPresenter.export(contentPane, current_taxpayer);
+        AddReceiptView.submit(contentPane, current_taxpayer, receiptsModel);
+        DeleteReceiptView.delete(contentPane, current_taxpayer, receiptsModel);
+        ViewReportView.produce_report(contentPane, current_taxpayer);
+        SaveDataView.export(contentPane, current_taxpayer);
 
         JTextPane txtpnName = new JTextPane();
         txtpnName.setEditable(false);
