@@ -1,5 +1,7 @@
 package incometaxcalculator.boundaries;
 
+import incometaxcalculator.app.taxpayers.Taxpayer;
+
 public interface ViewReportBoundary {
-    public void produce_report();
+    public double[][] produce_report(Taxpayer current_taxpayer);
 }
