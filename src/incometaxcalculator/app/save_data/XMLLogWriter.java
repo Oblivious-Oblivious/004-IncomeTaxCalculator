@@ -1,5 +1,6 @@
 package incometaxcalculator.app.save_data;
 
+import incometaxcalculator.app.receipts.ReceiptKind;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class XMLLogWriter extends LogWriter {
@@ -12,27 +13,17 @@ public class XMLLogWriter extends LogWriter {
         return "_LOG.xml";
     }
 
-    @Override
-    String[] get_label_format() {
-        String tax_variation;
-        if(this.taxpayer.getVariationTaxOnReceipts() > 0)
-            tax_variation = "<TaxIncrease>" + variationTaxOnReceipts() + "</TaxIncrease>";
-        else
-            tax_variation = "<TaxDecrease>" + variationTaxOnReceipts() + "</TaxDecrease>";
-
-        return new String[] {
-            "<Name>" + name() + "</Name>",
-            "<AFM>" + afm() + "</AFM>",
-            "<Income>" + income() + "</Income>",
-            "<BasicTax>" + basicTax() + "</BasicTax>",
-            tax_variation,
-            "<TotalTax>" + totalTax() + "</TotalTax>",
-            "<Receipts>" + totalReceiptsGathered() + "</Receipts>",
-            "<Entertainment>" + entertainment() + "</Entertainment>",
-            "<Basic>" + basic() + "</Basic>",
-            "<Travel>" + travel() + "</Travel>",
-            "<Health>" + health() + "</Health>",
-            "<Other>" + other() + "</Other>",
-        };
-    }
+    String name() { return "<Name>" + this.taxpayer.fullname + "</Name>"; }
+    String afm() { return "<AFM>" + this.taxpayer.taxRegistrationNumber + "</AFM>"; }
+    String income() { return "<Income>" + this.taxpayer.income + "</Income>"; }
+    String basicTax() { return "<BasicTax>" + this.taxpayer.getBasicTax() + "</BasicTax>"; }
+    String taxIncrease() { return "<TaxIncrease>" + this.taxpayer.getVariationTaxOnReceipts() + "</TaxIncrease>"; }
+    String taxDecrease() { return "<TaxDecrease>" + this.taxpayer.getVariationTaxOnReceipts() + "</TaxDecrease>"; }
+    String totalTax() { return "<TotalTax>" + this.taxpayer.getTotalTax() + "</TotalTax>"; }
+    String totalReceiptsGathered() { return "<TotalReceiptsGathered>" + this.taxpayer.totalReceiptsGathered + "</TotalReceiptsGathered>"; }
+    String entertainment() { return "<Entertainment>" + this.taxpayer.getAmountOfReceiptKind(ReceiptKind.ENTERTAINMENT) + "</Entertainment>"; }
+    String basic() { return "<Basic>" + this.taxpayer.getAmountOfReceiptKind(ReceiptKind.BASIC) + "</Basic>"; }
+    String travel() { return "<Travel>" + this.taxpayer.getAmountOfReceiptKind(ReceiptKind.TRAVEL) + "</Travel>"; }
+    String health() { return "<Health>" + this.taxpayer.getAmountOfReceiptKind(ReceiptKind.HEALTH) + "</Health>"; }
+    String other() { return "<Other>" + this.taxpayer.getAmountOfReceiptKind(ReceiptKind.OTHER) + "</Other>"; }
 }
