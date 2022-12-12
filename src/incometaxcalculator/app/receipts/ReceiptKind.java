@@ -1,5 +1,7 @@
 package incometaxcalculator.app.receipts;
 
+import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+
 public enum ReceiptKind {
     ENTERTAINMENT("Entertainment"),
     BASIC("Basic"),
@@ -13,11 +15,11 @@ public enum ReceiptKind {
         this.value = value;
     }
 
-    public static ReceiptKind from_string(String value) {
+    public static ReceiptKind from_string(String value) throws WrongReceiptKindException {
         for(ReceiptKind kind : values())
             if(value.equals(kind.toString()))
                 return kind;
-        return ReceiptKind.OTHER;
+        throw new WrongReceiptKindException();
     }
 
     public String toString() {
