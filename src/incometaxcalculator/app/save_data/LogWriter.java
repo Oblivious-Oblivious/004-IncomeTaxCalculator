@@ -12,14 +12,6 @@ public abstract class LogWriter {
     abstract String get_type();
     abstract String[] get_label_format();
 
-    void generateFile() throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxpayer.taxRegistrationNumber + get_type()));
-        String[] labels = get_label_format();
-        for(String label : labels)
-            outputStream.println(label);
-        outputStream.close();
-    }
-
     String name() { return this.taxpayer.fullname; }
     int afm() { return this.taxpayer.taxRegistrationNumber; }
     float income() { return this.taxpayer.income; }
@@ -32,4 +24,12 @@ public abstract class LogWriter {
     double travel() { return this.taxpayer.getAmountOfReceiptKind(ReceiptKind.TRAVEL); }
     double health() { return this.taxpayer.getAmountOfReceiptKind(ReceiptKind.HEALTH); }
     double other() { return this.taxpayer.getAmountOfReceiptKind(ReceiptKind.OTHER); }
+
+    public void generateFile() throws IOException {
+        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxpayer.taxRegistrationNumber + get_type()));
+        String[] labels = get_label_format();
+        for(String label : labels)
+            outputStream.println(label);
+        outputStream.close();
+    }
 }
