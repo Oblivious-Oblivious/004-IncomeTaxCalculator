@@ -12,7 +12,7 @@ public class UpdateTaxpayerInformation implements UpdateTaxpayerInformationBound
         if(new File(tax_registration_number + "_INFO.xml").exists()) {
             new XMLInfoWriter().generateFile(tax_registration_number);
         }
-        else {
+        if(new File(tax_registration_number + "_INFO.xml").exists()) {
             new TXTInfoWriter().generateFile(tax_registration_number);
         }
     }
