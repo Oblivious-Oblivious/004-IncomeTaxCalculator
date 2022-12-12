@@ -1,49 +1,30 @@
 package incometaxcalculator.app.update_taxpayer_information;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import incometaxcalculator.app.receipts.Receipt;
-import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
-// TODO Abstract commonalities into factory
 public class TXTInfoWriter extends InfoWriter {
-    private void generateTaxpayerReceipts(Taxpayer taxpayer, PrintWriter outputStream) {
-        HashMap<Integer, Receipt> receiptsHashMap = taxpayer.receiptHashMap;
-        Iterator<HashMap.Entry<Integer, Receipt>> iterator = receiptsHashMap.entrySet().iterator();
-        while(iterator.hasNext()) {
-            HashMap.Entry<Integer, Receipt> entry = iterator.next();
-            Receipt receipt = entry.getValue();
-            outputStream.println("Receipt ID: " + receipt.id);
-            outputStream.println("Date: " + receipt.issueDate);
-            outputStream.println("Kind: " + receipt.kind);
-            outputStream.println("Amount: " + receipt.amount);
-            outputStream.println("Company: " + receipt.company.name);
-            outputStream.println("Country: " + receipt.company.address.country);
-            outputStream.println("City: " + receipt.company.address.city);
-            outputStream.println("Street: " + receipt.company.address.street);
-            outputStream.println("Number: " + receipt.company.address.number);
-            outputStream.println();
-        }
+    public TXTInfoWriter(int taxRegistrationNumber) {
+        this.taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
     }
 
     @Override
-    public void generateFile(int taxRegistrationNumber) throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.txt"));
-        Taxpayer taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
-
-        outputStream.println("Name: " + taxpayer.fullname);
-        outputStream.println("AFM: " + taxRegistrationNumber);
-        outputStream.println("Status: " + taxpayer);
-        outputStream.println("Income: " + taxpayer.income);
-        outputStream.println();
-        outputStream.println("Receipts:");
-        outputStream.println();
-
-        generateTaxpayerReceipts(taxpayer, outputStream);
-        outputStream.close();
+    String get_type() {
+        return "_INFO.txt";
     }
+
+    String name() { return "Name: " + this.taxpayer.fullname; }
+    String afm() { return "AFM: " + this.taxpayer.taxRegistrationNumber; }
+    String status() { return "Status: " + this.taxpayer; }
+    String income() { return "Income: " + this.taxpayer.income; }
+
+    String id_of(Receipt receipt) { return "Receipt ID: " + receipt.id; }
+    String date_of(Receipt receipt) { return "Date: " + receipt.issueDate; }
+    String kind_of(Receipt receipt) { return "Kind: " + receipt.kind; }
+    String amount_of(Receipt receipt) { return "Amount: " + receipt.amount; }
+    String company_of(Receipt receipt) { return "Company: " + receipt.company.name; }
+    String country_of(Receipt receipt) { return "Country: " + receipt.company.address.country; }
+    String city_of(Receipt receipt) { return "City: " + receipt.company.address.city; }
+    String street_of(Receipt receipt) { return "Street: " + receipt.company.address.street; }
+    String number_of(Receipt receipt) { return "Number: " + receipt.company.address.number; }
 }

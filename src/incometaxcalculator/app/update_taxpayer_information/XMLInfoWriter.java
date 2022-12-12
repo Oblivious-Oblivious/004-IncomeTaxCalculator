@@ -1,49 +1,30 @@
 package incometaxcalculator.app.update_taxpayer_information;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import incometaxcalculator.app.receipts.Receipt;
-import incometaxcalculator.app.taxpayers.Taxpayer;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
-// TODO Abstract commonalities into factory
 public class XMLInfoWriter extends InfoWriter {
-    private void generateTaxpayerReceipts(Taxpayer taxpayer, PrintWriter outputStream) {
-        HashMap<Integer, Receipt> receiptsHashMap = taxpayer.receiptHashMap;
-        Iterator<HashMap.Entry<Integer, Receipt>> iterator = receiptsHashMap.entrySet().iterator();
-        while(iterator.hasNext()) {
-            HashMap.Entry<Integer, Receipt> entry = iterator.next();
-            Receipt receipt = entry.getValue();
-            outputStream.println("<ReceiptID> " + receipt.id + " </ReceiptID>");
-            outputStream.println("<Date> " + receipt.issueDate + " </Date>");
-            outputStream.println("<Kind> " + receipt.kind + " </Kind>");
-            outputStream.println("<Amount> " + receipt.amount + " </Amount>");
-            outputStream.println("<Company> " + receipt.company.name + " </Company>");
-            outputStream.println("<Country> " + receipt.company.address.country + " </Country>");
-            outputStream.println("<City> " + receipt.company.address.city + " </City>");
-            outputStream.println("<Street> " + receipt.company.address.street + " </Street>");
-            outputStream.println("<Number> " + receipt.company.address.number + " </Number>");
-            outputStream.println();
-        }
+    public XMLInfoWriter(int taxRegistrationNumber) {
+        this.taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
     }
 
     @Override
-    public void generateFile(int taxRegistrationNumber) throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxRegistrationNumber + "_INFO.xml"));
-        Taxpayer taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
-
-        outputStream.println("<Name> " + taxpayer.fullname + " </Name>");
-        outputStream.println("<AFM> " + taxRegistrationNumber + " </AFM>");
-        outputStream.println("<Status> " + taxpayer + " </Status>");
-        outputStream.println("<Income> " + taxpayer.income + " </Income>");
-        outputStream.println();
-        outputStream.println("<Receipts>");
-        outputStream.println();
-
-        generateTaxpayerReceipts(taxpayer, outputStream);
-        outputStream.close();
+    String get_type() {
+        return "_INFO.xml";
     }
+
+    String name() { return "<Name> " + this.taxpayer.fullname + "</Name>"; }
+    String afm() { return "<AFM> " + this.taxpayer.taxRegistrationNumber + "</AFM>"; }
+    String status() { return "<Status> " + this.taxpayer + "</Status>"; }
+    String income() { return "<Income> " + this.taxpayer.income + "</Income>"; }
+
+    String id_of(Receipt receipt) { return "<ReceiptID> " + receipt.id + "</ReceiptID>"; }
+    String date_of(Receipt receipt) { return "<Date> " + receipt.issueDate + "</Date>"; }
+    String kind_of(Receipt receipt) { return "<Kind> " + receipt.kind + "</Kind>"; }
+    String amount_of(Receipt receipt) { return "<Amount> " + receipt.amount + "</Amount>"; }
+    String company_of(Receipt receipt) { return "<Company> " + receipt.company.name + "</Company>"; }
+    String country_of(Receipt receipt) { return "<Country> " + receipt.company.address.country + "</Country>"; }
+    String city_of(Receipt receipt) { return "<City> " + receipt.company.address.city + "</City>"; }
+    String street_of(Receipt receipt) { return "<Street> " + receipt.company.address.street + "</Street>"; }
+    String number_of(Receipt receipt) { return "<Number> " + receipt.company.address.number + "</Number>"; }
 }
