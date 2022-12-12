@@ -75,8 +75,11 @@ public class LoadTaxpayerView {
                     }
 
                     if(answer == 0) {
-                        LoadTaxpayerPresenter.load(txtBox.isSelected(), taxRegistrationNumber);
-                        taxRegisterNumberModel.addElement(taxRegistrationNumber);
+                        String error = LoadTaxpayerPresenter.load(txtBox.isSelected(), taxRegistrationNumber);
+                        if(error != "")
+                            JOptionPane.showMessageDialog(null, error);
+                        else
+                            taxRegisterNumberModel.addElement(taxRegistrationNumber);
                     }
                 }
             }

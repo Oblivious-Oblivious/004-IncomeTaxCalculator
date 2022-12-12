@@ -18,8 +18,11 @@ public class DeleteTaxpayerView {
             public void actionPerformed(ActionEvent arg0) {
                 String trn = JOptionPane.showInputDialog(null, "Give the tax registration number that you want to delete: ");
 
-                DeleteTaxpayerPresenter.delete(trn);
-                taxRegisterNumberModel.removeElement(trn);
+                String error = DeleteTaxpayerPresenter.delete(trn);
+                if(error != "")
+                    JOptionPane.showMessageDialog(null, error);
+                else
+                    taxRegisterNumberModel.removeElement(trn);
             }
         });
         btnDeleteTaxpayer.setBounds(287, 0, 146, 23);

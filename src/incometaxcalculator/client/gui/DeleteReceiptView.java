@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import incometaxcalculator.app.taxpayers.Taxpayer;
+import incometaxcalculator.client.gui.helpers.Pair;
 import incometaxcalculator.client.presenters.DeleteReceiptPresenter;
 
 public class DeleteReceiptView {
@@ -28,8 +29,11 @@ public class DeleteReceiptView {
                 if(op == 0) {
                     String receipt_id_value = receipt_id_field.getText();
 
-                    int receipt_id = DeleteReceiptPresenter.delete(receipt_id_value, current_taxpayer.taxRegistrationNumber);
-                    receiptsModel.removeElement(receipt_id);
+                    Pair<Integer, String> delete_result = DeleteReceiptPresenter.delete(receipt_id_value, current_taxpayer.taxRegistrationNumber);
+                    if(delete_result.first == -1)
+                        JOptionPane.showMessageDialog(null, delete_result.second);
+                    else
+                        receiptsModel.removeElement(delete_result.first);
                 }
             }
         });

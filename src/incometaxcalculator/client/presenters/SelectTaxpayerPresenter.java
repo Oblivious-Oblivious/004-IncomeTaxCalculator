@@ -6,7 +6,7 @@ import incometaxcalculator.app.select_taxpayer.SelectTaxpayer;
 import incometaxcalculator.client.gui.TaxpayerDataView;
 
 public class SelectTaxpayerPresenter {
-    public static void select() {
+    public static String select() {
         SelectTaxpayer selector = new SelectTaxpayer();
 
         if(selector.taxpayer_hashmap_is_not_empty()) {
@@ -18,21 +18,24 @@ public class SelectTaxpayerPresenter {
                     if(selector.containsTaxpayer(taxRegistrationNumber)) {
                         TaxpayerDataView taxpayerData = new TaxpayerDataView(selector.select(taxRegistrationNumber));
                         taxpayerData.setVisible(true);
+                        return "";
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "This tax registration number isn't loaded.");
+                        return "This tax registration number isn't loaded.";
                     }
                 }
                 catch(NumberFormatException e1) {
-                    JOptionPane.showMessageDialog(null, "You must give a tax registation number.");
+                    return "You must give a tax registation number.";
                 }
                 catch(Exception e1) {
-                    e1.printStackTrace();
+                    return e1.getMessage();
                 }
             }
         }
         else {
-            JOptionPane.showMessageDialog(null, "There isn't any taxpayer loaded. Please load one first.");
+            return "There isn't any taxpayer loaded. Please load one first.";
         }
+
+        return "error";
     }
 }

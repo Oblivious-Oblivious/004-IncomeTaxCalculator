@@ -51,8 +51,11 @@ public class SaveDataView {
                 boxPanel.add(xmlBox, BorderLayout.EAST);
 
                 int answer = JOptionPane.showConfirmDialog(null, fileLoaderPanel, "", JOptionPane.OK_CANCEL_OPTION);
-                if(answer == 0)
-                    SaveDataPresenter.save(txtBox.isSelected(), current_taxpayer.taxRegistrationNumber);
+                if(answer == 0) {
+                    String error = SaveDataPresenter.save(txtBox.isSelected(), current_taxpayer.taxRegistrationNumber);
+                    if(error != "")
+                        JOptionPane.showMessageDialog(null, error);
+                }
             }
         });
         btnSaveData.setBounds(322, 0, 102, 23);

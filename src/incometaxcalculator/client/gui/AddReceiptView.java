@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import incometaxcalculator.app.taxpayers.Taxpayer;
+import incometaxcalculator.client.gui.helpers.Pair;
 import incometaxcalculator.client.presenters.AddReceiptPresenter;
 
 public class AddReceiptView {
@@ -62,8 +63,11 @@ public class AddReceiptView {
                     street_value = street_field.getText();
                     number_value = number_field.getText();
 
-                    int receipt_id = AddReceiptPresenter.add(receipt_id_value, date_value, amount_value, kind_value, company_value, country_value, city_value, street_value, number_value, current_taxpayer.taxRegistrationNumber);
-                    receiptsModel.addElement(receipt_id);
+                    Pair<Integer, String> add_result = AddReceiptPresenter.add(receipt_id_value, date_value, amount_value, kind_value, company_value, country_value, city_value, street_value, number_value, current_taxpayer.taxRegistrationNumber);
+                    if(add_result.first == -1)
+                        JOptionPane.showMessageDialog(null, add_result.second);
+                    else
+                        receiptsModel.addElement(add_result.first);
                 }
             }
         });
