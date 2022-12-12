@@ -15,11 +15,36 @@ import incometaxcalculator.app.taxpayers.TaxpayerType;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public abstract class FileReader {
-    abstract int checkForReceipt(BufferedReader inputStream) throws NumberFormatException, IOException;
-    abstract String getValueOfField(String fieldsLine) throws WrongFileFormatException;
+    abstract boolean receipt_check(String values[]);
+    abstract int receipt_id_index();
+    abstract String formatted_field_value(String fieldsLine);
 
     boolean isEmpty(String line) {
         return line == null;
+    }
+
+    int checkForReceipt(BufferedReader inputStream) throws NumberFormatException, IOException {
+        String line;
+        while(!isEmpty(line = inputStream.readLine())) {
+            String values[] = line.split(" ", 3);
+            if(receipt_check(values)) {
+                int receiptId = Integer.parseInt(values[receipt_id_index()].trim());
+                return receiptId;
+            }
+        }
+        return -1;
+    }
+
+    String getValueOfField(String fieldsLine) throws WrongFileFormatException {
+        if(isEmpty(fieldsLine))
+            throw new WrongFileFormatException();
+    
+        try {
+            return formatted_field_value(fieldsLine);
+        }
+        catch(NullPointerException e) {
+            throw new WrongFileFormatException();
+        }
     }
 
     public void readFile(String fileName) throws NumberFormatException, IOException, WrongTaxpayerStatusException, WrongFileFormatException, WrongReceiptKindException, WrongReceiptDateException {
