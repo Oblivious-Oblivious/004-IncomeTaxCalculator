@@ -8,7 +8,6 @@ import incometaxcalculator.boundaries.UpdateTaxpayerInformationBoundary;
 public class UpdateTaxpayerInformation implements UpdateTaxpayerInformationBoundary {
     @Override
     public void update(int tax_registration_number) throws IOException {
-        // TODO Get from factory
         if(new File(tax_registration_number + "_INFO.xml").exists()) {
             new XMLInfoWriter().generateFile(tax_registration_number);
         }
