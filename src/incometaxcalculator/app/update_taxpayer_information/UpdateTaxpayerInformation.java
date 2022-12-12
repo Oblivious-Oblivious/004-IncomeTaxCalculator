@@ -9,10 +9,10 @@ public class UpdateTaxpayerInformation implements UpdateTaxpayerInformationBound
     @Override
     public void update(int tax_registration_number) throws IOException {
         if(new File(tax_registration_number + "_INFO.xml").exists()) {
-            new XMLInfoWriter().generateFile(tax_registration_number);
+            new XMLInfoWriter(tax_registration_number).generateFile();
         }
         if(new File(tax_registration_number + "_INFO.xml").exists()) {
-            new TXTInfoWriter().generateFile(tax_registration_number);
+            new TXTInfoWriter(tax_registration_number).generateFile();
         }
     }
 }
