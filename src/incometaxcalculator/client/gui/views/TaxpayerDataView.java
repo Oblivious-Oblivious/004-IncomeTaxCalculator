@@ -2,13 +2,10 @@ package incometaxcalculator.client.gui.views;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -58,41 +55,10 @@ public class TaxpayerDataView extends JFrame {
             receiptsModel.addElement(receipt.id);
         }
 
-        JButton btnAddReceipt = new JButton("Add Receipt");
-        btnAddReceipt.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new AddReceiptPresenter(current_taxpayer, receiptsModel).submit();
-            }
-        });
-        btnAddReceipt.setBounds(0, 0, 102, 23);
-        contentPane.add(btnAddReceipt);
-
-        JButton btnDeleteReceipt = new JButton("Delete Receipt");
-        btnDeleteReceipt.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new DeleteReceiptPresenter(current_taxpayer, receiptsModel).delete();
-            }
-        });
-        btnDeleteReceipt.setBounds(100, 0, 120, 23);
-        contentPane.add(btnDeleteReceipt);
-
-        JButton btnViewReport = new JButton("View Report");
-        btnViewReport.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new ViewReportPresenter(current_taxpayer).produce_report();
-            }
-        });
-        btnViewReport.setBounds(214, 0, 109, 23);
-        contentPane.add(btnViewReport);
-
-        JButton btnSaveData = new JButton("Save Data");
-        btnSaveData.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new SaveDataPresenter(current_taxpayer).export();
-            }
-        });
-        btnSaveData.setBounds(322, 0, 102, 23);
-        contentPane.add(btnSaveData);
+        AddReceiptPresenter.submit(contentPane, current_taxpayer, receiptsModel);
+        DeleteReceiptPresenter.delete(contentPane, current_taxpayer, receiptsModel);
+        ViewReportPresenter.produce_report(contentPane, current_taxpayer);
+        SaveDataPresenter.export(contentPane, current_taxpayer);
 
         JTextPane txtpnName = new JTextPane();
         txtpnName.setEditable(false);
