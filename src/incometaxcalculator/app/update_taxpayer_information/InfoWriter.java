@@ -14,6 +14,7 @@ public abstract class InfoWriter {
     abstract String afm();
     abstract String status();
     abstract String income();
+    abstract String receipts();
     abstract String id_of(Receipt receipt);
     abstract String date_of(Receipt receipt);
     abstract String kind_of(Receipt receipt);
@@ -31,7 +32,7 @@ public abstract class InfoWriter {
         outputStream.println(status());
         outputStream.println(income());
         outputStream.println();
-        outputStream.println("Receipts:");
+        outputStream.println(receipts());
         outputStream.println();
 
         for(Receipt receipt : this.taxpayer.receiptHashMap.values()) {
