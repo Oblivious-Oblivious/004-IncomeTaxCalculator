@@ -8,7 +8,7 @@ public class DeleteTaxpayerPresenter {
         if(deleter.taxpayer_hashmap_is_not_empty()) {
             try {
                 int tax_registration_number = Integer.parseInt(trn);
-                if(deleter.containsTaxpayer(tax_registration_number))
+                if(deleter.contains_taxpayer(tax_registration_number))
                     deleter.delete(tax_registration_number);
                 return "";
             }
