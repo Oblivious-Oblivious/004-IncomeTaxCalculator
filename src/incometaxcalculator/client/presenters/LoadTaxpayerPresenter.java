@@ -33,7 +33,7 @@ public class LoadTaxpayerPresenter {
             return "The tax registration number must have only digits.";
         }
         catch(IOException e1) {
-            return "The file doesn't exists.";
+            return "The file does not exist.";
         }
         catch(WrongFileFormatException e1) {
             return "Please check your file format and try again.";
