@@ -63,7 +63,7 @@ public class AddReceiptView {
                     street_value = street_field.getText();
                     number_value = number_field.getText();
 
-                    Pair<Integer, String> add_result = AddReceiptPresenter.add(receipt_id_value, date_value, amount_value, kind_value, company_value, country_value, city_value, street_value, number_value, current_taxpayer.taxRegistrationNumber);
+                    Pair<Integer, String> add_result = AddReceiptPresenter.add(receipt_id_value, date_value, amount_value, kind_value, company_value, country_value, city_value, street_value, number_value, current_taxpayer.tax_registration_number);
                     if(add_result.first == -1)
                         JOptionPane.showMessageDialog(null, add_result.second);
                     else

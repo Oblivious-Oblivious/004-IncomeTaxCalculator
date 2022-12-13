@@ -20,7 +20,7 @@ public class AddReceipt implements AddReceiptBoundary {
         if(current_taxpayer.receiptHashMap.containsKey(receiptId))
             throw new ReceiptAlreadyExistsException();
 
-        current_taxpayer.addReceipt(new Receipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number));
+        current_taxpayer.add_receipt(new Receipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number));
         new UpdateTaxpayerInformation().update(taxRegistrationNumber);
     }
 }

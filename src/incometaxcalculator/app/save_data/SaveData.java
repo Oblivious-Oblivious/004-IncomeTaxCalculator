@@ -9,6 +9,6 @@ public class SaveData implements SaveDataBoundary {
     @Override
     public void export(int tax_registration_number, LogWriterType type) throws IOException, WrongFileFormatException {
         LogWriter writer = LogWriterFactory.create(type, tax_registration_number);
-        writer.generateFile();
+        writer.write_log();
     }
 }

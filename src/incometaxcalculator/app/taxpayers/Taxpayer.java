@@ -6,33 +6,47 @@ import incometaxcalculator.app.receipts.Receipt;
 import incometaxcalculator.app.receipts.ReceiptKind;
 
 public abstract class Taxpayer {
-    public final String fullname;
-    public final int taxRegistrationNumber;
-    public final float income;
-    public int totalReceiptsGathered = 0;
-    private HashMap<ReceiptKind, Double> amountPerReceiptsKind = new HashMap<ReceiptKind, Double>();
+    public String fullname;
+    public int tax_registration_number;
+    public float income;
+    public int total_receipts_gathered = 0;
     public HashMap<Integer, Receipt> receiptHashMap = new HashMap<Integer, Receipt>(0);
+    HashMap<ReceiptKind, Double> receipt_amounts = new HashMap<ReceiptKind, Double>();
 
-    public abstract int[] get_income_bounds();
-    public abstract double[] get_tax_multipliers();
+    abstract int[] get_income_bounds();
+    abstract double[] get_tax_multipliers();
 
-    private double getTotalAmountOfReceipts() {
-        return this.amountPerReceiptsKind.values().stream().mapToDouble(f -> f).sum();
+    double get_total_receipt_amount() {
+        return this.receipt_amounts.values().stream().mapToDouble(f -> f).sum();
     }
 
-    protected Taxpayer(String fullname, int taxRegistrationNumber, float income) {
+    public Taxpayer(String fullname, int tax_registration_number, float income) {
         this.fullname = fullname;
-        this.taxRegistrationNumber = taxRegistrationNumber;
+        this.tax_registration_number = tax_registration_number;
         this.income = income;
 
-        this.amountPerReceiptsKind.put(ReceiptKind.BASIC, 0d);
-        this.amountPerReceiptsKind.put(ReceiptKind.ENTERTAINMENT, 0d);
-        this.amountPerReceiptsKind.put(ReceiptKind.HEALTH, 0d);
-        this.amountPerReceiptsKind.put(ReceiptKind.TRAVEL, 0d);
-        this.amountPerReceiptsKind.put(ReceiptKind.OTHER, 0d);
+        this.receipt_amounts.put(ReceiptKind.BASIC, 0d);
+        this.receipt_amounts.put(ReceiptKind.ENTERTAINMENT, 0d);
+        this.receipt_amounts.put(ReceiptKind.HEALTH, 0d);
+        this.receipt_amounts.put(ReceiptKind.TRAVEL, 0d);
+        this.receipt_amounts.put(ReceiptKind.OTHER, 0d);
     }
 
-    public double calculateBasicTax() {
+
+    public void add_receipt(Receipt receipt) {
+        this.receipt_amounts.put(receipt.kind, this.receipt_amounts.get(receipt.kind) + receipt.amount);
+        receiptHashMap.put(receipt.id, receipt);
+        total_receipts_gathered++;
+    }
+
+    public void remove_receipt(int receiptId) {
+        Receipt receipt = receiptHashMap.get(receiptId);
+        this.receipt_amounts.put(receipt.kind, this.receipt_amounts.get(receipt.kind) - receipt.amount);
+        total_receipts_gathered--;
+        receiptHashMap.remove(receiptId);
+    }
+
+    public double calculate_basic_tax() {
         int income_bounds[] = get_income_bounds();
         double tax_multipliers[] = get_tax_multipliers();
 
@@ -48,42 +62,24 @@ public abstract class Taxpayer {
             return tax_multipliers[3] + 0.0985 * (income - income_bounds[3]);
     }
 
-    public double getVariationTaxOnReceipts() {
-        double totalAmountOfReceipts = getTotalAmountOfReceipts();
+    public double get_variation_tax_on_receipts() {
+        double totalAmountOfReceipts = get_total_receipt_amount();
 
         if(totalAmountOfReceipts < 0.2 * income)
-            return calculateBasicTax() * 0.08;
+            return calculate_basic_tax() * 0.08;
         else if(totalAmountOfReceipts < 0.4 * income)
-            return calculateBasicTax() * 0.04;
+            return calculate_basic_tax() * 0.04;
         else if(totalAmountOfReceipts < 0.6 * income)
-            return -calculateBasicTax() * 0.15;
+            return -calculate_basic_tax() * 0.15;
         else
-            return -calculateBasicTax() * 0.3;
+            return -calculate_basic_tax() * 0.3;
     }
 
-    public void addReceipt(Receipt receipt) {
-        this.amountPerReceiptsKind.put(receipt.kind, this.amountPerReceiptsKind.get(receipt.kind) + receipt.amount);
-        receiptHashMap.put(receipt.id, receipt);
-        totalReceiptsGathered++;
+    public double calculate_total_tax() {
+        return calculate_basic_tax() + get_variation_tax_on_receipts();
     }
 
-    public void removeReceipt(int receiptId) {
-        // TODO Fix that ?
-        Receipt receipt = receiptHashMap.get(receiptId);
-        this.amountPerReceiptsKind.put(receipt.kind, this.amountPerReceiptsKind.get(receipt.kind) - receipt.amount);
-        totalReceiptsGathered--;
-        receiptHashMap.remove(receiptId);
-    }
-
-    public double getTotalTax() {
-        return calculateBasicTax() + getVariationTaxOnReceipts();
-    }
-
-    public double getBasicTax() {
-        return calculateBasicTax();
-    }
-
-    public double getAmountOfReceiptKind(ReceiptKind kind) {
-        return this.amountPerReceiptsKind.get(kind);
+    public double get_amount_of(ReceiptKind kind) {
+        return this.receipt_amounts.get(kind);
     }
 }

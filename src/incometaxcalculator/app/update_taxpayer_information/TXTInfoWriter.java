@@ -14,7 +14,7 @@ public class TXTInfoWriter extends InfoWriter {
     }
 
     String name() { return "Name: " + this.taxpayer.fullname; }
-    String afm() { return "AFM: " + this.taxpayer.taxRegistrationNumber; }
+    String afm() { return "AFM: " + this.taxpayer.tax_registration_number; }
     String status() { return "Status: " + this.taxpayer; }
     String income() { return "Income: " + this.taxpayer.income; }
     String receipts() { return "Receipts:"; }

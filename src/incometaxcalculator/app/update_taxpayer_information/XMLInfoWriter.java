@@ -14,7 +14,7 @@ public class XMLInfoWriter extends InfoWriter {
     }
 
     String name() { return "<Name> " + this.taxpayer.fullname + " </Name>"; }
-    String afm() { return "<AFM> " + this.taxpayer.taxRegistrationNumber + " </AFM>"; }
+    String afm() { return "<AFM> " + this.taxpayer.tax_registration_number + " </AFM>"; }
     String status() { return "<Status> " + this.taxpayer + " </Status>"; }
     String income() { return "<Income> " + this.taxpayer.income + " </Income>"; }
     String receipts() { return "<Receipts>"; }

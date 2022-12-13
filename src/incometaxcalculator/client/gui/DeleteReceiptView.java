@@ -29,7 +29,7 @@ public class DeleteReceiptView {
                 if(op == 0) {
                     String receipt_id_value = receipt_id_field.getText();
 
-                    Pair<Integer, String> delete_result = DeleteReceiptPresenter.delete(receipt_id_value, current_taxpayer.taxRegistrationNumber);
+                    Pair<Integer, String> delete_result = DeleteReceiptPresenter.delete(receipt_id_value, current_taxpayer.tax_registration_number);
                     if(delete_result.first == -1)
                         JOptionPane.showMessageDialog(null, delete_result.second);
                     else

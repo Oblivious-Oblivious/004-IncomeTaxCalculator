@@ -25,8 +25,8 @@ public abstract class InfoWriter {
     abstract String street_of(Receipt receipt);
     abstract String number_of(Receipt receipt);
 
-    public void generateFile() throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(this.taxpayer.taxRegistrationNumber + get_type()));
+    public void write_info() throws IOException {
+        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(this.taxpayer.tax_registration_number + get_type()));
         outputStream.println(name());
         outputStream.println(afm());
         outputStream.println(status());

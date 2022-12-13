@@ -68,7 +68,7 @@ public abstract class FileReader {
             String street = getValueOfField(inputStream.readLine());
             int number = Integer.parseInt(getValueOfField(inputStream.readLine()));
 
-            new_taxpayer.addReceipt(new Receipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number));
+            new_taxpayer.add_receipt(new Receipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number));
         }
     }
 }

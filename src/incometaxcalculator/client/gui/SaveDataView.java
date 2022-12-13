@@ -52,7 +52,7 @@ public class SaveDataView {
 
                 int answer = JOptionPane.showConfirmDialog(null, fileLoaderPanel, "", JOptionPane.OK_CANCEL_OPTION);
                 if(answer == 0) {
-                    String error = SaveDataPresenter.save(txtBox.isSelected(), current_taxpayer.taxRegistrationNumber);
+                    String error = SaveDataPresenter.save(txtBox.isSelected(), current_taxpayer.tax_registration_number);
                     if(error != "")
                         JOptionPane.showMessageDialog(null, error);
                 }

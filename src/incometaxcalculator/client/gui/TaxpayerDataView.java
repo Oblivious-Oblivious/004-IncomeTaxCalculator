@@ -44,7 +44,6 @@ public class TaxpayerDataView extends JFrame {
 
         HashMap<Integer, Receipt> receipts = current_taxpayer.receiptHashMap;
         Iterator<HashMap.Entry<Integer, Receipt>> iterator = receipts.entrySet().iterator();
-
         while(iterator.hasNext()) {
             HashMap.Entry<Integer, Receipt> entry = iterator.next();
             Receipt receipt = entry.getValue();
@@ -91,7 +90,7 @@ public class TaxpayerDataView extends JFrame {
         taxpayerTRN.setFont(new Font("Tahoma", Font.PLAIN, 11));
         taxpayerTRN.setEditable(false);
         taxpayerTRN.setBounds(110, 65, 213, 20);
-        taxpayerTRN.setText(current_taxpayer.taxRegistrationNumber + "");
+        taxpayerTRN.setText(current_taxpayer.tax_registration_number + "");
         contentPane.add(taxpayerTRN);
 
         JTextArea taxpayerStatus = new JTextArea();

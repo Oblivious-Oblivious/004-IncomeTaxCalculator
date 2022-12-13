@@ -12,7 +12,7 @@ public class DeleteReceipt implements DeleteReceiptBoundary {
     @Override
     public void delete(int tax_registration_number, int receipt_id) throws IOException, WrongReceiptKindException {
         Taxpayer current_taxpayer = TaxpayerHashmap.get(tax_registration_number);
-        current_taxpayer.removeReceipt(receipt_id);
+        current_taxpayer.remove_receipt(receipt_id);
         new UpdateTaxpayerInformation().update(tax_registration_number);
     }
 }

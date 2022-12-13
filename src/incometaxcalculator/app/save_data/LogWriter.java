@@ -12,29 +12,29 @@ public abstract class LogWriter {
     abstract String name();
     abstract String afm();
     abstract String income();
-    abstract String basicTax();
-    abstract String taxIncrease();
-    abstract String taxDecrease();
-    abstract String totalTax();
-    abstract String totalReceiptsGathered();
+    abstract String basic_tax();
+    abstract String tax_increase();
+    abstract String tax_decrease();
+    abstract String total_tax();
+    abstract String total_receipts_gathered();
     abstract String entertainment();
     abstract String basic();
     abstract String travel();
     abstract String health();
     abstract String other();
 
-    public void generateFile() throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxpayer.taxRegistrationNumber + get_type()));
+    public void write_log() throws IOException {
+        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxpayer.tax_registration_number + get_type()));
         outputStream.println(name());
         outputStream.println(afm());
         outputStream.println(income());
-        outputStream.println(basicTax());
-        if(this.taxpayer.getVariationTaxOnReceipts() > 0)
-            outputStream.println(taxIncrease());
+        outputStream.println(basic_tax());
+        if(this.taxpayer.get_variation_tax_on_receipts() > 0)
+            outputStream.println(tax_increase());
         else
-            outputStream.println(taxDecrease());        
-        outputStream.println(totalTax());
-        outputStream.println(totalReceiptsGathered());
+            outputStream.println(tax_decrease());        
+        outputStream.println(total_tax());
+        outputStream.println(total_receipts_gathered());
         outputStream.println(entertainment());
         outputStream.println(basic());
         outputStream.println(travel());
