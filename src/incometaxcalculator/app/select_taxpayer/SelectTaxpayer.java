@@ -14,7 +14,7 @@ public class SelectTaxpayer implements SelectTaxpayerBoundary {
         return !TaxpayerHashmap.is_empty();
     }
 
-    public boolean containsTaxpayer(int tax_registration_number) {
+    public boolean contains_taxpayer(int tax_registration_number) {
         return TaxpayerHashmap.contains(tax_registration_number);
     }
 }

@@ -22,7 +22,7 @@ public class LoadTaxpayerPresenter {
             LoadTaxpayer loader = new LoadTaxpayer();
 
             int trn = Integer.parseInt(taxRegistrationNumber);
-            if(loader.containsTaxpayer(trn))
+            if(loader.contains_taxpayer(trn))
                 return "This taxpayer is already loaded.";
             else
                 loader.load(trn, type);

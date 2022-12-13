@@ -15,7 +15,7 @@ public class SelectTaxpayerPresenter {
             if(trn != null) {
                 try {
                     int taxRegistrationNumber = Integer.parseInt(trn);
-                    if(selector.containsTaxpayer(taxRegistrationNumber)) {
+                    if(selector.contains_taxpayer(taxRegistrationNumber)) {
                         TaxpayerDataView taxpayerData = new TaxpayerDataView(selector.select(taxRegistrationNumber));
                         taxpayerData.setVisible(true);
                         return "";
