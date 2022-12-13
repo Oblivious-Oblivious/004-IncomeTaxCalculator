@@ -24,23 +24,23 @@ public abstract class LogWriter {
     abstract String other();
 
     public void write_log() throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(taxpayer.tax_registration_number + get_type()));
-        outputStream.println(name());
-        outputStream.println(afm());
-        outputStream.println(income());
-        outputStream.println(basic_tax());
+        PrintWriter output_stream = new PrintWriter(new java.io.FileWriter(taxpayer.tax_registration_number + get_type()));
+        output_stream.println(name());
+        output_stream.println(afm());
+        output_stream.println(income());
+        output_stream.println(basic_tax());
         if(this.taxpayer.get_variation_tax_on_receipts() > 0)
-            outputStream.println(tax_increase());
+            output_stream.println(tax_increase());
         else
-            outputStream.println(tax_decrease());        
-        outputStream.println(total_tax());
-        outputStream.println(total_receipts_gathered());
-        outputStream.println(entertainment());
-        outputStream.println(basic());
-        outputStream.println(travel());
-        outputStream.println(health());
-        outputStream.println(other());
+            output_stream.println(tax_decrease());        
+        output_stream.println(total_tax());
+        output_stream.println(total_receipts_gathered());
+        output_stream.println(entertainment());
+        output_stream.println(basic());
+        output_stream.println(travel());
+        output_stream.println(health());
+        output_stream.println(other());
 
-        outputStream.close();
+        output_stream.close();
     }
 }

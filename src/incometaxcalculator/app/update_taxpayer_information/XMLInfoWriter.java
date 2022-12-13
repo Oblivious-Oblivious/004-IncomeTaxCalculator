@@ -4,8 +4,8 @@ import incometaxcalculator.app.receipts.Receipt;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class XMLInfoWriter extends InfoWriter {
-    public XMLInfoWriter(int taxRegistrationNumber) {
-        this.taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
+    public XMLInfoWriter(int tax_registration_number) {
+        this.taxpayer = TaxpayerHashmap.get(tax_registration_number);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class XMLInfoWriter extends InfoWriter {
     String receipts() { return "<Receipts>"; }
 
     String id_of(Receipt receipt) { return "<ReceiptID> " + receipt.id + " </ReceiptID>"; }
-    String date_of(Receipt receipt) { return "<Date> " + receipt.issueDate + " </Date>"; }
+    String date_of(Receipt receipt) { return "<Date> " + receipt.date + " </Date>"; }
     String kind_of(Receipt receipt) { return "<Kind> " + receipt.kind + " </Kind>"; }
     String amount_of(Receipt receipt) { return "<Amount> " + receipt.amount + " </Amount>"; }
     String company_of(Receipt receipt) { return "<Company> " + receipt.company.name + " </Company>"; }

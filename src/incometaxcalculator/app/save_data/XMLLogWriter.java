@@ -4,8 +4,8 @@ import incometaxcalculator.app.receipts.ReceiptKind;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class XMLLogWriter extends LogWriter {
-    public XMLLogWriter(int taxRegistrationNumber) {
-        this.taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
+    public XMLLogWriter(int tax_registration_number) {
+        this.taxpayer = TaxpayerHashmap.get(tax_registration_number);
     }
 
     @Override

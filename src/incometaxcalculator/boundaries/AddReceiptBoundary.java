@@ -8,5 +8,5 @@ import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.receipts.ReceiptKind;
 
 public interface AddReceiptBoundary {
-    public void add(int receiptId, String issueDate, float amount, ReceiptKind kind, String companyName, String country, String city, String street, int number, int taxRegistrationNumber) throws IOException, WrongReceiptKindException, WrongReceiptDateException, ReceiptAlreadyExistsException;
+    public void add(int receipt_id, String date, float amount, ReceiptKind kind, String company_name, String country, String city, String street, int number, int tax_registration_number) throws IOException, WrongReceiptKindException, WrongReceiptDateException, ReceiptAlreadyExistsException;
 }

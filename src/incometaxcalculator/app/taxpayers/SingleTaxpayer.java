@@ -1,8 +1,8 @@
 package incometaxcalculator.app.taxpayers;
 
 public class SingleTaxpayer extends Taxpayer {
-    public SingleTaxpayer(String fullname, int taxRegistrationNumber, float income) {
-        super(fullname, taxRegistrationNumber, income);
+    public SingleTaxpayer(String fullname, int tax_registration_number, float income) {
+        super(fullname, tax_registration_number, income);
     }
 
     @Override

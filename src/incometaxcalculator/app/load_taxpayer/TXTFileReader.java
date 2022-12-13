@@ -12,8 +12,8 @@ public class TXTFileReader extends FileReader {
     }
 
     @Override
-    String formatted_field_value(String fieldsLine) {
-        String values[] = fieldsLine.split(" ", 2);
+    String formatted_field_value(String fields_line) {
+        String values[] = fields_line.split(" ", 2);
         values[1] = values[1].trim();
         return values[1];
     }

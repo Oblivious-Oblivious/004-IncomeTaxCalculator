@@ -12,9 +12,9 @@ public class XMLFileReader extends FileReader {
     }
 
     @Override
-    String formatted_field_value(String fieldsLine) {
-        String valueWithTail[] = fieldsLine.split(" ", 2);
-        String valueReversed[] = new StringBuilder(valueWithTail[1]).reverse().toString().trim().split(" ", 2);
-        return new StringBuilder(valueReversed[1]).reverse().toString();
+    String formatted_field_value(String fields_line) {
+        String value_with_tail[] = fields_line.split(" ", 2);
+        String value_reversed[] = new StringBuilder(value_with_tail[1]).reverse().toString().trim().split(" ", 2);
+        return new StringBuilder(value_reversed[1]).reverse().toString();
     }
 }

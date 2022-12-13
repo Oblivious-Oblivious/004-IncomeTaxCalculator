@@ -4,14 +4,14 @@ import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 
 public class Receipt {
-    public final int id;
-    public final Date issueDate;
-    public final float amount;
-    public final ReceiptKind kind;
-    public final Company company;
+    public int id;
+    public Date date;
+    public float amount;
+    public ReceiptKind kind;
+    public Company company;
 
-    Date createDate(String issueDate) throws WrongReceiptDateException {
-        String token[] = issueDate.split("/");
+    Date create(String date) throws WrongReceiptDateException {
+        String token[] = date.split("/");
         if(token.length != 3)
             throw new WrongReceiptDateException();
 
@@ -22,11 +22,11 @@ public class Receipt {
         return new Date(day, month, year);
     }
 
-    public Receipt(int id, String issueDate, float amount, ReceiptKind kind, String companyName, String country, String city, String street, int number) throws WrongReceiptKindException, WrongReceiptDateException {
+    public Receipt(int id, String date, float amount, ReceiptKind kind, String company_name, String country, String city, String street, int number) throws WrongReceiptKindException, WrongReceiptDateException {
         this.id = id;
-        this.issueDate = createDate(issueDate);
+        this.date = create(date);
         this.amount = amount;
         this.kind = kind;
-        this.company = new Company(companyName, country, city, street, number);
+        this.company = new Company(company_name, country, city, street, number);
     }
 }

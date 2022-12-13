@@ -26,28 +26,28 @@ public abstract class InfoWriter {
     abstract String number_of(Receipt receipt);
 
     public void write_info() throws IOException {
-        PrintWriter outputStream = new PrintWriter(new java.io.FileWriter(this.taxpayer.tax_registration_number + get_type()));
-        outputStream.println(name());
-        outputStream.println(afm());
-        outputStream.println(status());
-        outputStream.println(income());
-        outputStream.println();
-        outputStream.println(receipts());
-        outputStream.println();
+        PrintWriter output_stream = new PrintWriter(new java.io.FileWriter(this.taxpayer.tax_registration_number + get_type()));
+        output_stream.println(name());
+        output_stream.println(afm());
+        output_stream.println(status());
+        output_stream.println(income());
+        output_stream.println();
+        output_stream.println(receipts());
+        output_stream.println();
 
         for(Receipt receipt : this.taxpayer.all_receipts()) {
-            outputStream.println(id_of(receipt));
-            outputStream.println(date_of(receipt));
-            outputStream.println(kind_of(receipt));
-            outputStream.println(amount_of(receipt));
-            outputStream.println(company_of(receipt));
-            outputStream.println(country_of(receipt));
-            outputStream.println(city_of(receipt));
-            outputStream.println(street_of(receipt));
-            outputStream.println(number_of(receipt));
-            outputStream.println();
+            output_stream.println(id_of(receipt));
+            output_stream.println(date_of(receipt));
+            output_stream.println(kind_of(receipt));
+            output_stream.println(amount_of(receipt));
+            output_stream.println(company_of(receipt));
+            output_stream.println(country_of(receipt));
+            output_stream.println(city_of(receipt));
+            output_stream.println(street_of(receipt));
+            output_stream.println(number_of(receipt));
+            output_stream.println();
         }
 
-        outputStream.close();
+        output_stream.close();
     }
 }

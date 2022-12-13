@@ -15,7 +15,7 @@ public class LoadTaxpayer implements LoadTaxpayerBoundary {
     public void load(int tax_registration_number, FileReaderType type) throws NumberFormatException, IOException, WrongFileFormatException, WrongFileEndingException, WrongTaxpayerStatusException, WrongReceiptKindException, WrongReceiptDateException {
         FileReader reader = FileReaderFactory.create(type);
         String filename = tax_registration_number + "_INFO." + type;
-        reader.readFile(filename);
+        reader.read_file(filename);
     }
 
     public boolean containsTaxpayer(int taxRegistrationNumber) {

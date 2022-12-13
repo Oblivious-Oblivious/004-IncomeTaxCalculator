@@ -17,58 +17,56 @@ import incometaxcalculator.persistence.TaxpayerHashmap;
 public abstract class FileReader {
     abstract boolean receipt_check(String values[]);
     abstract int receipt_id_index();
-    abstract String formatted_field_value(String fieldsLine);
+    abstract String formatted_field_value(String fields_line);
 
-    boolean isEmpty(String line) {
+    boolean is_empty(String line) {
         return line == null;
     }
 
-    int checkForReceipt(BufferedReader inputStream) throws NumberFormatException, IOException {
+    int check_for_receipt(BufferedReader input_stream) throws NumberFormatException, IOException {
         String line;
-        while(!isEmpty(line = inputStream.readLine())) {
+        while(!is_empty(line = input_stream.readLine())) {
             String values[] = line.split(" ", 3);
-            if(receipt_check(values)) {
-                int receiptId = Integer.parseInt(values[receipt_id_index()].trim());
-                return receiptId;
-            }
+            if(receipt_check(values))
+                return Integer.parseInt(values[receipt_id_index()].trim());
         }
         return -1;
     }
 
-    String getValueOfField(String fieldsLine) throws WrongFileFormatException {
-        if(isEmpty(fieldsLine))
+    String get_value_of_field(String fields_line) throws WrongFileFormatException {
+        if(is_empty(fields_line))
             throw new WrongFileFormatException();
     
         try {
-            return formatted_field_value(fieldsLine);
+            return formatted_field_value(fields_line);
         }
         catch(NullPointerException e) {
             throw new WrongFileFormatException();
         }
     }
 
-    public void readFile(String fileName) throws NumberFormatException, IOException, WrongTaxpayerStatusException, WrongFileFormatException, WrongReceiptKindException, WrongReceiptDateException {
-        BufferedReader inputStream = new BufferedReader(new java.io.FileReader(fileName));
-        String fullname = getValueOfField(inputStream.readLine());
-        int taxRegistrationNumber = Integer.parseInt(getValueOfField(inputStream.readLine()));
-        TaxpayerType status = TaxpayerType.from_string(getValueOfField(inputStream.readLine()));
-        float income = Float.parseFloat(getValueOfField(inputStream.readLine()));
+    public void read_file(String filename) throws NumberFormatException, IOException, WrongTaxpayerStatusException, WrongFileFormatException, WrongReceiptKindException, WrongReceiptDateException {
+        BufferedReader input_stream = new BufferedReader(new java.io.FileReader(filename));
+        String fullname = get_value_of_field(input_stream.readLine());
+        int tax_registration_number = Integer.parseInt(get_value_of_field(input_stream.readLine()));
+        TaxpayerType status = TaxpayerType.from_string(get_value_of_field(input_stream.readLine()));
+        float income = Float.parseFloat(get_value_of_field(input_stream.readLine()));
 
-        Taxpayer new_taxpayer = TaxpayerFactory.create(status, fullname, taxRegistrationNumber, income);
-        TaxpayerHashmap.put(taxRegistrationNumber, new_taxpayer);
+        Taxpayer new_taxpayer = TaxpayerFactory.create(status, fullname, tax_registration_number, income);
+        TaxpayerHashmap.put(tax_registration_number, new_taxpayer);
 
-        int receiptId;
-        while((receiptId = checkForReceipt(inputStream)) > 0) {
-            String issueDate = getValueOfField(inputStream.readLine());
-            ReceiptKind kind = ReceiptKind.from_string(getValueOfField(inputStream.readLine()));
-            float amount = Float.parseFloat(getValueOfField(inputStream.readLine()));
-            String companyName = getValueOfField(inputStream.readLine());
-            String country = getValueOfField(inputStream.readLine());
-            String city = getValueOfField(inputStream.readLine());
-            String street = getValueOfField(inputStream.readLine());
-            int number = Integer.parseInt(getValueOfField(inputStream.readLine()));
+        int receipt_id;
+        while((receipt_id = check_for_receipt(input_stream)) > 0) {
+            String date = get_value_of_field(input_stream.readLine());
+            ReceiptKind kind = ReceiptKind.from_string(get_value_of_field(input_stream.readLine()));
+            float amount = Float.parseFloat(get_value_of_field(input_stream.readLine()));
+            String company_name = get_value_of_field(input_stream.readLine());
+            String country = get_value_of_field(input_stream.readLine());
+            String city = get_value_of_field(input_stream.readLine());
+            String street = get_value_of_field(input_stream.readLine());
+            int number = Integer.parseInt(get_value_of_field(input_stream.readLine()));
 
-            new_taxpayer.add_receipt(new Receipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number));
+            new_taxpayer.add_receipt(new Receipt(receipt_id, date, amount, kind, company_name, country, city, street, number));
         }
     }
 }
