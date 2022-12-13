@@ -2,8 +2,6 @@ package incometaxcalculator.client.gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -42,13 +40,8 @@ public class TaxpayerDataView extends JFrame {
         receiptsListScrollPane.setLocation(100, 170);
         contentPane.add(receiptsListScrollPane);
 
-        HashMap<Integer, Receipt> receipts = current_taxpayer.receiptHashMap;
-        Iterator<HashMap.Entry<Integer, Receipt>> iterator = receipts.entrySet().iterator();
-        while(iterator.hasNext()) {
-            HashMap.Entry<Integer, Receipt> entry = iterator.next();
-            Receipt receipt = entry.getValue();
+        for(Receipt receipt : current_taxpayer.all_receipts())
             receiptsModel.addElement(receipt.id);
-        }
 
         AddReceiptView.submit(contentPane, current_taxpayer, receiptsModel);
         DeleteReceiptView.delete(contentPane, current_taxpayer, receiptsModel);

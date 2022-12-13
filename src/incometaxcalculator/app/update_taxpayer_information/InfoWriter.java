@@ -35,7 +35,7 @@ public abstract class InfoWriter {
         outputStream.println(receipts());
         outputStream.println();
 
-        for(Receipt receipt : this.taxpayer.receiptHashMap.values()) {
+        for(Receipt receipt : this.taxpayer.all_receipts()) {
             outputStream.println(id_of(receipt));
             outputStream.println(date_of(receipt));
             outputStream.println(kind_of(receipt));

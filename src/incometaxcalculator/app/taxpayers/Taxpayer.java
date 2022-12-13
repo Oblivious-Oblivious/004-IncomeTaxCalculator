@@ -1,5 +1,6 @@
 package incometaxcalculator.app.taxpayers;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import incometaxcalculator.app.receipts.Receipt;
@@ -10,7 +11,8 @@ public abstract class Taxpayer {
     public int tax_registration_number;
     public float income;
     public int total_receipts_gathered = 0;
-    public HashMap<Integer, Receipt> receiptHashMap = new HashMap<Integer, Receipt>(0);
+    
+    HashMap<Integer, Receipt> receipts_hashmap = new HashMap<Integer, Receipt>(0);
     HashMap<ReceiptKind, Double> receipt_amounts = new HashMap<ReceiptKind, Double>();
 
     abstract int[] get_income_bounds();
@@ -32,18 +34,25 @@ public abstract class Taxpayer {
         this.receipt_amounts.put(ReceiptKind.OTHER, 0d);
     }
 
+    public Collection<Receipt> all_receipts() {
+        return this.receipts_hashmap.values();
+    }
+
+    public boolean contains(int receipt_id) {
+        return this.receipts_hashmap.containsKey(receipt_id);
+    }
 
     public void add_receipt(Receipt receipt) {
         this.receipt_amounts.put(receipt.kind, this.receipt_amounts.get(receipt.kind) + receipt.amount);
-        receiptHashMap.put(receipt.id, receipt);
+        this.receipts_hashmap.put(receipt.id, receipt);
         total_receipts_gathered++;
     }
 
     public void remove_receipt(int receiptId) {
-        Receipt receipt = receiptHashMap.get(receiptId);
+        Receipt receipt = this.receipts_hashmap.get(receiptId);
         this.receipt_amounts.put(receipt.kind, this.receipt_amounts.get(receipt.kind) - receipt.amount);
         total_receipts_gathered--;
-        receiptHashMap.remove(receiptId);
+        this.receipts_hashmap.remove(receiptId);
     }
 
     public double calculate_basic_tax() {

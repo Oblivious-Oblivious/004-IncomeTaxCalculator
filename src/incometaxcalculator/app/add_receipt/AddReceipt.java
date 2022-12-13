@@ -17,7 +17,7 @@ public class AddReceipt implements AddReceiptBoundary {
     public void add(int receiptId, String issueDate, float amount, ReceiptKind kind, String companyName, String country, String city, String street, int number, int taxRegistrationNumber) throws IOException, WrongReceiptKindException, WrongReceiptDateException, ReceiptAlreadyExistsException {
         Taxpayer current_taxpayer = TaxpayerHashmap.get(taxRegistrationNumber);
 
-        if(current_taxpayer.receiptHashMap.containsKey(receiptId))
+        if(current_taxpayer.contains(receiptId))
             throw new ReceiptAlreadyExistsException();
 
         current_taxpayer.add_receipt(new Receipt(receiptId, issueDate, amount, kind, companyName, country, city, street, number));
