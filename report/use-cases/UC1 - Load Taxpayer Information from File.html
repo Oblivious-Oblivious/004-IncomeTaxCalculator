@@ -14,7 +14,7 @@
         <div class="data">
             <i>Data:</i>
             <ul>
-                <li>&lt;Taxpayer AFM&gt;</li>
+                <li>&lt;Taxpayer TRN&gt;</li>
                 <li>&lt;File Type&gt;</li>
             </ul>
         </div>
@@ -22,22 +22,54 @@
         <div class="primary-course">
             <i>Main Flow:</i>
             <ol>
-                <li>User issues `Load Taxpayer` command.</li>
-                <li>System uses the AFM and Type provided to find the corresponding file.</li>
-                <li>System parses data and stores it in memory.</li>
+                <li>User of the system issues `Load Taxpayer` command.</li>
+                <li>User is prompted to give taxpayer's registration number as well a filetype for loading.</li>
+                <li>System uses the TRN and Type provided to find the corresponding file.</li>
+                <li>System loads all taxpayer information along with receipt data for the current taxpayer.</li>
+                <li>System stores data it in memory.</li>
             </ol>
         </div>
-        
+
         <div class="exception-course">
-            <i>Non Existent AFM (2)</i>
+            <i>Invalid TRN</i>
             <ol>
-                <li>User is notified with: `The file doesn't exist.`.</li>
+                <li>User provided a tax registration number that is invalid as a format.</li>
+                <li>User is notified with: `The tax registration number must have only digits.`.</li>
                 <li>UC1 is executed again.</li>
             </ol>
 
-            <i>Invalid AFM (2)</i>
+            <i>Non Existent TRN</i>
             <ol>
-                <li>User is notified with: `The tax registration number must have 9 digits. Try again.`.</li>
+                <li>User provided a valid tax registration number however the appropriate file does not exist.</li>
+                <li>User is notified with: `This file does not exist.`.</li>
+                <li>UC1 is executed again.</li>
+            </ol>
+
+            <i>Wrong File Type</i>
+            <ol>
+                <li>User provided a file type that is invalid or not handled by the system.</li>
+                <li>User is notified with: `Please check your file format and try again.`.</li>
+                <li>UC1 is executed again.</li>
+            </ol>
+
+            <i>Wrong Taxpayer Status</i>
+            <ol>
+                <li>User provided a valid taxpayer however his status is invalid (not one of the types provided in requirements).</li>
+                <li>User is notified with: `Please check taxpayer's status and try again.`.</li>
+                <li>UC1 is executed again.</li>
+            </ol>
+
+            <i>Wrong Receipt Kind</i>
+            <ol>
+                <li>User provided a valid taxpayer however one of their receipts is of ivalid kind (not one of the types provided in requirements).</li>
+                <li>User is notified with: `Please check receipts kind and try again.`.</li>
+                <li>UC1 is executed again.</li>
+            </ol>
+
+            <i>Wrong Receipt Date</i>
+            <ol>
+                <li>User provided a valid taxpayer however one of their receipts has an invalid date.</li>
+                <li>User is notified with: `Please make sure your date is DD/MM/YYYY and try again.`.</li>
                 <li>UC1 is executed again.</li>
             </ol>
         </div>

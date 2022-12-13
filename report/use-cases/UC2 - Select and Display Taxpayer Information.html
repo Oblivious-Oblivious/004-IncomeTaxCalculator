@@ -14,29 +14,39 @@
         <div class="data">
             <i>Data:</i>
             <ul>
-                <li>&lt;Taxpayer AFM&gt;</li>
+                <li>&lt;Taxpayer TRN&gt;</li>
             </ul>
         </div>
 
         <div class="primary-course">
             <i>Main Flow:</i>
             <ol>
-                <li>User issues `Select Taxpayer` command.</li>
-                <li>System uses provided AFM to search and display from the taxpayers loaded.</li>
-                <li>System displays taxpayer data about personal information and receipts.</li>
+                <li>User of the system issues `Select Taxpayer` command.</li>
+                <li>User is prompted to provide the tax registration number of the user he wants to select.</li>
+                <li>System uses provided TRN to search in the list of taxpayers already loaded from UC1.</li>
+                <li>System displays taxpayer data about personal information and the list of his receipts.</li>
             </ol>
         </div>
-        
+
         <div class="exception-course">
-            <i>Non Existent AFM (2)</i>
+            <i>Non Existent TRN</i>
             <ol>
+                <li>User has provided an TRN that does not exist in the list loaded in the system.</li>
                 <li>User is notified with: `This tax registration number isn't loaded.`.</li>
                 <li>Use case ends.</li>
             </ol>
 
-            <i>Invalid AFM Error (2)</i>
+            <i>Invalid TRN</i>
             <ol>
+                <li>User has provided an invalid format for an TRN</li>
                 <li>User is notified with: `You must give a tax registration number.`.</li>
+                <li>Use case ends.</li>
+            </ol>
+
+            <i>No Taxpayer Loaded</i>
+            <ol>
+                <li>User tried to select a taxpayer from a list that has none loaded.</li>
+                <li>User is notified with: `There isn't any taxpayer loaded. Please load one first.`.</li>
                 <li>Use case ends.</li>
             </ol>
         </div>

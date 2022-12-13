@@ -14,29 +14,33 @@
         <div class="data">
             <i>Data:</i>
             <ul>
-                <li>&lt;Taxpayer AFM&gt;</li>
+                <li>&lt;Taxpayer TRN&gt;</li>
             </ul>
         </div>
 
         <div class="primary-course">
             <i>Main Flow:</i>
             <ol>
-                <li>User issues `Delete Taxpayer` command.</li>
-                <li>System deletes taxpayer with corresponding AFM from memory.</li>
+                <li>User of the system issues `Delete Taxpayer` command.</li>
+                <li>User is prompted for a taxpayer TRN for deletion.</li>
+                <li>System deletes taxpayer with corresponding TRN from memory.</li>
             </ol>
         </div>
 
         <div class="exception-course">
-            <i>No Taxpayer is Loaded (1)</i>
+            <i>No Taxpayer Loaded</i>
             <ol>
+                <li>User tries to remove a taxpayer however no taxpayer is loaded yet.</li>
                 <li>User is notified with: `There isnt't any taxpayer loaded. Please load one first.`.</li>
                 <li>Use case ends.</li>
             </ol>
         </div>
 
         <div class="exception-course">
-            <i>Invalid Taxpayer AFM (2)</i>
+            <i>Invalid Taxpayer TRN</i>
             <ol>
+                <li>User has provided a TRN that is not valid (per requirements of the system).</li>
+                <li>User is notified with: `Adress number is not a valid number.`.</li>
                 <li>Use case ends.</li>
             </ol>
         </div>

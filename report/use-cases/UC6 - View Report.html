@@ -14,15 +14,17 @@
         <div class="data">
             <i>Data:</i>
             <ul>
-                <li>&lt;-&gt;</li>
+                <li>&lt;Taxpayer TRN&gt;</li>
             </ul>
         </div>
 
         <div class="primary-course">
             <i>Main Flow:</i>
             <ol>
-                <li>User issues `View Report` command.</li>
-                <li>System aggregates tax information.</li>
+                <li>User of the system issues `View Report` command.</li>
+                <li>System aggregates tax information of current taxpayer (using provided TRN).</li>
+                <li>System calculates basic and total tax numbers, as well as the variation increase or decrease.</li>
+                <li>System gets information about the receipts amount according to receipt types.</li>
                 <li>System displays a pie chart and bar chart with current expendature types and tax analytics.</li>
             </ol>
         </div>

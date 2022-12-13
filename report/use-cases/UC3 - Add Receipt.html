@@ -14,43 +14,49 @@
         <div class="data">
             <i>Data:</i>
             <ul>
-                <li>&lt;ReceiptID&gt;</li>
+                <li>&lt;Receipt ID&gt;</li>
                 <li>&lt;Date&gt;</li>
                 <li>&lt;Kind&gt;</li>
                 <li>&lt;Amount&gt;</li>
-                <li>&lt;Company&gt;</li>
+                <li>&lt;Company Name&gt;</li>
                 <li>&lt;Country&gt;</li>
                 <li>&lt;City&gt;</li>
                 <li>&lt;Street&gt;</li>
                 <li>&lt;Number&gt;</li>
+                <li>&lt;TRN&gt;</li>
             </ul>
         </div>
 
         <div class="primary-course">
             <i>Main Flow:</i>
             <ol>
-                <li>User issues `Add Receipt` command.</li>
+                <li>User of the system issues `Add Receipt` command.</li>
+                <li>User is prompted to provide information about the new receipt he wants to input into the system.</li>
+                <li>User provides a unique id, a date, kind and amount of the receipt, as well as the address of the company that issued the receipt.</li>
                 <li>System uses information provided to issue a new receipt.</li>
-                <li>System saves receipt in memory.</li>
+                <li>System saves receipt in memory under the list of receipts of the current user (using provided TRN).</li>
                 <li>System executes UC5.</li>
             </ol>
         </div>
-        
+
         <div class="exception-course">
-            <i>Existing ReceiptID (2)</i>
+            <i>Existing ReceiptID</i>
             <ol>
+                <li>User has provided a receipt id that is not unique and already exists in the taxpayer's list.</li>
                 <li>User is notified with: `Receipt ID already exists.`.</li>
                 <li>Use case ends.</li>
             </ol>
 
-            <i>Invalid Date (2)</i>
+            <i>Invalid Date</i>
             <ol>
+                <li>User has provided a receipt with a date that is not valid (as in DD/MM/YYYY).</li>
                 <li>User is notified with: `Please make sure your date is DD/MM/YYYY and try again.`.</li>
                 <li>Use case ends.</li>
             </ol>
 
-            <i>Invalid Kind (2)</i>
+            <i>Invalid Kind</i>
             <ol>
+                <li>User has provided a receipt with an invalid kind (not one of the types provided in requirements).</li>
                 <li>User is notified with: `Please check receipt kinds and try again.`.</li>
                 <li>Use case ends.</li>
             </ol>

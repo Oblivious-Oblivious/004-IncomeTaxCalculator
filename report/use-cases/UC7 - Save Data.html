@@ -14,17 +14,33 @@
         <div class="data">
             <i>Data:</i>
             <ul>
-                <li>&lt;-&gt;</li>
+                <li>&lt;Taxpayer TRN&gt;</li>
+                <li>&lt;File Type&gt;</li>
             </ul>
         </div>
 
         <div class="primary-course">
             <i>Main Flow:</i>
             <ol>
-                <li>User issues `Save Data` command.</li>
+                <li>User of the system issues `Save Data` command.</li>
                 <li>User selects the type of format to export to.</li>
-                <li>System uses the AFM provided to create the corresponding log file with given export type.</li>
+                <li>System uses the TRN provided to create the corresponding log file with given export type.</li>
                 <li>System saves data in log file.</li>
+            </ol>
+        </div>
+
+        <div class="exception-course">
+            <i>Wrong File Format</i>
+            <ol>
+                <li>User has provided a file type that is not supported.</li>
+                <li>User is notified with: `Wrong file format.`.</li>
+                <li>Use case ends.</li>
+            </ol>
+
+            <i>IOException</i>
+            <ol>
+                <li>Occurs when a filesystem error happens mid opening log file for write.</li>
+                <li>Use case ends.</li>
             </ol>
         </div>
     </div>

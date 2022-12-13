@@ -14,22 +14,25 @@
         <div class="data">
             <i>Data:</i>
             <ul>
-                <li>&lt;ReceiptID&gt;</li>
+                <li>&lt;Receipt ID&gt;</li>
+                <li>&lt;Taxpayer TRN&gt;</li>
             </ul>
         </div>
 
         <div class="primary-course">
             <i>Main Flow:</i>
             <ol>
-                <li>User issues `Delete Receipt` command.</li>
-                <li>System deletes receipt with corresponding id from memory.</li>
+                <li>User of the system issues `Delete Receipt` command.</li>
+                <li>User is prompted to provide a receipt id to delete.</li>
+                <li>System deletes receipt with corresponding id from memory of the current taxpayer (using TRN).</li>
                 <li>System executes UC5.</li>
             </ol>
         </div>
-        
+
         <div class="exception-course">
-            <i>Invalid Receipt ID (2)</i>
+            <i>Invalid Receipt ID</i>
             <ol>
+                <li>User has provided a receipt id that is invalid or one that does not exist in the list.</li>
                 <li>Use case ends.</li>
             </ol>
         </div>
