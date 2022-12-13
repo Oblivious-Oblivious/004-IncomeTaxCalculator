@@ -1,9 +1,9 @@
 package incometaxcalculator.app.receipts;
 
 public class Date {
-    int day;
-    int month;
-    int year;
+    public int day;
+    public int month;
+    public int year;
 
     public Date(int day, int month, int year) {
         this.day = day;

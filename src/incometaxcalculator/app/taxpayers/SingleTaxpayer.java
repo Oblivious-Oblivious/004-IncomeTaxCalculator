@@ -6,12 +6,12 @@ public class SingleTaxpayer extends Taxpayer {
     }
 
     @Override
-    public int[] get_income_bounds() {
+    int[] get_income_bounds() {
         return new int[] {24680, 81080, 90000, 152540};
     }
 
     @Override
-    public double[] get_tax_multipliers() {
+    double[] get_tax_multipliers() {
         return new double[] {1320.38, 5296.58, 5996.80, 10906.19};
     }
 

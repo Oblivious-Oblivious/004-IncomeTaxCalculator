@@ -6,12 +6,12 @@ public class MarriedFilingJointlyTaxpayer extends Taxpayer {
     }
 
     @Override
-    public int[] get_income_bounds() {
+    int[] get_income_bounds() {
         return new int[] {36080, 90000, 143350, 254240};
     }
 
     @Override
-    public double[] get_tax_multipliers() {
+    double[] get_tax_multipliers() {
         return new double[] {1930.28, 5731.64, 9492.82, 18197.69};
     }
 
