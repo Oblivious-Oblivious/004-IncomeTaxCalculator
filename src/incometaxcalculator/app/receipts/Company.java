@@ -8,4 +8,9 @@ public class Company {
         this.name = name;
         this.address = new Address(country, city, street, number);
     }
+
+    public boolean equals(Company other) {
+        return this.name.equals(other.name)
+            && this.address.equals(other.address);
+    }
 }

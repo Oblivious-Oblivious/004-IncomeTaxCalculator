@@ -29,4 +29,12 @@ public class Receipt {
         this.kind = kind;
         this.company = new Company(company_name, country, city, street, number);
     }
+
+    public boolean equals(Receipt other) {
+        return this.id == other.id
+            && this.date.equals(other.date)
+            && this.amount == other.amount
+            && this.kind.equals(other.kind)
+            && this.company.equals(other.company);
+    }
 }

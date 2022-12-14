@@ -25,4 +25,8 @@ public enum ReceiptKind {
     public String toString() {
         return this.value;
     }
+
+    public boolean equals(ReceiptKind other) {
+        return this.value.equals(other.value);
+    }
 }

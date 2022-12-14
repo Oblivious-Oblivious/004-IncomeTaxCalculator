@@ -12,4 +12,11 @@ public class Address {
         this.street = street;
         this.number = number;
     }
+
+    public boolean equals(Address other) {
+        return this.country.equals(other.country)
+            && this.city.equals(other.city)
+            && this.street.equals(other.street)
+            && this.number == other.number;
+    }
 }

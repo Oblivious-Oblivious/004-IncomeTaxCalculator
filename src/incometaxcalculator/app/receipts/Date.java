@@ -14,4 +14,10 @@ public class Date {
     public String toString() {
         return day + "/" + month + "/" + year;
     }
+
+    public boolean equals(Date other) {
+        return this.day == other.day
+            && this.month == other.month
+            && this.year == other.year;
+    }
 }
