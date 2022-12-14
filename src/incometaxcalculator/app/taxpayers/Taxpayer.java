@@ -34,6 +34,10 @@ public abstract class Taxpayer {
         this.receipt_amounts.put(ReceiptKind.OTHER, 0d);
     }
 
+    public Receipt get(int receipt_id) {
+        return this.receipts_hashmap.get(receipt_id);
+    }
+
     public Collection<Receipt> all_receipts() {
         return this.receipts_hashmap.values();
     }
