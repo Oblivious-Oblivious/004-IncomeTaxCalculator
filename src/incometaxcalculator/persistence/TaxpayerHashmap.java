@@ -26,4 +26,12 @@ public class TaxpayerHashmap {
     public static boolean contains(int tax_registration_number) {
         return self.containsKey(tax_registration_number);
     }
+
+    public static int size() {
+        return self.size();
+    }
+
+    public static void clear() {
+        self.clear();
+    }
 }
