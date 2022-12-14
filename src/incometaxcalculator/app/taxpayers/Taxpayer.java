@@ -95,4 +95,16 @@ public abstract class Taxpayer {
     public double get_amount_of(ReceiptKind kind) {
         return this.receipt_amounts.get(kind);
     }
+
+    public boolean equals(Taxpayer other) {
+        boolean result = this.fullname.equals(other.fullname) && this.income == other.income;
+
+        Collection<Receipt> thisreceipts = this.receipts_hashmap.values();
+        Collection<Receipt> otherreceipts = other.receipts_hashmap.values();
+
+        for(int i = 0; i < this.receipts_hashmap.size(); i++)
+            if(!thisreceipts.containsAll(otherreceipts))
+                return false;
+        return result;
+    }
 }
