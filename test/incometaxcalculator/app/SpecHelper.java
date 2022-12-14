@@ -7,8 +7,6 @@ import incometaxcalculator.app.taxpayers.SingleTaxpayer;
 import incometaxcalculator.persistence.TaxpayerHashmap;
 
 public class SpecHelper {
-    public static double MIN_DELTA = 1e-323;
-
     public static void clear_taxpayer_hashmap() {
         TaxpayerHashmap.clear();
     }
