@@ -1,10 +1,11 @@
 package incometaxcalculator.client.presenters;
 
 import incometaxcalculator.app.delete_taxpayer.DeleteTaxpayer;
+import incometaxcalculator.boundaries.DeleteTaxpayerBoundary;
 
 public class DeleteTaxpayerPresenter {
     public static String delete(String trn) {        
-        DeleteTaxpayer deleter = new DeleteTaxpayer();
+        DeleteTaxpayerBoundary deleter = new DeleteTaxpayer();
         if(deleter.taxpayer_hashmap_is_not_empty()) {
             try {
                 int tax_registration_number = Integer.parseInt(trn);

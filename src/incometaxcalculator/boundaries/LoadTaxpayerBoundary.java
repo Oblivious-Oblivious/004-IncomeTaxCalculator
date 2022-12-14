@@ -11,4 +11,5 @@ import incometaxcalculator.app.load_taxpayer.FileReaderType;
 
 public interface LoadTaxpayerBoundary {
     public void load(int tax_registration_number, FileReaderType type) throws NumberFormatException, IOException, WrongFileFormatException, WrongFileEndingException, WrongTaxpayerStatusException, WrongReceiptKindException, WrongReceiptDateException;
+    public boolean contains_taxpayer(int tax_registration_number);
 }

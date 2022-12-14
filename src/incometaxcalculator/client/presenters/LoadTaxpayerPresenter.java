@@ -9,6 +9,7 @@ import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.exceptions.WrongTaxpayerStatusException;
 import incometaxcalculator.app.load_taxpayer.FileReaderType;
 import incometaxcalculator.app.load_taxpayer.LoadTaxpayer;
+import incometaxcalculator.boundaries.LoadTaxpayerBoundary;
 
 public class LoadTaxpayerPresenter {
     public static String load(boolean type_is_txt, String taxRegistrationNumber) {
@@ -19,7 +20,7 @@ public class LoadTaxpayerPresenter {
             type = FileReaderType.XML;
 
         try {
-            LoadTaxpayer loader = new LoadTaxpayer();
+            LoadTaxpayerBoundary loader = new LoadTaxpayer();
 
             int trn = Integer.parseInt(taxRegistrationNumber);
             if(loader.contains_taxpayer(trn))

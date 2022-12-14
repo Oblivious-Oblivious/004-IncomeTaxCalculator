@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import incometaxcalculator.app.delete_receipt.DeleteReceipt;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
+import incometaxcalculator.boundaries.DeleteReceiptBoundary;
 import incometaxcalculator.client.gui.helpers.Pair;
 
 public class DeleteReceiptPresenter {
@@ -11,7 +12,8 @@ public class DeleteReceiptPresenter {
         int receipt_id = Integer.parseInt(receipt_id_value);
 
         try {
-            new DeleteReceipt().delete(tax_registration_number, receipt_id);
+            DeleteReceiptBoundary deleter = new DeleteReceipt();
+            deleter.delete(tax_registration_number, receipt_id);
         }
         catch(IOException e1) {
             return new Pair<Integer, String>(-1, "Problem with opening file ." + receipt_id + "_INFO.txt");

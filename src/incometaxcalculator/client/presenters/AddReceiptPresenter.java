@@ -7,6 +7,7 @@ import incometaxcalculator.app.exceptions.ReceiptAlreadyExistsException;
 import incometaxcalculator.app.exceptions.WrongReceiptDateException;
 import incometaxcalculator.app.exceptions.WrongReceiptKindException;
 import incometaxcalculator.app.receipts.ReceiptKind;
+import incometaxcalculator.boundaries.AddReceiptBoundary;
 import incometaxcalculator.client.gui.helpers.Pair;
 
 public class AddReceiptPresenter {
@@ -18,7 +19,9 @@ public class AddReceiptPresenter {
             float amount = Float.parseFloat(amount_value);
             int number = Integer.parseInt(number_value);
             ReceiptKind kind = ReceiptKind.from_string(kind_value);
-            new AddReceipt().add(receipt_id, date, amount, kind, company_name, country, city, street, number, tax_registration_number);
+
+            AddReceiptBoundary adder = new AddReceipt();
+            adder.add(receipt_id, date, amount, kind, company_name, country, city, street, number, tax_registration_number);
         }
 
         catch(IOException e1) {
